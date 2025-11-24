@@ -1,0 +1,20 @@
+<style>
+    :root {
+      --base-font: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --logo-font: "Playfair Display", serif;
+      --bg-dark: #181818;
+      --panel-dark: rgba(20, 18, 16, 0.85);
+      --muted: #bfb2a3;
+      --accent: #BDA589;
+      /* sampled warm-gold */
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.06);
+      --radius: 12px;
+      --shadow-1: 0 6px 18px rgba(6, 6, 6, 0.45);
+      --max-width: 1400px;
+      font-size: 16px;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>

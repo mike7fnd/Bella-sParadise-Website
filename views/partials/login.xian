@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — Bella's Paradise Resort</title>
+<link
+  href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&display=swap"
+  rel="stylesheet">
+
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+  /* Base font: Archivo only + solid system fallbacks */
+  --base-font: "Archivo", sans-serif;
+ /* Logo font: Playfair Display only */
+  --logo-font: "Playfair Display", serif;
+      --bg-dark: #181818;
+      --muted: #e4bdd1;
+      --accent: #e6a8ce;
+      --white: #ffffff;
+      --glass-bg: rgba(0, 0, 0, 0.35);
+      --radius: 16px;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      --max-width: 1400px;
+      font-size: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      color: var(--white);
+      background: var(--bg-dark);
+      font-family: var(--base-font);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.35;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Topbar */
+    .topbar {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15));
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    /* Hero Login Section */
+    .hero-login {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        linear-gradient(180deg, rgba(21, 17, 14, 0.233), rgba(21, 17, 14, 0.247)),
+        url("https://scontent.fmnl13-3.fna.fbcdn.net/v/t39.30808-6/588409368_122213945966358347_1632753280468173866_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=ru3GoWMf-AUQ7kNvwHZd5E7&_nc_oc=AdmyykJCw1bvSNRVGAgvg5GcBrXikapinilHK_eDDlpakStE1L8X1521Jg7_2VKWQCQ&_nc_zt=23&_nc_ht=scontent.fmnl13-3.fna&_nc_gid=IDJOQKYvrQMx5usxOUJbgQ&oh=00_AfitPeYdHLIIMdOiBemmdWilNBKjkn235TbojEFzczu2xg&oe=692770F9");
+      background-size: cover;
+      background-position: center 18%;
+      z-index: 1;
+    }
+
+    /* Login Card */
+    .login-overlay {
+      position: relative;
+      z-index: 2;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 50px;
+      padding: 36px 32px;
+      width: min(420px, 92vw);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .logo {
+      font-family: var(--logo-font);
+      font-size: 2rem;
+      font-style:italic;
+      font-weight: 200;
+      color: var(--white);
+      text-align: center;
+      letter-spacing: 0px;
+      text-transform: none;
+    }
+
+    /* Back to Home Link */
+    .back-to-home {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      color: var(--accent);
+      margin-top: -8px;
+      margin-bottom: 12px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .back-to-home:hover {
+      color: #d6c0a0;
+      transform: translateX(-2px);
+    }
+
+    .back-to-home svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .login-title {
+      font-size: 1.45rem;
+      font-weight: 400;
+      text-align: center;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .login-subtitle {
+      font-size: 0.92rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 30px;
+      padding: 13px 14px;
+      color: var(--white);
+      font-size: 1rem;
+      transition: all 0.22s ease;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.48);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 0 3px rgba(189, 165, 137, 0.22);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      accent-color: var(--accent);
+      width: 16px;
+      height: 16px;
+    }
+
+    .forgot-link {
+      color: var(--accent);
+      font-size: 0.82rem;
+      text-align: right;
+      margin-top: -4px;
+      font-weight: 100;
+    }
+
+    .login-btn {
+      background: var(--white);
+      color: #111;
+      border: none;
+      padding: 13px 16px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: all 0.22s ease;
+    }
+
+    .login-btn:hover {
+      background: #e03d8f;
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .login-btn:focus {
+      outline: 3px solid rgba(189, 165, 137, 0.3);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin: 18px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .signup-link {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .signup-link a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      .topbar {
+        font-size: 0.78rem;
+        padding: 6px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .login-overlay {
+        padding: 28px 22px;
+        width: 92vw;
+      }
+
+      .logo {
+        font-size: 1.6rem;
+      }
+
+      .back-to-home {
+        font-size: 0.84rem;
+      }
+    }
+
+    button:focus,
+    a:focus,
+    input:focus {
+      outline: 3px solid rgba(189, 165, 137, 0.22);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="site" role="document">
+
+
+    <!-- Hero Login -->
+    <section class="hero-login" aria-labelledby="login-title">
+      <div class="hero-bg" role="img" aria-label="Resort dining area at sunset"></div>
+
+      <form class="login-overlay" action="/login" method="POST" novalidate>
+        {{#if error_msg}}
+        <div
+          style="background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.3); border-radius: 8px; padding: 10px; margin-bottom: 10px; color: #ff6b6b; font-size: 0.9rem;">
+          {{error_msg}}
+        </div>
+        {{/if}}
+        {{#if success_msg}}
+        <div
+          style="background: rgba(0,255,0,0.1); border: 1px solid rgba(0,255,0,0.3); border-radius: 8px; padding: 10px; margin-bottom: 10px; color: #4ecdc4; font-size: 0.9rem;">
+          {{success_msg}}
+        </div>
+        {{/if}}
+        <div class="logo">Bella's Paradise</div>
+
+        <p class="login-subtitle">Log in your Account.</p>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="••••••••" required
+            autocomplete="current-password" />
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: -8px;">
+          <label class="checkbox-group">
+            <input type="checkbox" id="remember" name="remember" />
+            Remember me
+          </label>
+          <a href="/forgot-password" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="login-btn">Log In</button>
+
+        <div class="divider">or</div>
+
+        <p class="signup-link">
+          Don't have an account? <a href="/signup">Create one</a>
+        </p>
+
+        <!-- Back to Home Link -->
+        <a href="/" class="back-to-home" aria-label="Back to homepage">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+          </svg>
+          Back to Home
+        </a>
+      </form>
+    </section>
+  </div>
+
+  <!-- GSAP Animations for Login Page -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Page fade-in
+      gsap.from('.site', {
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out'
+      });
+
+      // Login overlay slide-in from bottom
+      gsap.from('.login-overlay', {
+        opacity: 0,
+        y: 100,
+        duration: 1,
+        delay: 0.2,
+        ease: 'power2.out'
+      });
+
+      // Logo fade-in
+      gsap.from('.logo', {
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.8,
+        delay: 0.2,
+        ease: 'back.out(1.7)'
+      });
+
+      // Form elements stagger
+      gsap.from('.form-group, .checkbox-group, .forgot-link, .login-btn, .divider, .signup-link, .back-to-home', {
+        y: 20,
+        duration: 0.6,
+        stagger: 0.1,
+        delay: 0.5,
+        ease: 'power2.out'
+      });
+
+      // Input focus animations
+      const inputs = document.querySelectorAll('input[type="email"], input[type="password"]');
+      inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+          gsap.to(input, {
+            scale: 1.02,
+            duration: 0.2,
+            ease: 'power2.out'
+          });
+        });
+        input.addEventListener('blur', () => {
+          gsap.to(input, {
+            scale: 1,
+            duration: 0.2,
+            ease: 'power2.out'
+          });
+        });
+      });
+
+      // Button hover effect enhancement
+      const loginBtn = document.querySelector('.login-btn');
+      loginBtn.addEventListener('mouseenter', () => {
+        gsap.to(loginBtn, {
+          scale: 1.05,
+          duration: 0.2,
+          ease: 'power2.out'
+        });
+      });
+      loginBtn.addEventListener('mouseleave', () => {
+        gsap.to(loginBtn, {
+          scale: 1,
+          duration: 0.2,
+          ease: 'power2.out'
+        });
+      });
+    });
+
+
+  </script>
+
+
+
+</body>
+
+</html>

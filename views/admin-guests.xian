@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bella’s Paradise – Guests</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Circular+Std:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <style>
+    :root {
+      --red: #e03d8f;
+      --dark: #222222;
+      --gray: #484848;
+      --light: #767676;
+      --bg: #F7F7F7;
+      --white: #FFFFFF;
+      --border: #EBEBEB;
+      --shadow: 0 8px 30px rgba(0,0,0,0.09);
+      --radius: 20px;
+      --gap: 3rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Circular Std", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    .site { display: flex; min-height: 100vh; }
+
+    .main {
+      flex: 1;
+      padding: 5rem 2rem 4rem 2rem !important;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .page-header {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .page-title {
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    /* Section Header with Title + Link on Right */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      background: #000000;
+      color: #ffffff;
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 999px;
+      font-weight: 400;
+      font-size: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .explore-link {
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--dark);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .explore-link:hover {
+      color: var(--red);
+    }
+
+    .explore-link::after {
+      content: "→";
+      font-size: 1.6rem;
+      transition: transform 0.3s ease;
+    }
+
+    .explore-link:hover::after {
+      transform: translateX(6px);
+    }
+
+/* New Guests Grid - Enhanced Glassmorphism */
+.new-guests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 2rem;
+  margin-bottom: var(--gap);
+}
+
+.guest-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  aspect-ratio: 3 / 4; /* optional: keeps cards uniform */
+}
+
+.guest-card:nth-child(n+5) {
+  display: none;
+}
+
+/* Fullscreen background image */
+.guest-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: transform 0.6s ease;
+}
+
+.guest-card:hover .guest-img {
+  transform: scale(1.05);
+}
+
+/* Overlay with glass effect */
+.guest-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 1.6rem 1.8rem;
+  background: linear-gradient(to top,
+              rgba(0, 0, 0, 0.85) 0%,
+              rgba(0, 0, 0, 0.4) 60%,
+              transparent 100%);
+
+  /* Glassmorphism backdrop blur */
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+
+  z-index: 1;
+  transition: all 0.4s ease;
+}
+
+/* Enhanced text readability */
+.guest-name {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+  color: #ffffff;
+}
+
+.guest-location {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1rem;
+  font-weight: 200;
+  display: flex;
+  align-items: center;
+  gap: 0rem;
+    margin-bottom: 0.4rem;
+}
+
+/* Optional: subtle icon color tweak if you use SVG icons */
+.guest-location svg {
+  opacity: 0.9;
+}
+
+    .view-profile {
+      color: var(--red);
+      font-weight: 200;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+
+    .view-profile:hover {
+       text-decoration: none;
+       color:#ff92c9
+
+      }
+
+    /* Table */
+    .table-container {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: #FAFAFA;
+      padding: 1.5rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tr:hover td { background: #fff9f9; }
+
+    .profile-link {
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    .profile-link:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .main { padding: 7rem 1rem !important; }
+      .section-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      .explore-link { font-size: 1.2rem; }
+      .new-guests-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="site">
+    {{> admin-sidebar}}
+
+    <main class="main">
+
+      <header class="page-header">
+      </header>
+
+      <!-- NEW GUESTS SECTION -->
+      <section>
+        <div class="section-header">
+          <h2 class="section-title">New Guests</h2>
+          <a href="#all-guests" class="explore-link">All Guests</a>
+        </div>
+
+        <div class="new-guests-grid">
+          {{#each users}}
+          <div class="guest-card">
+            <img src="{{#if this.profile_picture}}{{this.profile_picture}}{{else}}https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80{{/if}}"
+                 alt="{{this.first_name}} {{this.last_name}}" class="guest-img">
+            <div class="guest-info">
+              <div class="guest-name">{{this.first_name}} {{this.last_name}}</div>
+              <div class="guest-location">
+                <i data-lucide="map-pin"></i>
+                {{#if this.city}}{{this.city}}, {{/if}}{{#if this.province}}{{this.province}}{{else}}Philippines{{/if}}
+              </div>
+              <a href="/admin-guests/{{this.id}}" class="view-profile">View Profile</a>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </section>
+
+      <!-- ALL GUESTS TABLE -->
+      <section id="all-guests">
+        <div class="section-header">
+          <h2 class="section-title">All Guests ({{users.length}})</h2>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Location</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each users}}
+              <tr>
+                <td><strong>#USR{{this.id}}</strong></td>
+                <td>{{this.first_name}} {{this.last_name}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.mobile}}</td>
+                <td>
+                  {{#if this.city}}{{this.city}}, {{/if}}
+                  {{#if this.province}}{{this.province}}{{else}}—{{/if}}
+                </td>
+                <td>
+                  <a class="profile-link" href="/admin-guests/{{this.id}}">View Profile</a>
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

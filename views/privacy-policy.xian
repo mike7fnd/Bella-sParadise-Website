@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Privacy Policy – Bella’s Paradise</title>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --base-font: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --logo-font: "Playfair Display", serif;
+      --bg-dark: #181818;
+      --muted: #bfb2a3;
+      --accent: #BDA589;
+      --white: #fff;
+      --glass: rgba(255, 255, 255, .06);
+      --radius: 12px;
+      --shadow-1: 0 6px 18px rgba(6, 6, 6, .45);
+      --max-width: 1400px;
+      font-size: 16px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg-dark);
+      color: var(--white);
+      font-family: var(--base-font);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .site {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: auto;
+      padding: 0 20px
+    }
+
+    /* Top bar */
+    .topbar {
+      width: 100%;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .45), rgba(0, 0, 0, .15));
+      padding: 8px 12px;
+      font-size: .85rem;
+      color: var(--muted);
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Page Title */
+    .page-title {
+      font-family: var(--base-font);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 400;
+      text-align: center;
+      margin: 2.5rem 0 1rem;
+      color: var(--white);
+      text-shadow: 0 6px 20px rgba(0, 0, 0, .5);
+    }
+
+    .page-subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0 auto 3rem;
+    }
+
+    /* Content Card */
+    .policy-card {
+      background: var(--glass);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, .04);
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      transition: border-color .3s ease;
+    }
+
+    .policy-card:hover {
+      border-color: rgba(255, 255, 255, .15);
+    }
+
+    .policy-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .policy-date {
+      font-size: .95rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: .5rem;
+    }
+
+    /* Section Styling */
+    .policy-section {
+      margin-bottom: 2rem;
+    }
+
+    .policy-section h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--white);
+      margin: 0 0 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .policy-section h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 1.5rem 0 .75rem;
+    }
+
+    .policy-section p,
+    .policy-section li {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, .95);
+      margin: 0 0 .75rem;
+    }
+
+    .policy-section ul {
+      padding-left: 1.5rem;
+      margin: .75rem 0;
+    }
+
+    .policy-section ul li {
+      position: relative;
+      margin-bottom: .5rem;
+    }
+
+    .policy-section ul li::marker {
+      color: var(--accent);
+    }
+
+    .highlight {
+      background: rgba(189, 165, 137, .15);
+      padding: .2rem .5rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    /* Contact Box */
+    .contact-box {
+      background: rgba(255, 255, 255, .08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border: 1px solid rgba(255, 255, 255, .1);
+      text-align: center;
+    }
+
+    .contact-box p {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+
+    .contact-box a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--muted);
+      font-size: .9rem;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      margin-top: auto;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      .container {
+        padding: 0 12px
+      }
+
+      .topbar {
+        font-size: .78rem;
+        padding: 6px
+      }
+
+      .page-title {
+        font-size: 2.2rem;
+        margin-top: 1.5rem
+      }
+
+      .policy-card {
+        padding: 1.5rem;
+      }
+
+      .policy-section h2 {
+        font-size: 1.35rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="site">
+
+
+    <!-- Header -->
+    <header style="width:100%; text-align:center; padding:1rem 0;">
+      <h2 style="margin:0; font-family:var(--logo-font); font-size:2rem; color:var(--accent);">Bella’s Paradise</h2>
+    </header>
+
+    <div class="container">
+      <h1 class="page-title">Privacy Policy</h1>
+      <p class="page-subtitle">Your privacy matters. Learn how we collect, use, and protect your personal information.</p>
+
+      <!-- Privacy Policy Card -->
+      <article class="policy-card">
+
+        <div class="policy-header">
+          <h1 style="font-size:2rem; margin:0; color:var(--white);">Privacy Policy</h1>
+          <p class="policy-date">Effective Date: November 16, 2025</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>1. Introduction</h2>
+          <p>Bella’s Paradise ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, book accommodations, or use our services.</p>
+          <p>We comply with the <span class="highlight">Data Privacy Act of 2012 (Republic Act No. 10173)</span> of the Philippines and other applicable laws.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>2. Information We Collect</h2>
+          <p>We may collect the following types of information:</p>
+
+          <h3>Personal Information</h3>
+          <ul>
+            <li>Full name</li>
+            <li>Contact details (email, phone number)</li>
+            <li>Home address</li>
+            <li>Government-issued ID (for check-in verification)</li>
+            <li>Payment information (processed securely via third-party gateways)</li>
+            <li>Booking preferences and special requests</li>
+          </ul>
+
+          <h3>Non-Personal Information</h3>
+          <ul>
+            <li>IP address</li>
+            <li>Browser type and device information</li>
+            <li>Pages visited and time spent on site</li>
+            <li>Cookies and usage data</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>3. How We Use Your Information</h2>
+          <p>We use your information to:</p>
+          <ul>
+            <li>Process and confirm bookings</li>
+            <li>Send booking confirmations, reminders, and updates</li>
+            <li>Improve our website and services</li>
+            <li>Respond to inquiries and provide customer support</li>
+            <li>Send promotional offers (with your consent)</li>
+            <li>Comply with legal obligations</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>4. Cookies & Tracking</h2>
+          <p>We use cookies to enhance your experience. These include:</p>
+          <ul>
+            <li><strong>Essential Cookies:</strong> Required for site functionality</li>
+            <li><strong>Analytics Cookies:</strong> Help us understand visitor behavior</li>
+            <li><strong>Marketing Cookies:</strong> Personalize offers (opt-in only)</li>
+          </ul>
+          <p>You can manage cookie preferences via the <strong>Cookie Consent</strong> banner or browser settings.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>5. Data Sharing & Disclosure</h2>
+          <p>We do not sell your personal data. We may share information with:</p>
+          <ul>
+            <li>Payment processors (e.g., GCash, Maya, credit card providers)</li>
+            <li>Cloud service providers (secure hosting)</li>
+            <li>Legal authorities when required by law</li>
+            <li>Third-party vendors (e.g., booking platforms) with your consent</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>6. Data Security</h2>
+          <p>We implement industry-standard security measures including:</p>
+          <ul>
+            <li>SSL encryption for data transmission</li>
+            <li>Secure payment gateways</li>
+            <li>Regular security audits</li>
+            <li>Restricted access to personal data</li>
+          </ul>
+          <p>However, no method of transmission over the internet is 100% secure.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>7. Your Rights Under Philippine Law</h2>
+          <p>As a data subject, you have the right to:</p>
+          <ul>
+            <li>Be informed about data processing</li>
+            <li>Access your personal data</li>
+            <li>Correct inaccurate data</li>
+            <li>Object to processing</li>
+            <li>Erase or block data ("right to be forgotten")</li>
+            <li>File a complaint with the <strong>National Privacy Commission (NPC)</strong></li>
+            <li>Receive damages for violations</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>8. Data Retention</h2>
+          <p>We retain your personal information only for as long as necessary:</p>
+          <ul>
+            <li>Booking records: 5 years (for audit and tax purposes)</li>
+            <li>Marketing preferences: Until you unsubscribe</li>
+            <li>Account data: Until deletion request is processed</li>
+          </ul>
+        </div>
+
+        <div class="policy-section">
+          <h2>9. Children's Privacy</h2>
+          <p>Our services are not intended for children under 13. We do not knowingly collect data from minors without parental consent.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>10. Changes to This Policy</h2>
+          <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date.</p>
+          <p>We will notify you via email or website notice for material changes.</p>
+        </div>
+
+        <div class="policy-section">
+          <h2>11. Contact Us</h2>
+          <p>If you have questions about this Privacy Policy or wish to exercise your rights, contact our <strong>Data Protection Officer</strong>:</p>
+
+          <div class="contact-box">
+            <p><strong>Email:</strong> <a href="mailto:dpo@bellasparadise.com">dpo@bellasparadise.com</a></p>
+            <p><strong>Phone:</strong> +63 917 123 4567</p>
+            <p><strong>Address:</strong> San Rafael, Bulacan, Philippines</p>
+          </div>
+
+          <p>You may also file a complaint with the <a href="https://privacy.gov.ph" target="_blank">National Privacy Commission</a>.</p>
+        </div>
+
+      </article>
+    </div>
+
+
+
+  </div>
+</body>
+
+</html>

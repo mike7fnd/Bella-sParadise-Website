@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bella’s Paradise – Admin Facilities</title>
+
+  <!-- Airbnb Circular Std Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Circular+Std:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <style>
+    :root {
+      --red: #e03d8f;
+      --dark: #222222;
+      --gray: #484848;
+      --light: #767676;
+      --bg: #F7F7F7;
+      --white: #FFFFFF;
+      --border: #EBEBEB;
+      --shadow: 0 8px 30px rgba(0,0,0,0.09);
+      --radius: 20px;
+      --gap: 3.5rem;
+      --transition: all 0.25s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Circular Std", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    .site { display: flex; min-height: 100vh; }
+    .main {
+      flex: 1;
+      padding: 7rem 2rem 4rem 2rem !important;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-divider { height: 1px; background: var(--border); margin: var(--gap) 0; opacity: 0.6; }
+
+    .page-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: var(--gap); flex-wrap: wrap; gap: 1.5rem;
+    }
+    .page-title { font-size: 2rem; font-weight: 500; color: var(--dark); }
+
+    .btn-primary {
+      background: #e03d8f;; color: white; padding: 1rem 2.4rem;
+      border: none; border-radius: 30px; font-weight: 500; font-size: 1.1rem;
+      cursor: pointer; display: flex; align-items: center; gap: 0.6rem;
+      transition: var(--transition); box-shadow: var(--shadow);
+    }
+
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 2rem; margin-bottom: var(--gap);
+    }
+    .stat-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 2.2rem; text-align: center; box-shadow: var(--shadow);
+    }
+    .stat-value { font-size: 2.8rem; font-weight: 700; color: var(--red); }
+    .stat-label { font-size: 1.05rem; color: var(--light); margin-top: 0.6rem; }
+
+    .table-container {
+      background: var(--white); border-radius: var(--radius);
+      overflow: hidden; box-shadow: var(--shadow); margin-bottom: var(--gap);
+    }
+    th {
+      background: #FAFAFA; padding: 1.6rem 1.5rem; text-align: left;
+      font-weight: 600; font-size: 0.9rem; color: var(--gray);
+      text-transform: uppercase; letter-spacing: 0.6px;
+    }
+    td { padding: 1.6rem 1.5rem; border-top: 1px solid var(--border); font-size: 1rem; vertical-align: middle; }
+    tr:hover td { background: #fff9f9; }
+
+    .facility-img {
+      width: 76px; height: 76px; object-fit: cover; border-radius: var(--radius);
+      border: 2px solid var(--border); transition: var(--transition);
+    }
+    .facility-img:hover { transform: scale(1.1); border-color: var(--red); box-shadow: 0 8px 25px rgba(255,90,95,0.2); }
+
+    .badge {
+      padding: 0.5rem 1.1rem; border-radius: 30px; font-size: 0.82rem;
+      font-weight: 700; text-transform: uppercase;
+    }
+    .badge.available   { background: #E3FCEF; color: #0D8B5F; }
+    .badge.occupied    { background: #FFF4E5; color: #B25E02; }
+    .badge.maintenance { background: #FCE7E7; color: #C62828; }
+
+    .action-buttons { display: flex; gap: 1rem; }
+    .action-btn {
+      width: 48px; height: 48px; border: 2px solid var(--dark);
+      background: transparent; color: var(--dark); border-radius: 16px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .action-btn:hover {
+      background: var(--red); color: white; border-color: var(--red);
+      transform: translateY(-2px);
+    }
+    .action-btn i { width: 22px; height: 22px; }
+
+    /* MODAL */
+    .modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center;
+      z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease;
+    }
+    .modal.active { opacity: 1; visibility: visible; }
+    .modal-content {
+      background: var(--white); border-radius: var(--radius);
+      width: 90%; max-width: 900px; max-height: 90vh; overflow-y: auto;
+      box-shadow: var(--shadow); padding: 3rem; position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none; font-size: 2rem; color: var(--light);
+      cursor: pointer; width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .modal-close:hover { background: var(--red); color: white; }
+    .modal-title { font-size: 2rem; font-weight: 700; color: var(--dark); margin-bottom: 2rem; }
+
+    .form-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    input, select, textarea {
+      width: 100%; padding: 1.1rem; border: 1.5px solid var(--border);
+      border-radius: 12px; font-size: 1rem;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none; border-color: var(--red);
+      box-shadow: 0 0 0 4px rgba(255,90,95,0.15);
+    }
+    .btn {
+      background: var(--red); color: white; padding: 1.1rem 2.8rem;
+      border: none; border-radius: 30px; font-weight: 700; font-size: 1.1rem;
+      cursor: pointer; transition: var(--transition);
+    }
+    .btn:hover { background: #e04a4f; }
+
+    @media (max-width: 768px) {
+      .main { padding: 7rem 1rem 3rem 1rem !important; }
+      .stats-grid, .form-grid { grid-template-columns: 1fr; }
+      .page-header { flex-direction: column; align-items: stretch; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="site">
+    {{> admin-sidebar}}
+
+    <main class="main">
+      <header class="page-header">
+        <h1 class="page-title">Facilities Management</h1>
+        <button id="open-create-modal" class="btn-primary">
+          <i data-lucide="plus"></i> Add New Facility
+        </button>
+      </header>
+
+      <!-- Stats -->
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div id="total-facilities-label" class="stat-value">0</div>
+          <div class="stat-label">Total Facilities</div>
+        </article>
+        <article class="stat-card">
+          <div id="available-label" class="stat-value">0</div>
+          <div class="stat-label">Available</div>
+        </article>
+        <article class="stat-card">
+          <div id="occupied-label" class="stat-value">0</div>
+          <div class="stat-label">Occupied</div>
+        </article>
+        <article class="stat-card">
+          <div id="maintenance-label" class="stat-value">0</div>
+          <div class="stat-label">Under Maintenance</div>
+        </article>
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- Table -->
+      <section class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Capacity</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="facilities-tbody"></tbody>
+        </table>
+      </section>
+
+      <!-- CREATE MODAL -->
+      <div id="create-modal" class="modal">
+        <div class="modal-content">
+          <button class="modal-close" aria-label="Close">×</button>
+          <h3 class="modal-title">Add New Facility</h3>
+          <form id="create-form" class="form-grid">
+            <div><label>Name</label><input type="text" name="name" placeholder="e.g. Kubo ni Bella" required></div>
+            <div><label>Type</label>
+              <select name="type" required>
+                <option value="">Select type</option>
+                <option>Kubo</option><option>Cabana</option><option>Room</option><option>Hall</option><option>House</option>
+              </select>
+            </div>
+            <div><label>Capacity (pax)</label><input type="number" name="capacity" min="1" required></div>
+            <div><label>Price (₱)</label><input type="number" name="price" step="50" required></div>
+            <div><label>Image URL (optional)</label><input type="url" name="imageUrl" placeholder="https://..."></div>
+            <div><label>Status</label>
+              <select name="status" required>
+                <option value="available">Available</option>
+                <option value="occupied">Occupied</option>
+                <option value="maintenance">Under Maintenance</option>
+              </select>
+            </div>
+            <div style="grid-column:1/-1;"><label>Description</label><textarea name="description" rows="4"></textarea></div>
+            <div style="grid-column:1/-1;"><button type="submit" class="btn">Create Facility</button></div>
+          </form>
+        </div>
+      </div>
+
+      <!-- EDIT MODAL -->
+      <div id="edit-modal" class="modal">
+        <div class="modal-content">
+          <button class="modal-close" aria-label="Close">×</button>
+          <h3 class="modal-title">Edit Facility</h3>
+          <form id="edit-form" class="form-grid">
+            <input type="hidden" id="edit-id">
+            <div><label>Name</label><input type="text" id="edit-name" required></div>
+            <div><label>Type</label><select id="edit-type" required><option>Kubo</option><option>Cabana</option><option>Room</option><option>Hall</option><option>House</option></select></div>
+            <div><label>Capacity</label><input type="number" id="edit-capacity" required></div>
+            <div><label>Price</label><input type="number" id="edit-price" step="50" required></div>
+            <div><label>Image URL</label><input type="url" id="edit-imageUrl"></div>
+            <div><label>Status</label>
+              <select id="edit-status" required>
+                <option value="available">Available</option>
+                <option value="occupied">Occupied</option>
+                <option value="maintenance">Under Maintenance</option>
+              </select>
+            </div>
+            <div style="grid-column:1/-1;"><label>Description</label><textarea id="edit-description" rows="4"></textarea></div>
+            <div style="grid-column:1/-1;"><button type="submit" class="btn">Update Facility</button></div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const PLACEHOLDER_IMG = "https://static.vecteezy.com/system/resources/previews/048/910/778/non_2x/default-image-missing-placeholder-free-vector.jpg";
+
+    async function loadFacilities() {
+      try {
+        const res = await fetch('/api/facilities');
+        const facilities = await res.json();
+
+        const tbody = document.getElementById('facilities-tbody');
+        tbody.innerHTML = '';
+
+        facilities.forEach(f => {
+          const imgUrl = f.imageUrl?.trim() ? f.imageUrl : PLACEHOLDER_IMG;
+
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><strong>#FAC${String(f.id).padStart(3,'0')}</strong></td>
+            <td><img src="${imgUrl}" alt="${f.name}" class="facility-img" onerror="this.src='${PLACEHOLDER_IMG}'"></td>
+            <td><strong>${f.name}</strong></td>
+            <td>${f.type || '—'}</td>
+            <td>${f.capacity} pax</td>
+            <td><strong>₱${parseFloat(f.price).toLocaleString()}</strong></td>
+            <td><span class="badge ${f.status}">${f.status.charAt(0).toUpperCase() + f.status.slice(1)}</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="action-btn" title="Edit" onclick="editFacility(${f.id})">
+                  <i data-lucide="pencil"></i>
+                </button>
+                <button class="action-btn" title="Delete" onclick="deleteFacility(${f.id})">
+                  <i data-lucide="trash-2"></i>
+                </button>
+              </div>
+            </td>`;
+          tbody.appendChild(row);
+        });
+
+        // Update stats
+        document.getElementById('total-facilities-label').textContent = facilities.length;
+        document.getElementById('available-label').textContent = facilities.filter(f => f.status === 'available').length;
+        document.getElementById('occupied-label').textContent = facilities.filter(f => f.status === 'occupied').length;
+        document.getElementById('maintenance-label').textContent = facilities.filter(f => f.status === 'maintenance').length;
+
+        lucide.createIcons();
+      } catch (err) {
+        console.error('Failed to load facilities:', err);
+      }
+    }
+
+    // Open Create Modal
+    document.getElementById('open-create-modal').onclick = () => {
+      document.getElementById('create-modal').classList.add('active');
+    };
+
+    // Close modals
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.addEventListener('click', e => {
+        if (e.target === modal || e.target.classList.contains('modal-close')) {
+          modal.classList.remove('active');
+        }
+      });
+    });
+
+    // CREATE
+    document.getElementById('create-form').onsubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      try {
+        await fetch('/api/facilities', { method: 'POST', body: formData });
+        e.target.reset();
+        document.getElementById('create-modal').classList.remove('active');
+        loadFacilities();
+      } catch (err) {
+        alert('Error creating facility');
+      }
+    };
+
+    // EDIT
+    window.editFacility = async (id) => {
+      try {
+        const res = await fetch(`/api/facilities/${id}`);
+        const f = await res.json();
+
+        document.getElementById('edit-id').value = f.id;
+        document.getElementById('edit-name').value = f.name;
+        document.getElementById('edit-type').value = f.type || '';
+        document.getElementById('edit-capacity').value = f.capacity;
+        document.getElementById('edit-price').value = f.price;
+        document.getElementById('edit-imageUrl').value = f.imageUrl || '';
+        document.getElementById('edit-status').value = f.status;
+        document.getElementById('edit-description').value = f.description || '';
+
+        document.getElementById('edit-modal').classList.add('active');
+      } catch (err) {
+        alert('Error loading facility');
+      }
+    };
+
+    // UPDATE
+    document.getElementById('edit-form').onsubmit = async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('edit-id').value;
+      const formData = new FormData(e.target);
+      try {
+        await fetch(`/api/facilities/${id}`, { method: 'PUT', body: formData });
+        document.getElementById('edit-modal').classList.remove('active');
+        loadFacilities();
+      } catch (err) {
+        alert('Error updating facility');
+      }
+    };
+
+    // DELETE
+    window.deleteFacility = async (id) => {
+      if (confirm('Delete this facility permanently?')) {
+        try {
+          await fetch(`/api/facilities/${id}`, { method: 'DELETE' });
+          loadFacilities();
+        } catch (err) {
+          alert('Error deleting facility');
+        }
+      }
+    };
+
+    // Load on start
+    document.addEventListener('DOMContentLoaded', loadFacilities);
+  </script>
+</body>
+</html>

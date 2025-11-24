@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bella’s Paradise – Admin Dashboard</title>
+
+  <!-- Airbnb Circular Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Circular+Std:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      --red: #e03d8f;
+      --dark: #222222;
+      --gray: #484848;
+      --light: #767676;
+      --bg: #F7F7F7;
+      --white: #FFFFFF;
+      --border: #EBEBEB;
+      --shadow: 0 8px 30px rgba(0,0,0,0.09);
+      --radius: 20px;
+      --gap: 3rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Circular Std", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .site { display: flex; min-height: 100vh; }
+
+    /* MUCH MORE TOP SPACING */
+    .main {
+      flex: 1;
+      padding: 7rem 2rem 4rem 2rem !important;  /* Increased from 5rem → 9rem */
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: var(--gap) 0;
+      opacity: 0.7;
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: var(--gap);
+    }
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .stat-value { font-size: 2.6rem; font-weight: 700; color: var(--red); }
+    .stat-label { font-size: 1rem; color: var(--light); margin-top: 0.5rem; }
+
+    /* Table */
+    .table-container {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: var(--gap);
+    }
+    th {
+      background: #FAFAFA;
+      padding: 1.5rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    td {
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 1rem;
+      vertical-align: middle;
+    }
+    tr:hover td { background: #fff9f9; }
+
+    .badge {
+      padding: 0.45rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge.success   { background: #E3FCEF; color: #0D8B5F; }
+    .badge.pending   { background: #FFF4E5; color: #B25E02; }
+    .badge.cancelled { background: #FCE7E7; color: #C62828; }
+
+    /* Action Buttons with Icons */
+    .action-buttons {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .action-btn {
+      width: 44px;
+      height: 44px;
+      border: 2px solid var(--dark);
+      background: transparent;
+      color: var(--dark);
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .action-btn:hover {
+      background: var(--red);
+      color: white;
+      border-color: var(--red);
+    }
+    .action-btn i { width: 20px; height: 20px; }
+
+    /* Charts & Form */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 2rem;
+      margin-bottom: var(--gap);
+    }
+    .chart-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+    .chart-title { font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 700; }
+
+    .form-section {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 3rem;
+      box-shadow: var(--shadow);
+    }
+    .form-title { font-size: 1.8rem; margin-bottom: 2rem; font-weight: 700; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 1rem;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--red);
+      box-shadow: 0 0 0 4px rgba(255,90,95,0.15);
+    }
+    .btn {
+      background: var(--red);
+      color: white;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .btn:hover { background: #e04a4f; }
+
+    @media (max-width: 768px) {
+      .main { padding: 7rem 1rem 3rem 1rem !important; } /* Still generous on mobile */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="site">
+    {{> admin-sidebar}}
+
+    <main class="main">
+      <!-- Stats -->
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-value">₱248,500</div>
+          <div class="stat-label">Revenue (This Month)</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-value">142</div>
+          <div class="stat-label">Bookings Today</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-value">78%</div>
+          <div class="stat-label">Occupancy Rate</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-value">23</div>
+          <div class="stat-label">Pending Check-ins</div>
+        </article>
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- Recent Bookings with Icons -->
+      <section class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th><th>Guest</th><th>Facility</th><th>Check-in</th><th>Status</th><th>Amount</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each recentBookings}}
+            <tr>
+              <td><strong>#{{id}}</strong></td>
+              <td>{{guest}}</td>
+              <td>{{facility}}</td>
+              <td>{{check_in}}</td>
+              <td><span class="badge {{statusClass}}">{{status}}</span></td>
+              <td><strong>{{amount}}</strong></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn" title="View Booking">
+                    <i data-lucide="eye"></i>
+                  </button>
+                  <button class="action-btn" title="Edit Booking">
+                    <i data-lucide="pencil"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- Charts -->
+      <section class="charts-grid">
+        <div class="chart-card">
+          <h3 class="chart-title">Revenue Trend (Last 7 Days)</h3>
+          <canvas id="revenueChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3 class="chart-title">Booking Sources</h3>
+          <canvas id="sourceChart"></canvas>
+        </div>
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- Add New Facility -->
+      <section class="form-section">
+        <h2 class="form-title">Add New Facility</h2>
+        <form class="form-grid">
+          <div><label>Name</label><input type="text" placeholder="e.g. Kubo ni Bella" required></div>
+          <div><label>Type</label>
+            <select required><option value="">Select type</option><option>Kubo</option><option>Cabana</option><option>Function Hall</option><option>House</option></select>
+          </div>
+          <div><label>Capacity (pax)</label><input type="number" min="1" placeholder="10" required></div>
+          <div><label>Price (₱)</label><input type="number" step="50" placeholder="800" required></div>
+          <div style="grid-column:1/-1;"><label>Description</label><textarea rows="4"></textarea></div>
+          <div style="grid-column:1/-1;"><button type="submit" class="btn">Create Facility</button></div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      new Chart(document.getElementById('revenueChart'), {
+        type: 'line',
+        data: {
+          labels: ['11 Nov','12','13','14','15','16','17'],
+          datasets: [{
+            data: [32000,28500,31000,29500,34000,30500,35500],
+            borderColor: '#FF5A5F',
+            backgroundColor: 'rgba(255,90,95,0.1)',
+            tension: 0.4,
+            fill: true,
+            pointRadius: 6,
+            pointBackgroundColor: '#FF5A5F'
+          }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+      });
+
+      new Chart(document.getElementById('sourceChart'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Website','Phone','Walk-in','Facebook'],
+          datasets: [{ data: [45,30,15,10], backgroundColor: ['#FF5A5F','#00A699','#FFB400','#1877F2'], borderWidth: 0 }]
+        },
+        options: { responsive: true }
+      });
+    });
+  </script>
+</body>
+</html>

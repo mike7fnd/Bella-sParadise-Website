@@ -1,0 +1,274 @@
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Settings – Bella’s Paradise</title>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&display=swap"
+  rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --airbnb-font: "Archivo", sans-serif;
+ /* Logo font: Playfair Display only */
+  --logo-font: "Playfair Display", serif;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f7f7f7;
+      --text-primary: #222222;
+      --text-secondary: #717171;
+      --border-color: #dddddd;
+      --accent: #FF385C;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --max-width: 1128px;
+      --spacing-xs: 8px;
+      --spacing-sm: 16px;
+      --spacing-md: 24px;
+      font-size: 16px;
+      font-family: var(--airbnb-font);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #161925;
+      --bg-secondary: #1a1f2e;
+      --text-primary: #ffffff;
+      --text-secondary: #a7a7a7;
+      --border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box }
+    html, body { height: 100%; margin: 0; background: var(--bg-primary); color: var(--text-primary); line-height: 1.5; -webkit-font-smoothing: antialiased }
+    a { color: inherit; text-decoration: none }
+
+    .site { min-height: 100vh; display: flex; flex-direction: column; align-items: center }
+    .container { width: 100%; max-width: var(--max-width); margin: auto; padding: 0 var(--spacing-md) }
+
+    .topbar {
+      width: 100%; background: rgba(0,0,0,.04); border-bottom: 1px solid var(--border-color);
+      padding: var(--spacing-sm) var(--spacing-xs); font-size: .875rem; color: var(--text-secondary);
+      text-align: center; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+    }
+    [data-theme="dark"] .topbar { background: rgba(255,255,255,.06); }
+
+    .back-home { margin: var(--spacing-md) 0 var(--spacing-xs); text-align: left; width: 100%; max-width: var(--max-width); padding: 0 var(--spacing-md); }
+    .back-link { display: inline-flex; align-items: center; gap: .5rem; color: var(--text-secondary); font-weight: 500; transition: color .2s; }
+    .back-link:hover { color: var(--accent); }
+    .back-link::before { content: "←"; font-size: 1rem; }
+
+    .page-title {   font-size: 40px;
+      font-weight: 500; text-align: left; margin: var(--spacing-md) 0 var(--spacing-sm); line-height: 1.1; }
+    .page-subtitle { text-align: left; color: var(--text-secondary); font-size: 1rem; max-width: 600px; }
+
+    .settings-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: var(--spacing-md); margin-bottom: 3rem; }
+
+    .settings-card {
+      background: var(--bg-secondary); border-radius: var(--radius-md); border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm); transition: box-shadow .2s, border-color .2s;
+    }
+    .settings-card:hover { box-shadow: var(--shadow-md); border-color: var(--accent); }
+
+    .settings-card-header { padding: var(--spacing-md); border-bottom: 1px solid var(--border-color); }
+    .settings-card-title { font-size: 1.25rem; font-weight: 600; margin: 0 0 var(--spacing-xs) 0; }
+    .settings-card-subtitle { font-size: .875rem; color: var(--text-secondary); margin: 0; }
+
+    .settings-card-body { padding: var(--spacing-md); display: flex; flex-direction: column; gap: var(--spacing-sm); }
+
+    /* Toggle */
+    .toggle { position: relative; display: inline-block; width: 44px; height: 24px; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; cursor: pointer; inset: 0; background: #EBEBEB; border-radius: 12px; transition: .3s; }
+    [data-theme="dark"] .toggle-slider { background: rgba(255,255,255,.2); }
+    .toggle-slider:before { content: ""; position: absolute; height: 20px; width: 20px; left: 2px; bottom: 2px; background: var(--text-primary); border-radius: 50%; transition: .3s; }
+    input:checked + .toggle-slider { background: var(--accent); }
+    input:checked + .toggle-slider:before { transform: translateX(20px); background: #fff; }
+
+    /* Select */
+    .select-wrapper { position: relative; width: 100%; }
+    select {
+      appearance: none; background: var(--bg-primary); border: 1px solid var(--border-color); color: var(--text-primary);
+      padding: .75rem 2rem .75rem 1rem; border-radius: var(--radius-sm); width: 100%; cursor: pointer; font-size: 1rem;
+      transition: border .2s, box-shadow .2s;
+    }
+    [data-theme="dark"] select { background: var(--bg-secondary); }
+    select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255,56,92,.1); }
+    .select-wrapper::after { content: "Down Arrow"; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-secondary); pointer-events: none; font-size: .75rem; }
+
+    .setting-item { display: flex; justify-content: space-between; align-items: center; gap: var(--spacing-sm); }
+    .setting-label { font-weight: 500; }
+    .setting-desc { font-size: .875rem; color: var(--text-secondary); margin-top: .25rem; }
+
+    .btn-action {
+      background: var(--accent); color: #fff; border: none; padding: .75rem 1.5rem; border-radius: var(--radius-sm);
+      font-weight: 600; font-size: .875rem; cursor: pointer; transition: background .2s;
+    }
+    .btn-action:hover { background: #e31c5d; }
+
+    .btn-link {
+      background: transparent; color: var(--accent); border: 1px solid var(--accent); padding: .625rem 1.25rem;
+      border-radius: var(--radius-sm); font-size: .875rem; cursor: pointer; transition: all .2s;
+    }
+    .btn-link:hover { background: var(--accent); color: #fff; }
+
+    .btn-delete { color: #ff6b35; border-color: #ff6b35; }
+    .btn-delete:hover { background: #ff6b35; color: #fff; }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 var(--spacing-sm); }
+      .settings-grid { grid-template-columns: 1fr; }
+      .setting-item { flex-direction: column; align-items: flex-start; gap: var(--spacing-xs); }
+      .toggle, .select-wrapper { align-self: flex-end; width: auto; }
+      select { width: 100%; }
+    }
+  </style>
+</head>
+
+<!-- Light mode by default -->
+<body data-theme="light">
+
+  <div class="site">
+
+    <div class="back-home">
+      <a href="/" class="back-link">Back to Home</a>
+    </div>
+
+    <div class="container">
+      <h1 class="page-title" style="margin-top:40px;">Settings</h1>
+      <p class="page-subtitle">Manage your preferences, privacy, and account settings.</p>
+
+      <section class="settings-grid">
+
+        <!-- Notifications -->
+        <article class="settings-card">
+          <div class="settings-card-header">
+            <h3 class="settings-card-title">Notifications</h3>
+            <p class="settings-card-subtitle">Control how we reach you</p>
+          </div>
+          <div class="settings-card-body">
+            <div class="setting-item">
+              <div><div class="setting-label">Booking Confirmations</div><div class="setting-desc">Email & SMS alerts</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-item">
+              <div><div class="setting-label">Promotions & Offers</div><div class="setting-desc">Special deals and updates</div></div>
+              <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-item">
+              <div><div class="setting-label">Reminder Alerts</div><div class="setting-desc">24 hours before check-in</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+        </article>
+
+        <!-- Appearance -->
+        <article class="settings-card">
+          <div class="settings-card-header">
+            <h3 class="settings-card-title">Appearance</h3>
+            <p class="settings-card-subtitle">Customize your experience</p>
+          </div>
+          <div class="settings-card-body">
+            <div class="setting-item">
+              <div><div class="setting-label">Theme</div><div class="setting-desc">Choose light or dark mode</div></div>
+              <div class="select-wrapper">
+                <select id="theme-select">
+                  <option value="light">Light</option>
+                  <option value="dark">Dark</option>
+                </select>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div><div class="setting-label">Language</div><div class="setting-desc">Select preferred language</div></div>
+              <div class="select-wrapper">
+                <select><option>English</option><option>Filipino</option></select>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Privacy & Data -->
+        <article class="settings-card">
+          <div class="settings-card-header">
+            <h3 class="settings-card-title">Privacy & Cookies</h3>
+            <p class="settings-card-subtitle">Manage your data preferences</p>
+          </div>
+          <div class="settings-card-body">
+            <div class="setting-item">
+              <div><div class="setting-label">Analytics</div><div class="setting-desc">Help improve our services</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="setting-item">
+              <div><div class="setting-label">Marketing Cookies</div><div class="setting-desc">Personalized recommendations</div></div>
+              <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+            <button class="btn-link" style="margin-top:.5rem;">Manage Cookies</button>
+          </div>
+        </article>
+
+        <!-- Account -->
+        <article class="settings-card">
+          <div class="settings-card-header">
+            <h3 class="settings-card-title">Account</h3>
+            <p class="settings-card-subtitle">Security and profile</p>
+          </div>
+          <div class="settings-card-body">
+            <button class="btn-action">Change Password</button>
+            <button class="btn-action" style="background:var(--bg-primary); color:var(--text-primary); border:1px solid var(--border-color); margin-top:.5rem;">
+              Download My Data
+            </button>
+            <button class="btn-link btn-delete" style="margin-top:1rem;">Delete Account</button>
+          </div>
+        </article>
+
+      </section>
+    </div>
+
+    <footer style="width:100%; text-align:center; padding:var(--spacing-md) var(--spacing-sm); color:var(--text-secondary); font-size:.875rem; border-top:1px solid var(--border-color); margin-top:auto;">
+      <p>© 2025 Bella’s Paradise. All rights reserved. |
+        <a href="#" style="color:var(--accent);">Privacy Policy</a> •
+        <a href="#" style="color:var(--accent);">Terms of Service</a>
+      </p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Light mode by default + persist choice
+    const themeSelect = document.getElementById('theme-select');
+    const savedTheme = localStorage.getItem('bella_setting_theme') || 'light'; // default light
+
+    document.body.setAttribute('data-theme', savedTheme);
+    themeSelect.value = savedTheme === 'dark' ? 'dark' : 'light';
+
+    themeSelect.addEventListener('change', () => {
+      const newTheme = themeSelect.value;
+      document.body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('bella_setting_theme', newTheme);
+    });
+
+    // Subtle GSAP entrance
+    gsap.from('.site', { opacity: 0, duration: 0.6, ease: 'power2.out' });
+    gsap.from('.back-home', { opacity: 0, x: -20, duration: 0.5, delay: 0.1 });
+    gsap.from('.page-title', { opacity: 0, scale: 0.95, duration: 0.6, delay: 0.2 });
+    gsap.from('.page-subtitle', { opacity: 0, y: 10, duration: 0.5, delay: 0.3 });
+    gsap.from('.settings-card', { opacity: 0, y: 20, duration: 0.6, stagger: 0.08, delay: 0.4 });
+
+    // Save other settings (unchanged)
+    document.querySelectorAll('input[type="checkbox"], select').forEach(el => {
+      if (el.id === 'theme-select') return;
+      const key = `bella_setting_${el.closest('.setting-item')?.querySelector('.setting-label')?.textContent.trim().replace(/\s+/g, '_').toLowerCase() || Math.random()}`;
+      const saved = localStorage.getItem(key);
+      if (saved !== null) el.type === 'checkbox' ? el.checked = saved === 'true' : el.value = saved;
+      el.addEventListener('change', () => localStorage.setItem(key, el.type === 'checkbox' ? el.checked : el.value));
+    });
+  </script>
+</body>
+</html>

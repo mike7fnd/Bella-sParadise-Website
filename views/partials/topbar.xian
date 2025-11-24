@@ -1,0 +1,25 @@
+<style>
+    /* Top slim info bar */
+    .topbar {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15));
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+</style>
+      <div class="topbar" role="region" aria-label="Contact bar">
+        <div>Balahid
+          , Hagan, Bongabong, Oriental Mindoro</div>
+        <div>•</div>
+        <div>0977 445 8694</div>
+        <div>•</div>
+        <div>bellasparadisefarmresort@gmail.com</div>
+      </div>
+
+        <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>

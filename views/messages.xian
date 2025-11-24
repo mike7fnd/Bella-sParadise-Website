@@ -1,0 +1,476 @@
+{{> head}}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Messages – Bella’s Paradise</title>
+
+  <!-- New Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <style>
+    :root {
+      --red: #e03d8f;
+      --dark: #222222;
+      --gray: #484848;
+      --light: #767676;
+      --bg: #F7F7F7;
+      --white: #FFFFFF;
+      --border: #EBEBEB;
+      --shadow: 0 8px 30px rgba(0,0,0,0.09);
+      --radius: 30px;
+
+      /* Typography */
+      --base-font: "Archivo", ui-sans-serif, system-ui, sans-serif;
+      --logo-font: "Playfair Display", serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg-light);
+      font-family: var(--base-font);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.35;
+    }
+
+    /* Playfair Display only for big titles & logo */
+    .panel-header,
+    .chat-header > div,
+    .empty-state > div:first-of-type {
+      font-family: var(--base-font);
+      font-weight: 500;
+    }
+
+    .site { display: flex; min-height: 100vh; }
+    .main {
+      flex: 1;
+      padding: 7rem 2rem 4rem 2rem;
+      max-width: 1600px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      gap: 2rem;
+    }
+
+    /* Left Panel */
+    .conversations-panel {
+      width: 360px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-header {
+      padding: 2rem;
+      background: #FAFAFA;
+      border-bottom: 1px solid var(--border);
+      font-size: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      letter-spacing: -0.5px;
+    }
+
+    .users-list { flex: 1; overflow-y: auto; }
+
+    .user-item {
+      padding: 1.3rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .user-item:hover { background: #fff9f9; }
+    .user-item.active {
+      background: #fff2f2;
+      border-left: 5px solid var(--red);
+      padding-left: calc(2rem - 5px);
+    }
+
+    .user-avatar {
+      width: 54px; height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #ddd;
+    }
+
+    .user-info h4 {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+      letter-spacing: -0.2px;
+    }
+    .user-info small { color: var(--light); font-size: 0.9rem; }
+
+    /* Chat Area */
+    .chat-area {
+      flex: 1;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      padding: 1.6rem 2rem;
+      background: #FAFAFA;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.55rem;
+      font-weight: 600;
+    }
+
+    .chat-header img,
+    .chat-header .placeholder-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--red);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .messages-container {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      background: #f9f9fb;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    /* iMessage Bubbles – unchanged */
+    .message { max-width: 68%; align-self: flex-start; }
+    .message.me { align-self: flex-end; }
+    .message.me.sending { animation: sendPop 0.42s cubic-bezier(0.18, 0.89, 0.32, 1.28); }
+
+    @keyframes sendPop {
+      0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+      100% { opacity: 1; transform: none; }
+    }
+
+    .message-bubble {
+      padding: 0.9rem 1.3rem;
+      border-radius: 20px;
+      font-size: 1.05rem;
+      line-height: 1.45;
+      word-wrap: break-word;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      position: relative;
+    }
+
+    .message.them .message-bubble {
+      background: #e5e5ea;
+      color: #000;
+      border-bottom-left-radius: 4px;
+    }
+
+    .message.me .message-bubble {
+      background: var(--red);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message-meta {
+      margin-top: 0.4rem;
+      font-size: 0.75rem;
+      text-align: right;
+      color: rgba(255,255,255,0.8);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      justify-content: flex-end;
+    }
+
+    .message.them .message-meta { color: #888; justify-content: flex-start; }
+
+    /* Composer */
+    .composer {
+      padding: 1.5rem 2rem;
+      background: #FAFAFA;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .composer input {
+      flex: 1;
+      padding: 1rem 1.6rem;
+      border: 1.5px solid var(--border);
+      border-radius: 30px;
+      font-size: 1.05rem;
+      background: white;
+      font-family: var(--base-font);
+    }
+
+    .composer input:focus {
+      outline: none;
+      border-color: var(--red);
+      box-shadow: 0 0 0 4px rgba(224, 61, 143, 0.15);
+    }
+
+    .attach-btn, .send-btn {
+      background: transparent;
+      color: var(--gray);
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .attach-btn:hover, .send-btn:hover { background: #f0f0f0; }
+    .send-btn { background: var(--red); color: white; }
+    .send-btn:hover { background: #d63384; }
+
+    .empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--light);
+      font-size: 1.2rem;
+      gap: 1rem;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    @media (max-width: 992px) {
+      .main { flex-direction: column; padding: 7rem 1rem 4rem !important; }
+      .conversations-panel, .chat-area { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <main class="main">
+
+      <aside class="conversations-panel">
+        <div class="panel-header">
+          <i data-lucide="messages-square"></i> Messages
+        </div>
+        <div class="users-list" id="peopleList"></div>
+      </aside>
+
+      <section class="chat-area">
+        <div class="chat-header" id="chatHeader">
+          <div class="placeholder-avatar">B</div>
+          <div>Select a conversation</div>
+        </div>
+
+        <div class="messages-container" id="messagesArea">
+          <div class="empty-state">
+            <i data-lucide="heart" style="width:64px;height:64px;opacity:0.3;"></i>
+            <div>Your messages with Bella’s Paradise appear here</div>
+          </div>
+        </div>
+
+        <div class="composer">
+          <button class="attach-btn" id="attachBtn"><i data-lucide="paperclip"></i></button>
+          <input type="text" id="messageInput" placeholder="Write a message..." autocomplete="off">
+          <button class="send-btn" id="sendBtn"><i data-lucide="send"></i></button>
+          <input type="file" id="fileInput" style="display:none" accept="image/*,video/*,.pdf,.doc,.docx">
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="appData" style="display:none"
+       data-current-user="{{user.id}}"
+       data-admin-id="{{adminId}}"></div>
+
+  <script>
+    lucide.createIcons();
+
+    const currentUserId = Number(document.getElementById('appData').dataset.currentUser) || null;
+    const adminId = Number(document.getElementById('appData').dataset.adminId) || null;
+    let activePartner = null;
+
+    const peopleList = document.getElementById('peopleList');
+    const messagesArea = document.getElementById('messagesArea');
+    const chatHeader = document.getElementById('chatHeader');
+
+    function formatTime(dt) {
+      try { return new Date(dt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true }); }
+      catch { return ''; }
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    async function loadConversations() {
+      try {
+        const res = await fetch('/api/messages/conversations');
+        if (!res.ok) return;
+        const convos = await res.json();
+        peopleList.innerHTML = '';
+
+        if (adminId) {
+          const adminItem = document.createElement('div');
+          adminItem.className = 'user-item active';
+          adminItem.innerHTML = `
+            <div class="user-avatar placeholder-avatar" style="background:var(--red);color:white;font-weight:700;">B</div>
+            <div class="user-info">
+              <h4>Bella’s Paradise</h4>
+              <small>We’re here to help · 24/7</small>
+            </div>`;
+          adminItem.onclick = () => selectConversation(adminId, "Bella’s Paradise");
+          peopleList.appendChild(adminItem);
+          if (!activePartner) selectConversation(adminId, "Bella’s Paradise");
+        }
+
+        convos.forEach(p => {
+          if (p.id === adminId) return;
+          const el = document.createElement('div');
+          el.className = 'user-item' + (p.id === activePartner ? ' active' : '');
+          const pic = p.profile_picture || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80';
+          el.innerHTML = `
+            <img src="${pic}" alt="${p.name}" class="user-avatar">
+            <div class="user-info">
+              <h4>${escapeHtml(p.name)}</h4>
+              <small>${p.lastMessage ? escapeHtml(p.lastMessage.slice(0,38)) + (p.lastMessage.length>38?'...':'') : 'No messages yet'}</small>
+            </div>`;
+          el.onclick = () => selectConversation(p.id, p.name);
+          peopleList.appendChild(el);
+        });
+      } catch (e) { console.error(e); }
+    }
+
+    function selectConversation(id, name) {
+      activePartner = id;
+      document.querySelectorAll('.user-item').forEach(x => x.classList.remove('active'));
+      event.target.closest('.user-item').classList.add('active');
+
+      const headerPic = id === adminId
+        ? '<div class="placeholder-avatar" style="background:var(--red);color:white;font-weight:700;">B</div>'
+        : '<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="User">';
+
+      chatHeader.innerHTML = `${headerPic}<div>${escapeHtml(name)}</div>`;
+      loadMessages(id);
+    }
+
+    async function loadMessages(partnerId) {
+      messagesArea.innerHTML = '';
+      try {
+        const res = await fetch(`/api/messages/conversation/${partnerId}`);
+        if (!res.ok) return;
+        const msgs = await res.json();
+
+        if (msgs.length === 0) {
+          messagesArea.innerHTML = `
+            <div class="empty-state">
+              <i data-lucide="heart" style="width:64px;height:64px;opacity:0.3;"></i>
+              <div>Say hello! Your first message starts the conversation.</div>
+            </div>`;
+          lucide.createIcons();
+          return;
+        }
+
+        msgs.forEach(m => {
+          const isMe = m.senderId === currentUserId;
+          const div = document.createElement('div');
+          div.className = `message ${isMe ? 'me' : 'them'}`;
+          if (isMe) div.classList.add('sending');
+
+          div.innerHTML = `
+            <div class="message-bubble">
+              ${escapeHtml(m.content)}
+              <div class="message-meta">
+                ${formatTime(m.createdAt)}
+              </div>
+            </div>`;
+          messagesArea.appendChild(div);
+        });
+
+        messagesArea.scrollTop = messagesArea.scrollHeight;
+      } catch (e) { console.error(e); }
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById('messageInput');
+      const content = input.value.trim();
+      if (!content || !activePartner) return;
+
+      const tempDiv = document.createElement('div');
+      tempDiv.className = 'message me sending';
+      tempDiv.innerHTML = `
+        <div class="message-bubble">
+          ${escapeHtml(content)}
+          <div class="message-meta">${formatTime(new Date())} • <span style="opacity:0.8;">Sending...</span></div>
+        </div>`;
+      messagesArea.appendChild(tempDiv);
+      messagesArea.scrollTop = messagesArea.scrollHeight;
+      input.value = '';
+
+      try {
+        await fetch('/api/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ recipientId: activePartner, content })
+        });
+        loadMessages(activePartner);
+        loadConversations();
+      } catch (e) {
+        tempDiv.remove();
+        console.error(e);
+      }
+    }
+
+    document.getElementById('sendBtn').addEventListener('click', sendMessage);
+    document.getElementById('messageInput').addEventListener('keypress', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    document.getElementById('attachBtn').onclick = () => document.getElementById('fileInput').click();
+    document.getElementById('fileInput').onchange = async e => {
+      const file = e.target.files[0];
+      if (!file || !activePartner) return;
+      const form = new FormData();
+      form.append('recipientId', activePartner);
+      form.append('file', file);
+      await fetch('/api/messages/attachment', { method: 'POST', body: form });
+      e.target.value = '';
+      loadMessages(activePartner);
+    };
+
+    loadConversations();
+    setInterval(() => {
+      loadConversations();
+      if (activePartner) loadMessages(activePartner);
+    }, 4000);
+  </script>
+</body>
+</html>
