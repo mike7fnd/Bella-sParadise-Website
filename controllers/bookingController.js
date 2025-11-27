@@ -2,6 +2,7 @@ import { Booking } from "../models/bookingModel.js";
 import { Facility } from "../models/facilityModel.js";
 import { User } from "../models/userModel.js";
 import nodemailer from 'nodemailer';
+import bcrypt from 'bcrypt';
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'bellasparadisefarmresort@gmail.com';
 
@@ -11,7 +12,32 @@ export const createBooking = async (req, res) => {
     const userId = req.session.userId;
     if (!userId) return res.status(401).json({ message: 'Not authenticated' });
 
-    const { facilityId, check_in, check_out, guests, contact_phone, notes } = req.body;
+    const currentUser = await User.findByPk(userId);
+    if (!currentUser) return res.status(401).json({ message: 'User not found' });
+
+    let bookingUserId = userId;
+    let contact_phone = req.body.contact_phone;
+
+    // If admin and guest details provided, find or create guest user
+    if (currentUser.role === 'admin' && req.body.guest_name && req.body.email) {
+      const { guest_name, email, phone } = req.body;
+      let guestUser = await User.findOne({ where: { email } });
+      if (!guestUser) {
+        // Create guest user with minimal info
+        guestUser = await User.create({
+          first_name: guest_name.split(' ')[0] || guest_name,
+          last_name: guest_name.split(' ').slice(1).join(' ') || '',
+          email,
+          mobile: phone || null,
+          password: await bcrypt.hash(Math.random().toString(36), 10), // random password
+          role: 'guest'
+        });
+      }
+      bookingUserId = guestUser.id;
+      contact_phone = phone || contact_phone;
+    }
+
+    const { facilityId, check_in, check_out, guests, notes, status } = req.body;
     if (!facilityId || !check_in || !check_out) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
@@ -29,7 +55,7 @@ export const createBooking = async (req, res) => {
     const total = (pricePerNight * nights).toFixed(2);
 
     const booking = await Booking.create({
-      userId,
+      userId: bookingUserId,
       facilityId,
       check_in,
       check_out,
@@ -37,7 +63,7 @@ export const createBooking = async (req, res) => {
       contact_phone: contact_phone || null,
       total,
       notes: notes || null,
-      status: 'pending'
+      status: status || 'pending'
     });
 
     // Notify admin about the new booking (best-effort; non-blocking)

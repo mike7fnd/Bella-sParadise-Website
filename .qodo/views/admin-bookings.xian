@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bella’s Paradise – Bookings Management</title>
+
+  <!-- Airbnb Circular Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Circular+Std:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Chart.js (if needed later) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      --red: #e03d8f;
+      --dark: #222222;
+      --gray: #484848;
+      --light: #767676;
+      --bg: #F7F7F7;
+      --white: #FFFFFF;
+      --border: #EBEBEB;
+      --shadow: 0 8px 30px rgba(0,0,0,0.09);
+      --radius: 20px;
+      --gap: 3rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Circular Std", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .site { display: flex; min-height: 100vh; }
+
+    /* GENEROUS TOP SPACING – exactly like the base UI */
+    .main {
+      flex: 1;
+      padding: 7rem 2rem 4rem 2rem !important;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: var(--gap) 0;
+      opacity: 0.7;
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: var(--gap);
+    }
+    .stat-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .stat-value { font-size: 2.6rem; font-weight: 700; color: var(--red); }
+    .stat-label { font-size: 1rem; color: var(--light); margin-top: 0.5rem; }
+
+    /* Table */
+    .table-container {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: var(--gap);
+    }
+    th {
+      background: #FAFAFA;
+      padding: 1.5rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    td {
+      padding: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 1rem;
+      vertical-align: middle;
+    }
+    tr:hover td { background: #fff9f9; }
+
+    .badge {
+      padding: 0.45rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge.confirmed   { background: #E3FCEF; color: #0D8B5F; }
+    .badge.pending     { background: #FFF4E5; color: #B25E02; }
+    .badge.completed   { background: #E8F5E9; color: #2E7D32; }
+    .badge.cancelled  { background: #FCE7E7; color: #C62828; }
+
+    /* Action Buttons – exactly like the base UI */
+    .action-buttons {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .action-btn {
+      width: 44px;
+      height: 44px;
+      border: 2px solid var(--dark);
+      background: transparent;
+      color: var(--dark);
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .action-btn:hover {
+      background: var(--red);
+      color: white;
+      border-color: var(--red);
+    }
+    .action-btn i { width: 20px; height: 20px; }
+
+    /* Forms */
+    .form-section {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 3rem;
+      box-shadow: var(--shadow);
+    }
+    .form-title { font-size: 1.8rem; margin-bottom: 2rem; font-weight: 700; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 1rem;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--red);
+      box-shadow: 0 0 0 4px rgba(255,90,95,0.15);
+    }
+    .btn {
+      background: var(--red);
+      color: white;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .btn:hover { background: #e04a4f; }
+
+    @media (max-width: 768px) {
+      .main { padding: 7rem 1rem 3rem 1rem !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="site">
+    {{> admin-sidebar}}
+
+    <main class="main">
+
+      <!-- Stats -->
+      <section class="stats-grid" aria-labelledby="stats-title">
+        <article class="stat-card">
+          <div class="stat-value" id="total-bookings">0</div>
+          <div class="stat-label">Total Bookings</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-value" id="confirmed-count">0</div>
+          <div class="stat-label">Confirmed</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-value" id="pending-count">0</div>
+          <div class="stat-label">Pending</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-value" id="completed-count">0</div>
+          <div class="stat-label">Completed</div>
+        </article>
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- Bookings Table -->
+      <section class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Guest</th>
+              <th>Facility</th>
+              <th>Check-in</th>
+              <th>Check-out</th>
+              <th>Guests</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="bookings-tbody">
+            <!-- Filled by JS -->
+          </tbody>
+        </table>
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- Create New Booking -->
+      <section class="form-section">
+        <h2 class="form-title">Create New Booking</h2>
+        <form id="create-booking-form" class="form-grid">
+          <div><label>Guest Name</label><input type="text" name="guest_name" required></div>
+          <div><label>Email</label><input type="email" name="email" required></div>
+          <div><label>Phone</label><input type="tel" name="phone" required></div>
+          <div><label>Facility</label>
+            <select name="facility_id" required>
+              <option value="">Select facility</option>
+              <!-- options populated dynamically or static -->
+            </select>
+          </div>
+          <div><label>Check-in</label><input type="date" name="check_in" required></div>
+          <div><label>Check-out</label><input type="date" name="check_out" required></div>
+          <div><label>Guests</label><input type="number" name="guests" min="1" required></div>
+          <div><label>Status</label>
+            <select name="status">
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+          <div style="grid-column:1/-1;">
+            <label>Special Notes</label>
+            <textarea name="notes" rows="4"></textarea>
+          </div>
+          <div style="grid-column:1/-1;">
+            <button type="submit" class="btn">Create Booking</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // Same logic you had, just adapted to the new markup
+    async function loadBookings() {
+      try {
+        const res = await fetch('/api/bookings');
+        if (!res.ok) throw new Error('Failed');
+        const bookings = await res.json();
+
+        const tbody = document.getElementById('bookings-tbody');
+        tbody.innerHTML = '';
+
+        const stats = { total: 0, confirmed: 0, pending: 0, completed: 0, cancelled: 0 };
+
+        bookings.forEach(b => {
+          stats.total++;
+          stats[b.status] = (stats[b.status] || 0) + 1;
+
+          const tr = document.createElement('tr');
+          tr.dataset.id = b.id;
+
+          const badgeClass = b.status === 'confirmed' ? 'confirmed' :
+                            b.status === 'pending' ? 'pending' :
+                            b.status === 'completed' ? 'completed' : 'cancelled';
+
+          tr.innerHTML = `
+            <td><strong>#BK${String(b.id).padStart(3,'0')}</strong></td>
+            <td>${escape(b.guest_name || b.User?.first_name + ' ' + b.User?.last_name || 'Guest')}</td>
+            <td>${escape(b.Facility?.name || '—')}</td>
+            <td>${b.check_in?.split('T')[0] || ''}</td>
+            <td>${b.check_out?.split('T')[0] || ''}</td>
+            <td>${b.guests || ''}</td>
+            <td><strong>₱${Number(b.total || 0).toLocaleString()}</strong></td>
+            <td><span class="badge ${badgeClass}">${b.status}</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="action-btn view-btn" title="View"><i data-lucide="eye"></i></button>
+                <button class="action-btn edit-btn" title="Edit"><i data-lucide="pencil"></i></button>
+                <button class="action-btn cancel-btn" title="Cancel"><i data-lucide="x"></i></button>
+              </div>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        document.getElementById('total-bookings').textContent = stats.total;
+        document.getElementById('confirmed-count').textContent = stats.confirmed;
+        document.getElementById('pending-count').textContent = stats.pending;
+        document.getElementById('completed-count').textContent = stats.completed;
+
+        lucide.createIcons();
+      } catch (e) { console.error(e); }
+    }
+
+    function escape(str) {
+      if (!str) return '';
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadBookings);
+  </script>
+</body>
+</html>

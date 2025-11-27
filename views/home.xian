@@ -109,7 +109,7 @@
       max-height: 100vh;
       background-image:
         linear-gradient(180deg, rgba(34, 26, 20, 0.336), rgba(21, 17, 14, 0.178)),
-        url("https://images.pexels.com/photos/27429680/pexels-photo-27429680.jpeg");
+        url("https://scontent.fmnl3-1.fna.fbcdn.net/v/t39.30808-6/586603435_122213800826358347_408999789738518857_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeH4Z91QT1QkcZIDO2WF8R_OkZaQYVYpZyCRlpBhVilnIGOVxyY4pBLrXhZ_dfqX-k8jZfQFjLUWtE9kBbanBjff&_nc_ohc=aIF_D_RVkfEQ7kNvwEdN--S&_nc_oc=AdkmVtPLk6-nuiWBXktQ4gJRoNqXefHgX88R-sXjuw5g_RkDm6M_RT5PUTcWt1zY0pWgqI4jQOnPoYjgwcDgaTmq&_nc_zt=23&_nc_ht=scontent.fmnl3-1.fna&_nc_gid=T1aEuQijQs3OjZnFePySwA&oh=00_AfgeaVzE1O2b2izlR0tBJCiMrLF0yuo5QOozVVRSmMq3Mw&oe=692D59A4");
       background-size: cover;
       background-position: center 18%;
       display: flex;
@@ -607,19 +607,19 @@
         <div class="tile"
           style="background-image:
           linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.3)),
-          url('https://images.pexels.com/photos/3225531/pexels-photo-3225531.jpeg'); background-size:cover; background-position:center 20%;">
+          url('https://scontent.fmnl3-2.fna.fbcdn.net/v/t39.30808-6/471188747_122154729332314282_6517071890032118335_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHZQAS8IPqnS_CXfhC8jZuR52yfApMMe53nbJ8Ckwx7nVJyWX2iY-leNKDjaO6gx_WSpteFywHtt3wMjUhEQffL&_nc_ohc=mhVqP45y2ooQ7kNvwH160nP&_nc_oc=AdlU6I4HHQEWKK0E9FkatMYleRlgfSHgZA4IC4FP1y9oninyzeRITidZhnW-XOiX3SLf9ZQBfvrCamaeKqphvvNU&_nc_zt=23&_nc_ht=scontent.fmnl3-2.fna&_nc_gid=WhNG6o2BNV9aO-P7sWUfJw&oh=00_AfgljjLLKGWEjs8adcpO1yIvw3sWI6kwXCxJVWKoxt632A&oe=692D5169'); background-size:cover; background-position:center 20%;">
           <div class="caption">Stay</div>
         </div>
         <div class="tile"
           style="background-image:
           linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.3)),
-          url('https://images.pexels.com/photos/16436952/pexels-photo-16436952.jpeg'); background-size:cover; background-position:center 30%;">
+          url('https://scontent.fmnl37-2.fna.fbcdn.net/v/t39.30808-6/469385367_122152366322314282_7573002497832840550_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF8Zz4YWoHg2IgMGSD8SS0P1xrMMOg1f_XXGsww6DV_9T4iFbun0E52FrUqdm7SQwG5XnS3jNUxhD07JB5V6T3z&_nc_ohc=ST3t9d7QG68Q7kNvwFewTXE&_nc_oc=AdnTXUpwAzmpN0B-dTUHOASv_Zcf-2r_2dztJQg0LP6tpLWaYgrfdVIvmTexiCF_1MppzTokdXqE2VvSKPVS1ygK&_nc_zt=23&_nc_ht=scontent.fmnl37-2.fna&_nc_gid=pCyJXaG79fGyOnvllSuzUQ&oh=00_AfjVqTPp5OBmNYC0Bk41WYZAVXO9s3f2T-7zejbnQd5HZg&oe=692D5516'); background-size:cover; background-position:center 30%;">
           <div class="caption">Relax</div>
         </div>
         <div class="tile"
           style="background-image:
           linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.3)),
-          url('https://images.pexels.com/photos/5607906/pexels-photo-5607906.jpeg'); background-size:cover; background-position:center 10%;">
+          url('https://scontent.fmnl37-2.fna.fbcdn.net/v/t39.30808-6/470194222_122153668538314282_2739780092801774534_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHrRZCwMFEq7pvE_HVBOFJ3whThGG83G6HCFOEYbzcbodlqV6htFjrhQ8HurBpK7iqPmV_BlnV1Rg0xdY7_ReFs&_nc_ohc=7IdROFWHXMYQ7kNvwGDPop3&_nc_oc=AdlgPnpyKpPbQoICkzrnAPsABYbtndBfjbpNGzqyz_e29FsJXnaRcZeOHZ2KMsGqOObeKRHeuaDVDBiZ7CKLMGAF&_nc_zt=23&_nc_ht=scontent.fmnl37-2.fna&_nc_gid=c-FTwSv0rZJ-G6o6OZBFlA&oh=00_AfgZceTWS1i_TWMCFw-KIjtPuYgHnHZU_7a1XiZwpUFdvQ&oe=692D6AE1'); background-size:cover; background-position:center 10%;">
           <div class="caption">Relapse</div>
         </div>
       </section>
@@ -646,7 +646,7 @@
           <div class="room-card"
             style="background-image:
             linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05)),
-            url('https://images.pexels.com/photos/5607906/pexels-photo-5607906.jpeg'); background-size:cover; background-position:center 45%;">
+            url('https://scontent.fmnl3-1.fna.fbcdn.net/v/t39.30808-6/487906801_122172051266314282_6393627976666335261_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFhwKjSJHxeXIPDAcHx-2o1PolpWUpB8SI-iWlZSkHxIgT-FlJlU-lqNDCHCf8du9JVAewtM7FbogeLKPnN1CYl&_nc_ohc=mG8muZPCudoQ7kNvwE6BDAo&_nc_oc=AdlIQtONPoBi8BRvXJgl_Jy6BBQNYzxHV60B2lQRuocS4UXN70LziIjIHZ3JcLy9TIHokgNqwHcr91Tk5Cuxb64q&_nc_zt=23&_nc_ht=scontent.fmnl3-1.fna&_nc_gid=lvg_D64CAg-bv2sjKyHxMA&oh=00_Afh1D6N53L20ufnpwuVLR_rNbncf2SBKdiVTjMxHrab0uQ&oe=692D7857'); background-size:cover; background-position:center 45%;">
             <div class="heart-icon" onclick="this.classList.toggle('liked')">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
@@ -659,7 +659,7 @@
           <div class="room-card"
             style="background-image:
             linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05)),
-            url('https://images.pexels.com/photos/11493028/pexels-photo-11493028.jpeg'); background-size:cover; background-position:center 55%;">
+            url('https://scontent.fmnl3-2.fna.fbcdn.net/v/t39.30808-6/491956215_122174434418314282_489576799142036752_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHlCBoBwMxcvQ3VI0fBS_vYOJIDt9KbrH04kgO30pusfVjCnQxCnU9caesQs7V_6a21RtJfXqdhMzvV5z6ZnXWS&_nc_ohc=mEk94uIJfj4Q7kNvwGH-LBT&_nc_oc=AdmIinoMvYpiFXGmU5XsttT6dwwvODxbYC0cvcY9zE0fMIp0Cm752UVAdgTM23psaI7Tm2w4gPv6Rb9gOESY5SBK&_nc_zt=23&_nc_ht=scontent.fmnl3-2.fna&_nc_gid=jFDjn4w5g0u768bqh62LIg&oh=00_Afgonzr__Jy1rg1625dAgiqMN6wd7z2LCJmzjf1CWGXJXA&oe=692D7998'); background-size:cover; background-position:center 55%;">
  <div class="heart-icon" onclick="this.classList.toggle('liked')">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
@@ -672,33 +672,33 @@
           <div class="room-card"
             style="background-image:
             linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05)),
-            url('https://images.pexels.com/photos/17556197/pexels-photo-17556197.jpeg'); background-size:cover; background-position:center 65%;">
+            url('https://scontent.fmnl3-4.fna.fbcdn.net/v/t39.30808-6/491683611_122174433830314282_447100985292508846_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFnPtHs9FtPNwYmxKD-3pfDTSmAAMdGhgFNKYAAx0aGAYQ3YGtiiKqeuvjJB3diOKepVhBKdmJ5OOAX3cjedq1V&_nc_ohc=apqnwGCjF8oQ7kNvwGxWw7m&_nc_oc=Adm2oO4QJ2F2mCMcto1oX1cDvUTnqA51Cnd48nZUtxc7BxYqiBMs1Sqi5PMlMS6BWNRH6FZRk5MsBR5YhRenzVjd&_nc_zt=23&_nc_ht=scontent.fmnl3-4.fna&_nc_gid=AgPwynpPZ4khRokJRsn1Wg&oh=00_Afhmne3huK9AypYj44QaNaHdeHNi2wuBV40MFipZMAQijQ&oe=692D7A75'); background-size:cover; background-position:center 65%;">
              <div class="heart-icon" onclick="this.classList.toggle('liked')">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
               fill="none" stroke="#ffffff" stroke-width="2.2"/>
       </svg>
     </div>
-            <div class="meta">Kubo sa Ilog<small>2 Guests · 35 ft</small></div>
+            <div class="meta">Kubo sa Ilog<small>10 Guests · 35 ft</small></div>
           </div>
 
           <div class="room-card"
             style="background-image:
             linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05)),
-            url('https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/469454093_122152361702314282_6616735370467706879_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF5k-O_yFIy86eRVRroJ_x3_bprQI3Tr839umtAjdOvzZPWVkFPIPNRPlpvwnA6JvOIP9vqd-gOGzB-EE-CNUO8&_nc_ohc=BDL_8PRHnj8Q7kNvwF_jl45&_nc_oc=AdngigcM34MbFarGpLO4BEchGtl8xQydfplEs7Alz54bUj4Zf3O_Ju5sd9bqoo0d4ik&_nc_zt=23&_nc_ht=scontent-mnl1-1.xx&_nc_gid=DCpdiqc_NOJjRLGzBVSfDw&oh=00_Afj7V4vSyzqW-Q8k_wap0ut36E9NKwxScHYpqXO_rpJKuQ&oe=69259010'); background-size:cover; background-position:center 35%;">
+            url('https://scontent.fmnl37-2.fna.fbcdn.net/v/t39.30808-6/470162719_122153683700314282_5552501253636709280_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG6UbMdcWsNcVhrWURgSX87RH-I2GE7FhNEf4jYYTsWE8-F6HQNVKhMRaAqQo5JYO4cKC58vkdojd0l9UEFWN4W&_nc_ohc=UbUUMbJid_UQ7kNvwGFOrHv&_nc_oc=Adm5bf3dVHnL-3bmGi4QoEabTVRUxtqMnmSgPKNDr63rV-jqOpcr2wu6UiJHnTcAKCu90PX2gtLS6sVCX6Hc6MAp&_nc_zt=23&_nc_ht=scontent.fmnl37-2.fna&_nc_gid=mPOkDqFkgDJK9mJiXfmyoQ&oh=00_AfhX7_qYpxkYhyPmdkMv1LJWTl1fIxVQbXJjNF583azJ6g&oe=692D54C4'); background-size:cover; background-position:center 35%;">
              <div class="heart-icon" onclick="this.classList.toggle('liked')">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
               fill="none" stroke="#ffffff"  stroke-width="2.2"/>
       </svg>
     </div>
-            <div class="meta">Function Hall<small>4 Guests · 60 ft</small></div>
+            <div class="meta">Function Hall<small>20 Guests · 60 ft</small></div>
           </div>
 
           <div class="room-card"
             style="background-image:
             linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05)),
-            url('https://scontent-mnl3-3.xx.fbcdn.net/v/t39.30808-6/491998749_122174434196314282_8701410998447490278_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF79WRB2PoycUzkiHJWc2SQOvlpsVs8ZZU6-WmxWzxllU5OnL1UNvYBfrTxn2QbZwoAy2XLic9kbrN8UsqtoRNL&_nc_ohc=X1iOIZ-i_HwQ7kNvwGLpJE2&_nc_oc=AdlroZBwo0YIrTP4nbPKyKSfiNUnIgBdnQlQCpCtlS_-WV05LJIT9jhvqqfpSE9SKz4&_nc_zt=23&_nc_ht=scontent-mnl3-3.xx&_nc_gid=JzcVjolgN_BjWlU1O-041A&oh=00_Afj4Dxz10kYzOqlPZArIKgwM69MGcHBZ76ANKod_zPQ2Lw&oe=69259A5A'); background-size:cover; background-position:center 50%;">
+            url('https://scontent.fmnl3-2.fna.fbcdn.net/v/t39.30808-6/586901199_122213938784358347_3651113017931463506_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeG_MQe3fR2WAsVOm__zv82-dxddmXorpzB3F12ZeiunMMks5PD8wQQxrcLHe5qW5Pa5BRvJPkYZOTDMvoqLvMxq&_nc_ohc=gLccqU68Bj8Q7kNvwFfQZh7&_nc_oc=AdmD7C7wzwNl3AnzFPtLEdTwuFyJjY_Z3R1FG4jIbjfWPGDbFjeeTvEMCXPvOlRHxZGMLIh2vzng-4RE0cPVM5W0&_nc_zt=23&_nc_ht=scontent.fmnl3-2.fna&_nc_gid=LzLjKObgKBJcpv2xFdcEyw&oh=00_Afjq_qwJBLL6v0y6znOA1TloWrIcjVQKZt07Qw7tvoj0Kw&oe=692D6325'); background-size:cover; background-position:center 50%;">
              <div class="heart-icon" onclick="this.classList.toggle('liked')">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
@@ -711,14 +711,14 @@
           <div class="room-card"
             style="background-image:
             linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05)),
-            url('https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/470226136_122153663552314282_9047250905310151346_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEZPKjsI7kOuBOaa79a7hyV-lGEhQ0QrxD6UYSFDRCvEO3FZ2ZYKkv2tUxon4-arhGefwptfAraRLHcPySLH9UU&_nc_ohc=2oSOvjcTvdgQ7kNvwHJlc80&_nc_oc=Adm7yFF9QpVZ-DhsK4vpENOohNuU-ttL_2ogpV91GhXTMTFF-wzcr3TFAeBnSuVEMfQ&_nc_zt=23&_nc_ht=scontent-mnl1-1.xx&_nc_gid=8rPNxfLskX_D1VayTauKfw&oh=00_AfiQiS6T9ein5_CML66YrugbYZmreKpw9P6Rsc1tbLEBMw&oe=6925A05B'); background-size:cover; background-position:center 20%;">
+            url('https://scontent.fmnl37-2.fna.fbcdn.net/v/t39.30808-6/469358975_122152361996314282_2967648227444504326_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEJAsMSZheS8r-4nTZkZhx9-V3JSE5C-Iz5XclITkL4jNvPNoQscky29WfnftHsoxHKBS6evGwFbzHR-1n2iPEe&_nc_ohc=nGsc3n95gbAQ7kNvwFDPcbv&_nc_oc=AdmOy8Ez2fjaab9Q3xLZxwlA1FLzP9fzIoLOxOqx-7-lpi7uFhnaZ5L3xRnVs7JxfSpeFXq3FxozuYyfmK2wH_Cu&_nc_zt=23&_nc_ht=scontent.fmnl37-2.fna&_nc_gid=9g14CyHtzoG1brZ0tc7WhQ&oh=00_AfjnwKXSU6kg88Am4zCLikChb9jy1WIpGUmtsOelQLuZoA&oe=692D72DE'); background-size:cover; background-position:center 20%;">
              <div class="heart-icon" onclick="this.classList.toggle('liked')">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
               fill="none" stroke="#ffffff"  stroke-width="2.2"/>
       </svg>
     </div>
-            <div class="meta">Function Hall<small>4 Guests · 60 ft</small></div>
+            <div class="meta">Tents<small>4 Guests · 8 ft</small></div>
           </div>
         </div>
       </section>

@@ -1,0 +1,1176 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bela's Paradise Resort</title>
+
+
+  <!-- Fonts chosen to visually match the design: Great Vibes for logo/nature beauty, Montserrat for headings/body -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Archivo:wght@50;100;200;300;400;500;600;700&family=Playfair+Display:wght@300;400;500;600;700;800;900&display=swap"
+  rel="stylesheet">
+  <!-- Styles (reservation UI removed) -->
+  <style>
+
+    :root {
+  /* Base font: Archivo only + solid system fallbacks */
+  --base-font: "Archivo", sans-serif;
+ /* Logo font: Playfair Display only */
+  --logo-font: "Playfair Display", serif;
+      --bg-light: #f1f1f1;
+      --panel-light: rgba(250, 245, 245, 0.92);
+      --text: #ffffff;
+      --muted: #ffffff;
+      --accent: #e6a8ce;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.68);
+      --radius: 20px;
+      --shadow-1: 0 8px 32px rgba(0, 0, 0, 0.09);
+      --max-width: 1400px;
+      font-size: 16px;
+    }
+
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg-light);
+      font-family: var(--base-font);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.35;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .site {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      position: relative;
+      color: var(--text);
+    }
+
+
+    .topbar {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    /* HERO */
+    .hero {
+      /* full-bleed hero across the desktop width */
+      width: 100vw;
+      max-width: none;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      margin-top: 0;
+      position: relative;
+      display: block;
+    }
+
+    .hero-inner {
+      position: relative;
+      overflow: hidden;
+      /* only round the bottom-left and bottom-right corners */
+      border-radius: 0 0 60px 60px;
+      margin: 0 auto;
+    }
+
+    /* Background image (embedded as data URI) */
+    .hero-bg {
+      width: 100%;
+      /* enforce a 16:9 landscape hero — larger on desktop */
+      aspect-ratio: 16/9;
+      min-height: 500px;
+      max-height: 97vh;
+      background-image:
+        linear-gradient(180deg, rgba(34, 26, 20, 0.336), rgba(21, 17, 14, 0.178)),
+        url("https://scontent.fmnl13-2.fna.fbcdn.net/v/t39.30808-6/586603435_122213800826358347_408999789738518857_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeH4Z91QT1QkcZIDO2WF8R_OkZaQYVYpZyCRlpBhVilnIGOVxyY4pBLrXhZ_dfqX-k8jZfQFjLUWtE9kBbanBjff&_nc_ohc=ZA6Dhw8CpoIQ7kNvwGVH7mY&_nc_oc=AdkhbWZ0rMvv1oNQ7ug1_65dLE6O7HC3_4sx4bkouER_5nJFqJIJ-muOoQgyFdwbJPU&_nc_zt=23&_nc_ht=scontent.fmnl13-2.fna&_nc_gid=NDCsdPQfHp18xKN0z_2YWw&oh=00_Afi2rTCz2eIMYlP17l2htdnsGLErOSapE6GPBu90a7RxRQ&oe=692732A4");
+      background-size: cover;
+      background-position: center 18%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-content {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 33px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .headline {
+  font-family: var(--logo-font);
+  font-style: italic;
+  font-size: clamp(5rem, 8vw, 7rem);     /* balik mo sa original kung gusto mo mas malaki */
+  font-weight: 400;
+  color: var(--white);
+  margin: 0 0 0.7rem 0;                  /* alisin yung left/right margin kung ayaw mo */
+  text-shadow: 0 4px 12px rgba(0, 0, 0, .6);
+  line-height: 1;
+}
+
+.subhead {
+  color: var(--muted);
+  font-size: 4rem;
+  max-width: 64ch;
+  margin: 0 0 -50px 0;       /* negative bottom margin para mag-overlap sa headline */
+  text-align: left;        /* o inherit/left/right depende sa design mo */
+  font-weight: 50;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+}
+
+    /* Reservation overlay bar (centered horizontally) */
+    .reservation {
+      margin-top: 18px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.035), rgba(0, 0, 0, 0.06));
+      border-radius: 30px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: min(980px, 92%);
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .reservation .left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px
+    }
+
+    .reservation small {
+      color: var(--muted);
+      font-size: 0.82rem
+    }
+
+    .reservation .date {
+      font-weight: 400
+    }
+
+    .res-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center
+    }
+
+    .res-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 10px;
+      border-radius: 10px;
+      min-width: 80px;
+      justify-content: space-between
+    }
+
+    .res-ctrl button {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 1rem;
+      padding: 6px;
+      cursor: pointer
+    }
+
+    .res-check {
+      background: #ffffff;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 30px;
+      color: #111;
+      font-weight: 600;
+      cursor: pointer;
+      min-width: 120px
+    }
+
+    .res-check:focus {
+      outline: 3px solid rgba(189, 165, 137, 0.25)
+    }
+
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 18px auto;
+      padding: 0 20px;
+    }
+
+   .tile {
+  position: relative;
+  aspect-ratio: 9/13;
+  background: var(--glass);
+  border-radius: 30px;
+  overflow: hidden;
+  min-height: 280px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-1);
+}
+
+.tile .caption {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;                    /* distance from bottom */
+  transform: translateX(-50%);     /* perfect horizontal centering */
+  color: var(--text);
+  font-weight: 200;
+  font-size: 2rem;
+  white-space: nowrap;            /* para hindi mag-break ang single-line title */
+
+
+}
+
+    .quoteband {
+      width: 100%;
+      background: rgba(214, 214, 214, 0.97);
+      padding: 42px 12px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .quote {
+      max-width: 980px;
+      text-align: center;
+      color: #000000;;
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.4;
+
+    }
+
+.rooms-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 12px;
+}
+
+.rooms-header h2 {
+  margin: 0;
+  font-size: 2.5rem;           /* much larger heading */
+  font-weight: 300;
+  color: #111;
+  line-height: 1.1;
+}
+
+.explore-link {
+  font-size: 1.3rem;          /* larger link text */
+  font-weight: 300;
+  color: #000000;          /* nice blue */
+  text-decoration: none;      /* no line at all */
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.explore-link:hover {
+  color: #e6187f;              /* slightly darker on hover */
+  text-decoration: none;      /* still no line */
+}
+
+.explore-link::after {
+  content: " →";
+  margin-left: 4px;
+  opacity: 0.8;
+}
+
+/* Optional: slightly smaller on mobile */
+@media (max-width: 640px) {
+  .explore-link {
+    font-size: 0.95rem;
+  }
+}
+
+    .rooms {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 28px 20px;
+      margin: 8px auto 28px;
+    }
+
+    .rooms h2 {
+      background: #000000;
+      color: #ffffff;
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 300;
+      margin: 0 0 24px;
+      font-size: 1.5rem;
+    }
+
+    .room-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+ .room-card {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: var(--glass);
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  min-height: 280px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-1);
+  cursor: default;
+}
+
+/* Dark fade from bottom to top */
+.room-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;                     /* covers the entire card */
+  border-radius: 30px;          /* match parent roundness */
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.589) 0%,     /* strong black at bottom */
+    rgba(0, 0, 0, 0.233) 20%,
+    rgba(0, 0, 0, 0) 100%      /* fully transparent at top */
+  );
+  pointer-events: none;         /* doesn’t block clicks */
+  z-index: 1;
+}
+
+/* Ensure content (text, buttons, etc.) stays above the fade */
+.room-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.heart-icon {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 56px;           /* much bigger */
+  height: 56px;          /* much bigger */
+
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+
+}
+
+.heart-icon:hover {
+  transform: scale(1.12);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.heart-icon svg {
+  width: 32px;           /* bigger icon inside */
+  height: 32px;
+  transition: all 0.3s ease;
+}
+
+.heart-icon.liked svg path {
+  fill: white;           /* filled white when liked */
+  stroke: white;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+}
+
+    .room-card .meta {
+      color: var(--text);
+      font-weight: 300;
+      font-size: 1.5rem;
+    }
+
+    .room-card small {
+      display: block;
+      font-weight: 200;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: -2px;
+    }
+
+    .insta {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 18px 20px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .insta img {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 15px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
+    }
+
+      .cookie-popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 1rem;
+    }
+
+    .cookie-popup.active {
+      display: flex;
+    }
+
+    .cookie-content {
+      background: #fff;
+      border-radius: 30px;
+      max-width: 500px;
+      width: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .cookie-content h3 {
+      font-size: 1.5rem;
+      margin: 0 0 1rem;
+      color: #161616;
+    }
+
+    .cookie-content p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #000000ff;
+      margin: 0 0 1.5rem;
+    }
+
+    .cookie-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .cookie-accept,
+    .cookie-decline {
+      padding: .75rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .cookie-accept {
+      background: var(--accent);
+      color: #000000;
+      border: none;
+    }
+
+    .cookie-accept:hover {
+      background: #a8769d;
+    }
+
+    .cookie-decline {
+      background: rgba(0, 0, 0, 0.08);
+      color: var(--text);
+      border: none;
+    }
+
+    .cookie-decline:hover {
+      background: rgba(0, 0, 0, 0.14);
+    }
+
+    /* Responsive */
+    @media (max-width:1100px) {
+
+      .room-grid,
+      .tiles {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width:720px) {
+      .reservation {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .res-controls {
+        justify-content: space-between;
+      }
+
+      .tiles,
+      .room-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-bg {
+        background-position: center 12%;
+        /* smaller hero on mobile — keep visually balanced */
+        height: 36vh;
+        max-height: none;
+      }
+
+      .headline {
+        font-size: 2.8rem;
+      }
+
+      .topbar {
+        font-size: 0.78rem;
+        padding: 6px;
+      }
+    }
+
+    button:focus,
+    a:focus {
+      outline: 3px solid rgba(189, 165, 137, 0.3);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="site" role="document">
+    <header aria-label="Top of page">
+
+
+      <div class="hero"data-speed="1.2">
+        <div class="hero-inner">
+          <section class="hero-bg"data-speed="0.8" role="img" aria-label="Hero background with dining scene">
+            {{> head}}
+            <div class="hero-content" role="region" aria-label="Hero content">
+               <p class="subhead">any season at</p>
+              <h1 class="headline">Bella's Paradise</h1>
+
+
+              <!-- Reservation removed per request -->
+
+            </div>
+          </section>
+        </div>
+      </div>
+    </header>
+
+    <main role="main"data-speed="1.2" class="pagecontent" style="width:100%;max-width:var(--max-width);margin:8px auto;">
+      <!-- Three promo tiles -->
+      <section class="tiles"data-speed="1.2" aria-label="Highlights">
+        <div class="tile"
+          style="background-image:
+          linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.3)),
+          url('https://scontent-mnl1-2.xx.fbcdn.net/v/t39.30808-6/471188747_122154729332314282_6517071890032118335_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHZQAS8IPqnS_CXfhC8jZuR52yfApMMe53nbJ8Ckwx7nVJyWX2iY-leNKDjaO6gx_WSpteFywHtt3wMjUhEQffL&_nc_ohc=wLdYCf72OQIQ7kNvwEOdb65&_nc_oc=AdnQl1XE-wfpDMkDZEJAqtBVQ_V5hHn4qn3KmldJplwKwAaI_FVy-xwT0rRddrvsDS8&_nc_zt=23&_nc_ht=scontent-mnl1-2.xx&_nc_gid=i-hXuNN49s7PUUs4N0yO9Q&oh=00_Afi9uBiycTDM7C6ZgxVaC4AfqC25XheA9dcoqUqD9-b8Fw&oe=6925A0A9'); background-size:cover; background-position:center 20%;">
+          <div class="caption">Stay</div>
+        </div>
+        <div class="tile"
+          style="background-image:
+          linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.3)),
+          url('https://scontent-mnl3-3.xx.fbcdn.net/v/t39.30808-6/470194222_122153668538314282_2739780092801774534_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHrRZCwMFEq7pvE_HVBOFJ3whThGG83G6HCFOEYbzcbodlqV6htFjrhQ8HurBpK7iqPmV_BlnV1Rg0xdY7_ReFs&_nc_ohc=eW8tZBx9CRkQ7kNvwFnDT3L&_nc_oc=AdlzcZYLN1RdaFDfXMPMWp3-vS0W5mPI0pOKjMawzJdY20z7I2UZidvHk8qTMzR7vkQ&_nc_zt=23&_nc_ht=scontent-mnl3-3.xx&_nc_gid=Jk-1CM7DvqfObvr5NXjzaA&oh=00_Afg5WmMyCOte1rzoR_rhZFSiswilVxzb02FI7Uoo-UDvdQ&oe=692581E1'); background-size:cover; background-position:center 30%;">
+          <div class="caption">Relax</div>
+        </div>
+        <div class="tile"
+          style="background-image:
+          linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.3)),
+          url('https://scontent-mnl3-1.xx.fbcdn.net/v/t39.30808-6/469385367_122152366322314282_7573002497832840550_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF8Zz4YWoHg2IgMGSD8SS0P1xrMMOg1f_XXGsww6DV_9T4iFbun0E52FrUqdm7SQwG5XnS3jNUxhD07JB5V6T3z&_nc_ohc=mELT1Ucbc5kQ7kNvwEtZT-y&_nc_oc=AdnKpOTIdTCyaqqy0KfIaRXApU0gp4iMBBhLNgrq2qvjgo1O4wgj9yDYufXVRqkpHWA&_nc_zt=23&_nc_ht=scontent-mnl3-1.xx&_nc_gid=fGzyieoxTGZ-JQfzl47wQA&oh=00_AfgRYlv2lZ3XLAME9lY_WQ3rAGu-c2B5s4wjA4XACj1AsA&oe=6925A456'); background-size:cover; background-position:center 10%;">
+          <div class="caption">Relapse</div>
+        </div>
+      </section>
+
+      <!-- Quote band -->
+      <section class="quoteband" aria-label="Testimonial">
+        <div class="quote">Experience the nature and the freshwater around you at Bela's Paradise Resort, where every
+          stay is
+          a journey into sophistication, comfort, and unforgettable memories.</div>
+      </section>
+
+
+
+
+      <!-- Rooms -->
+      <section class="rooms" aria-label="Our Rooms">
+
+<div class="rooms-header">
+    <h2>What We Have Here?</h2>
+    <a href="/login" class="explore-link">Explore more accomodations</a>
+  </div>
+
+        <div class="room-grid" style="margin-top:18px;">
+          <div class="room-card"
+            style="background-image:
+            linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05)),
+            url('https://scontent-mnl1-2.xx.fbcdn.net/v/t39.30808-6/469278928_122152358480314282_2230956606368736761_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGrMe46pDR0e8RwfppBhpeBsWB99Z5S3HSxYH31nlLcdLPaOiwywgiI2CYEm07JEsKqLhWfXkWHLS2MsoVu_P8g&_nc_ohc=0JDmszaPaK0Q7kNvwHYBEAc&_nc_oc=Adk1E26wSnUKDyBUl57K9TnX04bP_X3HD_GqBswL8L32tTvI2pGJaLvZ4hw_pLyL0yw&_nc_zt=23&_nc_ht=scontent-mnl1-2.xx&_nc_gid=QtAT56CISnYxt84DrfxOIw&oh=00_AfgJnzAu0dhAaHZv-mcsXqARH_A4A0PBOmmz1NuAOt4SfQ&oe=6925A79A'); background-size:cover; background-position:center 45%;">
+            <div class="heart-icon" onclick="this.classList.toggle('liked')">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              fill="none" stroke="#ffffff" stroke-width="2.2"/>
+      </svg>
+    </div>
+            <div class="meta">Kubo<small>Kubo Nature</small></div>
+          </div>
+
+          <div class="room-card"
+            style="background-image:
+            linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05)),
+            url('https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/487906801_122172051266314282_6393627976666335261_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFhwKjSJHxeXIPDAcHx-2o1PolpWUpB8SI-iWlZSkHxIgT-FlJlU-lqNDCHCf8du9JVAewtM7FbogeLKPnN1CYl&_nc_ohc=vXWywSkCNN8Q7kNvwH5LYVT&_nc_oc=Adk0-J-6itjzBG74KGOnYj_If0SrXQs9V9RBrHAQrflkBmsPxGcGtq8pB_nr5fYxALM&_nc_zt=23&_nc_ht=scontent-mnl1-1.xx&_nc_gid=a_UynwQaMT83O6JkfMYI6g&oh=00_Afguh_Z-TTzQyr9QeKkUwCmaSiJhfKOBL_oZNDy1GDen2Q&oe=69258F57'); background-size:cover; background-position:center 55%;">
+ <div class="heart-icon" onclick="this.classList.toggle('liked')">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              fill="none" stroke="#ffffff"  stroke-width="2.2"/>
+      </svg>
+    </div>
+            <div class="meta">Cabana<small>2 Guests · 35 ft</small></div>
+          </div>
+
+          <div class="room-card"
+            style="background-image:
+            linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05)),
+            url('https://scontent-mnl1-2.xx.fbcdn.net/v/t39.30808-6/491956215_122174434418314282_489576799142036752_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHlCBoBwMxcvQ3VI0fBS_vYOJIDt9KbrH04kgO30pusfVjCnQxCnU9caesQs7V_6a21RtJfXqdhMzvV5z6ZnXWS&_nc_ohc=DwhVcGUoykgQ7kNvwFkeRGy&_nc_oc=Adk5LSokNsrqPFOY30oxuolhuYVljuxHv6GXSKHO_pnjUIcsyp_815kzwrJ-EMviS50&_nc_zt=23&_nc_ht=scontent-mnl1-2.xx&_nc_gid=7KuRyQJMMMs2pJ5rGvzHpA&oh=00_AfhcdFqjrFjT40Lp1GbZHfrsQ9dwR01zHP2XNW76T1Jt8w&oe=69259098'); background-size:cover; background-position:center 65%;">
+             <div class="heart-icon" onclick="this.classList.toggle('liked')">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              fill="none" stroke="#ffffff" stroke-width="2.2"/>
+      </svg>
+    </div>
+            <div class="meta">Kubo sa Ilog<small>2 Guests · 35 ft</small></div>
+          </div>
+
+          <div class="room-card"
+            style="background-image:
+            linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05)),
+            url('https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/469454093_122152361702314282_6616735370467706879_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF5k-O_yFIy86eRVRroJ_x3_bprQI3Tr839umtAjdOvzZPWVkFPIPNRPlpvwnA6JvOIP9vqd-gOGzB-EE-CNUO8&_nc_ohc=BDL_8PRHnj8Q7kNvwF_jl45&_nc_oc=AdngigcM34MbFarGpLO4BEchGtl8xQydfplEs7Alz54bUj4Zf3O_Ju5sd9bqoo0d4ik&_nc_zt=23&_nc_ht=scontent-mnl1-1.xx&_nc_gid=DCpdiqc_NOJjRLGzBVSfDw&oh=00_Afj7V4vSyzqW-Q8k_wap0ut36E9NKwxScHYpqXO_rpJKuQ&oe=69259010'); background-size:cover; background-position:center 35%;">
+             <div class="heart-icon" onclick="this.classList.toggle('liked')">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              fill="none" stroke="#ffffff"  stroke-width="2.2"/>
+      </svg>
+    </div>
+            <div class="meta">Function Hall<small>4 Guests · 60 ft</small></div>
+          </div>
+
+          <div class="room-card"
+            style="background-image:
+            linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05)),
+            url('https://scontent-mnl3-3.xx.fbcdn.net/v/t39.30808-6/491998749_122174434196314282_8701410998447490278_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF79WRB2PoycUzkiHJWc2SQOvlpsVs8ZZU6-WmxWzxllU5OnL1UNvYBfrTxn2QbZwoAy2XLic9kbrN8UsqtoRNL&_nc_ohc=X1iOIZ-i_HwQ7kNvwGLpJE2&_nc_oc=AdlroZBwo0YIrTP4nbPKyKSfiNUnIgBdnQlQCpCtlS_-WV05LJIT9jhvqqfpSE9SKz4&_nc_zt=23&_nc_ht=scontent-mnl3-3.xx&_nc_gid=JzcVjolgN_BjWlU1O-041A&oh=00_Afj4Dxz10kYzOqlPZArIKgwM69MGcHBZ76ANKod_zPQ2Lw&oe=69259A5A'); background-size:cover; background-position:center 50%;">
+             <div class="heart-icon" onclick="this.classList.toggle('liked')">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              fill="none"stroke="#ffffff"  stroke-width="2.2"/>
+      </svg>
+    </div>
+            <div class="meta">A-House<small>4 Guests · 60 ft</small></div>
+          </div>
+
+          <div class="room-card"
+            style="background-image:
+            linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05)),
+            url('https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/470226136_122153663552314282_9047250905310151346_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEZPKjsI7kOuBOaa79a7hyV-lGEhQ0QrxD6UYSFDRCvEO3FZ2ZYKkv2tUxon4-arhGefwptfAraRLHcPySLH9UU&_nc_ohc=2oSOvjcTvdgQ7kNvwHJlc80&_nc_oc=Adm7yFF9QpVZ-DhsK4vpENOohNuU-ttL_2ogpV91GhXTMTFF-wzcr3TFAeBnSuVEMfQ&_nc_zt=23&_nc_ht=scontent-mnl1-1.xx&_nc_gid=8rPNxfLskX_D1VayTauKfw&oh=00_AfiQiS6T9ein5_CML66YrugbYZmreKpw9P6Rsc1tbLEBMw&oe=6925A05B'); background-size:cover; background-position:center 20%;">
+             <div class="heart-icon" onclick="this.classList.toggle('liked')">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              fill="none" stroke="#ffffff"  stroke-width="2.2"/>
+      </svg>
+    </div>
+            <div class="meta">Function Hall<small>4 Guests · 60 ft</small></div>
+          </div>
+        </div>
+      </section>
+
+    <!-- What Guests Are Saying / Feedback Section -->
+<section class="feedback-section" aria-label="Guest Feedback">
+  <div class="rooms-header" style="margin-bottom: 40px;">
+    <h2>What Guests Are Saying</h2>
+    <a href="#all-reviews" class="explore-link">Read all reviews</a>
+  </div>
+
+  <div class="feedback-grid">
+    <!-- Left Review (smaller) -->
+    <div class="feedback-card feedback-card--sm">
+      <div class="feedback-profile">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Krizell F." loading="lazy">
+      </div>
+      <div class="feedback-stars">★★★★★</div>
+      <p class="feedback-text">
+        "Hello Po. Super ganda po ng place, relaxing po. Tsaka pool saktong sakto po sa mga kids. Super Accommodate din ng mga staff"
+      </p>
+      <div class="feedback-author">
+        <strong>Maria & Carlo S.</strong>
+        <span>— Kubo sa Ilog, Oct 2025</span>
+      </div>
+    </div>
+
+    <!-- Center Review (bigger & highlighted) -->
+    <div class="feedback-card feedback-card--lg">
+      <div class="feedback-profile">
+        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="The Reyes Family" loading="lazy">
+      </div>
+      <div class="feedback-stars">★★★★★</div>
+      <p class="feedback-text">
+        "Hello Po. Super ganda po ng place, relaxing po. Tsaka pool saktong sakto po sa mga kids. Super Accommodate din ng mga staff"
+      </p>
+      <div class="feedback-author">
+        <strong>Krizzel F.</strong>
+        <span>— A-House, Sept 2025</span>
+      </div>
+    </div>
+
+    <!-- Right Review (smaller) -->
+    <div class="feedback-card feedback-card--sm">
+      <div class="feedback-profile">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Paolo" loading="lazy">
+      </div>
+      <div class="feedback-stars">★★★★★</div>
+      <p class="feedback-text">
+        "Unreal vibe and super clean. Nature all around — easily the best resort experience in the province!"
+      </p>
+      <div class="feedback-author">
+        <strong>Paolo & Friends</strong>
+        <span>— Cabana, Nov 2025</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feedback-section {
+    width: 100%;
+    max-width: var(--max-width);
+    padding: 60px 20px;
+    margin: 0 auto;
+  }
+
+      .rooms-header h2 {
+      background: #000000;
+      color: #ffffff;
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 300;
+      margin: 0 0 24px;
+      font-size: 1.5rem;
+    }
+
+  .feedback-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .feedback-card {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    border-radius: 30px;
+    padding: 32px 28px;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: var(--shadow-1);
+    transition: transform 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .feedback-card:hover {
+    transform: translateY(-10px);
+  }
+
+  .feedback-card--lg {
+    padding: 48px 36px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    transform: translateY(-12px);
+  }
+
+  .feedback-card--lg:hover {
+    transform: translateY(-20px);
+  }
+
+  .feedback-profile {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--accent);
+    flex-shrink: 0;
+  }
+
+  .feedback-card--lg .feedback-profile {
+    width: 92px;
+    height: 92px;
+    border-width: 4px;
+  }
+
+  .feedback-profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feedback-stars {
+    color: #e03d8f;
+    font-size: 1.55rem;
+    letter-spacing: 3px;
+  }
+
+  .feedback-card--lg .feedback-stars {
+    font-size: 1.8rem;
+    letter-spacing: 4px;
+  }
+
+  .feedback-text {
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: #111;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .feedback-card--lg .feedback-text {
+    font-size: 1.35rem;
+    line-height: 1.6;
+  }
+
+  .feedback-author {
+    margin-top: auto;
+    font-size: 0.98rem;
+    color: #444;
+  }
+
+  .feedback-author strong {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .feedback-author span {
+    color: #777;
+    font-weight: 300;
+  }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .feedback-grid {
+      grid-template-columns: 1fr 1.15fr 1fr;
+      gap: 20px;
+    }
+    .feedback-card--lg {
+      padding: 40px 30px;
+    }
+  }
+
+  @media (max-width:  720px) {
+    .feedback-grid {
+      grid-template-columns: 1fr;
+    }
+    .feedback-card--lg,
+    .feedback-card--sm {
+      padding: 36px 28px;
+      transform: none !important;
+    }
+    .feedback-card--lg .feedback-profile {
+      width: 78px;
+      height: 78px;
+    }
+    .feedback-card--lg:hover {
+      transform: translateY(-8px);
+    }
+  }
+</style>
+
+      <!-- Instagram sample strip -->
+      <section class="insta-strip" aria-label="Instagram">
+        <div class="insta" role="region" aria-label="Instagram photos">
+          <!-- using same embedded image cropped for thumbnails to guarantee fidelity -->
+          <img alt="ig-1"
+            src="https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/491810175_122174434328314282_7748146003699442918_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG6kt4dm0AwVLeKH7Dnc8sOKhnsuAtLLWIqGey4C0stYii32exE08q3j774_mqDZvytn6FhZQjhb-1IqYYywfT7&_nc_ohc=TbPCqKTFCwsQ7kNvwEm10lc&_nc_oc=AdmI_eqPF4zCTaLrj3vKQp38EjQJy5bsDDvMkR-uYlL9MpCo5b5HzB8szEnjJjmQv0I&_nc_zt=23&_nc_ht=scontent-mnl1-1.xx&_nc_gid=lZs_wgWof2M6h29ASkZMmw&oh=00_Afh71kVjByK81jlce2a78H0sGtFaUYK6MJDIzd1rEqqFMQ&oe=69258C52">
+          <img alt="ig-2"
+            src="https://scontent-mnl3-1.xx.fbcdn.net/v/t39.30808-6/491864500_122174434526314282_6864867861873462224_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHX0_eN7E35ESlUVas7UM9PNqX9W_LtIW02pf1b8u0hbb2X1TMANL4uO22rP6VYx7TbDdF0zlYHVr4WC_4bl829&_nc_ohc=aDl1AdPv5nUQ7kNvwEM28_H&_nc_oc=AdnDeed2SjLce-ftvtXqxZU36bXPwJb_sgaqYlzWuUIyqKp2C2c8vxCrBQS3NLRqn1A&_nc_zt=23&_nc_ht=scontent-mnl3-1.xx&_nc_gid=nhaQjV4RWGPanPi8DQp1HQ&oh=00_AfiH_IaVnas7MfPs5ikQSXCCi87CwBfeQvxwl63Q-11wDg&oe=692595F3">
+          <img alt="ig-3"
+            src="https://scontent-mnl1-2.xx.fbcdn.net/v/t39.30808-6/491956215_122174434418314282_489576799142036752_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHlCBoBwMxcvQ3VI0fBS_vYOJIDt9KbrH04kgO30pusfVjCnQxCnU9caesQs7V_6a21RtJfXqdhMzvV5z6ZnXWS&_nc_ohc=DwhVcGUoykgQ7kNvwFkeRGy&_nc_oc=Adk5LSokNsrqPFOY30oxuolhuYVljuxHv6GXSKHO_pnjUIcsyp_815kzwrJ-EMviS50&_nc_zt=23&_nc_ht=scontent-mnl1-2.xx&_nc_gid=SuUWm_DWw3tdfQURbzaitQ&oh=00_AfhZrZfYfh4s7k2jxQ-mf35e5jrBeryS0n0WLAvhFr5jTQ&oe=69259098">
+          <img alt="ig-4"
+            src="https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/491808375_122174434148314282_5862400687955116903_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG8B9WGWKHzj5FyoMuWiIQ4SI76iMiLvS5IjvqIyIu9LphCDi8RWCoBgL3g60IJ0GHwG020pj7Z1uEb6yJsHiw1&_nc_ohc=Lgdke0XHtHQQ7kNvwH34b_S&_nc_oc=Adn06hWOquzgjU45lAXoz_FqHIMYk7b5aFhuVugMGN62SPiaS5xSVWvWR41aKRPCSAw&_nc_zt=23&_nc_ht=scontent-mnl1-1.xx&_nc_gid=M_bR4Ixe7HTwhHQl1gjRgw&oh=00_AfiDnutIQnX2jsku6wvsGiSRrTEzJdmqmzj7joOPKU3ijg&oe=6925772B">
+          <img alt="ig-5"
+            src="https://scontent-mnl3-1.xx.fbcdn.net/v/t39.30808-6/488942091_122172055862314282_1570564828707484218_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEYGFi-ER7h1jXMsgg--NWI2REvL9IKoN_ZES8v0gqg3zaNvZ24pWQxfZCHIqtocqT0kokXdhdSqLDoREMRIa_X&_nc_ohc=3RN0YsO0UzAQ7kNvwHs_kFd&_nc_oc=AdkGavDYLfhJz9xaWsC3C_eicHQQk7N656qRl9WlameW1HjEGs78aMW_MS93q0N8EVw&_nc_zt=23&_nc_ht=scontent-mnl3-1.xx&_nc_gid=0u7NtPgCetreLN8cchTiJg&oh=00_Afg6SvNsk6V8rPmg6WzD78T8NKAtg4APO3M9GtEgjkvBSw&oe=69258723">
+          <img alt="ig-6"
+            src="https://scontent-mnl1-2.xx.fbcdn.net/v/t39.30808-6/487871310_122172051218314282_4584551913395274932_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFc2Ov_T0G24nC43lGokU_6TKCked9x2JFMoKR533HYkQ9eu2eonPvZPmPnztfQNFW1wsx6oSI87v1ZpGDB6T2V&_nc_ohc=tR1uzzg_g8QQ7kNvwG_qJO4&_nc_oc=AdmSiSTq6jTeCKb7p02jN0ps_cg2hRK7nHQmrpMie4RS5iVvAsGdS9mcosFIj2HZabk&_nc_zt=23&_nc_ht=scontent-mnl1-2.xx&_nc_gid=GAKJzKNyK1VpdvFEq9qK3w&oh=00_Afi-V3sS6eCLUwBwBB3xozrEaSb9I4a8shXkQe3aPEDpcA&oe=6925A88A">
+
+          <img alt="ig-7"
+            src="https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/491810175_122174434328314282_7748146003699442918_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG6kt4dm0AwVLeKH7Dnc8sOKhnsuAtLLWIqGey4C0stYii32exE08q3j774_mqDZvytn6FhZQjhb-1IqYYywfT7&_nc_ohc=TbPCqKTFCwsQ7kNvwEm10lc&_nc_oc=AdmI_eqPF4zCTaLrj3vKQp38EjQJy5bsDDvMkR-uYlL9MpCo5b5HzB8szEnjJjmQv0I&_nc_zt=23&_nc_ht=scontent-mnl1-1.xx&_nc_gid=lZs_wgWof2M6h29ASkZMmw&oh=00_Afh71kVjByK81jlce2a78H0sGtFaUYK6MJDIzd1rEqqFMQ&oe=69258C52">
+          <img alt="ig-8"
+            src="https://scontent-mnl3-1.xx.fbcdn.net/v/t39.30808-6/491864500_122174434526314282_6864867861873462224_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHX0_eN7E35ESlUVas7UM9PNqX9W_LtIW02pf1b8u0hbb2X1TMANL4uO22rP6VYx7TbDdF0zlYHVr4WC_4bl829&_nc_ohc=aDl1AdPv5nUQ7kNvwEM28_H&_nc_oc=AdnDeed2SjLce-ftvtXqxZU36bXPwJb_sgaqYlzWuUIyqKp2C2c8vxCrBQS3NLRqn1A&_nc_zt=23&_nc_ht=scontent-mnl3-1.xx&_nc_gid=nhaQjV4RWGPanPi8DQp1HQ&oh=00_AfiH_IaVnas7MfPs5ikQSXCCi87CwBfeQvxwl63Q-11wDg&oe=692595F3">
+          <img alt="ig-9"
+            src="https://scontent-mnl1-2.xx.fbcdn.net/v/t39.30808-6/491956215_122174434418314282_489576799142036752_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHlCBoBwMxcvQ3VI0fBS_vYOJIDt9KbrH04kgO30pusfVjCnQxCnU9caesQs7V_6a21RtJfXqdhMzvV5z6ZnXWS&_nc_ohc=DwhVcGUoykgQ7kNvwFkeRGy&_nc_oc=Adk5LSokNsrqPFOY30oxuolhuYVljuxHv6GXSKHO_pnjUIcsyp_815kzwrJ-EMviS50&_nc_zt=23&_nc_ht=scontent-mnl1-2.xx&_nc_gid=SuUWm_DWw3tdfQURbzaitQ&oh=00_AfhZrZfYfh4s7k2jxQ-mf35e5jrBeryS0n0WLAvhFr5jTQ&oe=69259098">
+          <img alt="ig-10"
+            src="https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/491808375_122174434148314282_5862400687955116903_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG8B9WGWKHzj5FyoMuWiIQ4SI76iMiLvS5IjvqIyIu9LphCDi8RWCoBgL3g60IJ0GHwG020pj7Z1uEb6yJsHiw1&_nc_ohc=Lgdke0XHtHQQ7kNvwH34b_S&_nc_oc=Adn06hWOquzgjU45lAXoz_FqHIMYk7b5aFhuVugMGN62SPiaS5xSVWvWR41aKRPCSAw&_nc_zt=23&_nc_ht=scontent-mnl1-1.xx&_nc_gid=M_bR4Ixe7HTwhHQl1gjRgw&oh=00_AfiDnutIQnX2jsku6wvsGiSRrTEzJdmqmzj7joOPKU3ijg&oe=6925772B">
+          <img alt="ig-11"
+            src="https://scontent-mnl3-1.xx.fbcdn.net/v/t39.30808-6/488942091_122172055862314282_1570564828707484218_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEYGFi-ER7h1jXMsgg--NWI2REvL9IKoN_ZES8v0gqg3zaNvZ24pWQxfZCHIqtocqT0kokXdhdSqLDoREMRIa_X&_nc_ohc=3RN0YsO0UzAQ7kNvwHs_kFd&_nc_oc=AdkGavDYLfhJz9xaWsC3C_eicHQQk7N656qRl9WlameW1HjEGs78aMW_MS93q0N8EVw&_nc_zt=23&_nc_ht=scontent-mnl3-1.xx&_nc_gid=0u7NtPgCetreLN8cchTiJg&oh=00_Afg6SvNsk6V8rPmg6WzD78T8NKAtg4APO3M9GtEgjkvBSw&oe=69258723">
+          <img alt="ig-12"
+            src="https://scontent-mnl1-2.xx.fbcdn.net/v/t39.30808-6/487871310_122172051218314282_4584551913395274932_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFc2Ov_T0G24nC43lGokU_6TKCked9x2JFMoKR533HYkQ9eu2eonPvZPmPnztfQNFW1wsx6oSI87v1ZpGDB6T2V&_nc_ohc=tR1uzzg_g8QQ7kNvwG_qJO4&_nc_oc=AdmSiSTq6jTeCKb7p02jN0ps_cg2hRK7nHQmrpMie4RS5iVvAsGdS9mcosFIj2HZabk&_nc_zt=23&_nc_ht=scontent-mnl1-2.xx&_nc_gid=GAKJzKNyK1VpdvFEq9qK3w&oh=00_Afi-V3sS6eCLUwBwBB3xozrEaSb9I4a8shXkQe3aPEDpcA&oe=6925A88A">
+
+          <img alt="ig-13"
+            src="https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/491810175_122174434328314282_7748146003699442918_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG6kt4dm0AwVLeKH7Dnc8sOKhnsuAtLLWIqGey4C0stYii32exE08q3j774_mqDZvytn6FhZQjhb-1IqYYywfT7&_nc_ohc=TbPCqKTFCwsQ7kNvwEm10lc&_nc_oc=AdmI_eqPF4zCTaLrj3vKQp38EjQJy5bsDDvMkR-uYlL9MpCo5b5HzB8szEnjJjmQv0I&_nc_zt=23&_nc_ht=scontent-mnl1-1.xx&_nc_gid=lZs_wgWof2M6h29ASkZMmw&oh=00_Afh71kVjByK81jlce2a78H0sGtFaUYK6MJDIzd1rEqqFMQ&oe=69258C52">
+          <img alt="ig-14"
+            src="https://scontent-mnl3-1.xx.fbcdn.net/v/t39.30808-6/491864500_122174434526314282_6864867861873462224_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHX0_eN7E35ESlUVas7UM9PNqX9W_LtIW02pf1b8u0hbb2X1TMANL4uO22rP6VYx7TbDdF0zlYHVr4WC_4bl829&_nc_ohc=aDl1AdPv5nUQ7kNvwEM28_H&_nc_oc=AdnDeed2SjLce-ftvtXqxZU36bXPwJb_sgaqYlzWuUIyqKp2C2c8vxCrBQS3NLRqn1A&_nc_zt=23&_nc_ht=scontent-mnl3-1.xx&_nc_gid=nhaQjV4RWGPanPi8DQp1HQ&oh=00_AfiH_IaVnas7MfPs5ikQSXCCi87CwBfeQvxwl63Q-11wDg&oe=692595F3">
+          <img alt="ig-15"
+            src="https://scontent-mnl1-2.xx.fbcdn.net/v/t39.30808-6/491956215_122174434418314282_489576799142036752_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHlCBoBwMxcvQ3VI0fBS_vYOJIDt9KbrH04kgO30pusfVjCnQxCnU9caesQs7V_6a21RtJfXqdhMzvV5z6ZnXWS&_nc_ohc=DwhVcGUoykgQ7kNvwFkeRGy&_nc_oc=Adk5LSokNsrqPFOY30oxuolhuYVljuxHv6GXSKHO_pnjUIcsyp_815kzwrJ-EMviS50&_nc_zt=23&_nc_ht=scontent-mnl1-2.xx&_nc_gid=SuUWm_DWw3tdfQURbzaitQ&oh=00_AfhZrZfYfh4s7k2jxQ-mf35e5jrBeryS0n0WLAvhFr5jTQ&oe=69259098">
+          <img alt="ig-16"
+            src="https://scontent-mnl1-1.xx.fbcdn.net/v/t39.30808-6/491808375_122174434148314282_5862400687955116903_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG8B9WGWKHzj5FyoMuWiIQ4SI76iMiLvS5IjvqIyIu9LphCDi8RWCoBgL3g60IJ0GHwG020pj7Z1uEb6yJsHiw1&_nc_ohc=Lgdke0XHtHQQ7kNvwH34b_S&_nc_oc=Adn06hWOquzgjU45lAXoz_FqHIMYk7b5aFhuVugMGN62SPiaS5xSVWvWR41aKRPCSAw&_nc_zt=23&_nc_ht=scontent-mnl1-1.xx&_nc_gid=M_bR4Ixe7HTwhHQl1gjRgw&oh=00_AfiDnutIQnX2jsku6wvsGiSRrTEzJdmqmzj7joOPKU3ijg&oe=6925772B">
+
+
+        </div>
+      </section>
+    </main>
+
+    {{> footer}}
+
+  </div>
+
+  <!-- Minimal script: ensure no horizontal scroll on orientation change -->
+  <script>
+    (function () {
+      function tidy() {
+        document.documentElement.style.scrollBehavior = 'auto';
+        setTimeout(() => document.documentElement.style.scrollBehavior = 'smooth', 60);
+      }
+      window.addEventListener('orientationchange', tidy, { passive: true });
+    })();
+
+    // GSAP Animations for Home Page
+    document.addEventListener('DOMContentLoaded', () => {
+      // Register ScrollTrigger
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Page fade-in
+      gsap.from('.site', {
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out'
+      });
+
+      // Hero headline fade-in
+      gsap.from('.headline', {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        delay: 0.2,
+        ease: 'power2.out'
+      });
+
+      // Subhead fade-in with delay
+      gsap.from('.subhead', {
+        opacity: 0,
+        y: 30,
+        duration: 1,
+        delay: 0.3,
+        ease: 'power2.out'
+      });
+
+
+      // Tiles stagger animation on scroll
+      gsap.from('.tile', {
+        opacity: 0,
+        y: 60,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.tiles',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+
+
+      // Rooms grid stagger on scroll
+      gsap.from('.room-card', {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.room-grid',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      // Instagram strip fade-in on scroll
+      gsap.from('.insta img', {
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: '.insta-strip',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+    });
+  </script>
+
+  <!-- Cookie Consent Popup -->
+  <div id="cookie-popup" class="cookie-popup">
+    <div class="cookie-content">
+      <h3>Cookie Consent</h3>
+      <p>We use cookies to enhance your experience on our website. By continuing to browse, you agree to our use of
+        cookies.</p>
+      <div class="cookie-buttons">
+        <button class="cookie-accept">Accept</button>
+        <button class="cookie-decline">Decline</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    // Cookie Consent Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const cookiePopup = document.getElementById('cookie-popup');
+      const acceptBtn = document.querySelector('.cookie-accept');
+      const declineBtn = document.querySelector('.cookie-decline');
+
+      // Check if user has already made a choice
+      const cookieChoice = localStorage.getItem('cookieConsent');
+      if (!cookieChoice) {
+        // Show popup if no choice made
+        cookiePopup.classList.add('active');
+      }
+
+      // Accept cookies
+      acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted');
+        cookiePopup.classList.remove('active');
+      });
+
+      // Decline cookies
+      declineBtn.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'declined');
+        cookiePopup.classList.remove('active');
+      });
+    });
+  </script>
+
+  <script>
+    // Variables to store selected dates
+    let checkIn = null;
+    let checkOut = null;
+
+    // Open modal
+    document.querySelector('.res-check').addEventListener('click', () => {
+      document.getElementById('availability-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    // Close modal
+    document.getElementById('availability-modal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('availability-modal') || e.target.classList.contains('modal-close')) {
+        document.getElementById('availability-modal').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Inline Calendar (always visible)
+    const calendar = flatpickr("#inline-calendar", {
+      inline: true,
+      mode: "range",
+      minDate: "today",
+      dateFormat: "M j, Y",
+      theme: "dark",
+      onChange: function (selectedDates) {
+        if (selectedDates.length === 2) {
+          checkIn = selectedDates[0];
+          checkOut = selectedDates[1];
+
+          // Update the reservation bar text
+          document.getElementById('selected-dates').textContent =
+            `${flatpickr.formatDate(checkIn, "M j")} – ${flatpickr.formatDate(checkOut, "M j, Y")}`;
+        }
+      }
+    });
+
+    // Continue Booking → Save & Redirect
+    document.getElementById('continue-booking').addEventListener('click', () => {
+      if (!checkIn || !checkOut) {
+        alert("Please select both check-in and check-out dates.");
+        return;
+      }
+
+      // Save to sessionStorage
+      sessionStorage.setItem('bookingCheckIn', checkIn.toISOString().split('T')[0]);
+      sessionStorage.setItem('bookingCheckOut', checkOut.toISOString().split('T')[0]);
+      sessionStorage.setItem('bookingAdults', document.getElementById('adult-count')?.textContent || '1');
+      sessionStorage.setItem('bookingChildren', document.getElementById('child-count')?.textContent || '0');
+
+      // Redirect
+      window.location.href = "/login";   // Change to "/book" if user is already logged in
+    });
+  </script>
+
+
+</body>
+
+</html>

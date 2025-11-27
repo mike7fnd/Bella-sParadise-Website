@@ -276,108 +276,198 @@
 }
 
 
-    /* MODALS */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(16px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 1rem;
-    }
-    .modal.active { display: flex; }
+   /* Updated modal CSS for facility-modal and booking-modal */
 
-    .modal-content {
-      background: white;
-      border-radius: 32px;
-      max-width: 820px;
-      width: 100%;
-      max-height: 95vh;
-      overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.2);
-      position: relative;
-    }
 
-    .modal-close {
-      position: absolute;
-      top: 16px; right: 16px;
-      width: 44px; height: 44px;
-      background: rgba(0,0,0,0.1);
-      border: none;
-      border-radius: 50%;
-      font-size: 1.6rem;
-      cursor: pointer;
-      z-index: 10;
-    }
+/* GLOBAL FONT OVERRIDE FOR MODALS (Claviro-like Airbnb aesthetic) */
+.modal, .modal * {
+  font-family: "Claviro", "Archivo", sans-serif !important;
+}
 
-    .modal-img {
-      height: 320px;
-      background: center/cover no-repeat;
-    }
-
-    .modal-body{
-      padding: 2.5rem;
-    }
-
-    .modal-title {
-      font-size: 2.2rem;
-       margin-bottom: 0.5rem;
-    }
-
-    .modal-meta {
-       color: var(--muted);
-        font-size: 1.1rem;
-      }
-
-    .modal-price {
-      font-size: 2rem;
-       font-weight: 400;
-       color: #ff7ea9;
-       margin: 1.5rem 0;
-    }
-
-    .modal-book {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 1rem 2.5rem;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-    /* SUCCESS MODAL */
-#success-modal {
-  display: none;
+/* BASE MODAL LAYOUT — slightly smaller, centered, Airbnb spacing */
+.modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(3px);
-  justify-content: center;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(18px);
+  display: none;
   align-items: center;
-  z-index: 2000;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.25s ease-out;
+}
+.modal.active { display: flex; }
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
-#success-modal.active {
+/* MODAL CONTENT — decreased size by ~10% ("1× smaller") */
+.modal-content {
+  background: #ffffff;
+  border-radius: 28px;
+  max-width: 700px; /* was 820px */
+  width: 100%;
+  max-height: 88vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.16);
+  position: relative;
+  transform: translateY(6px);
+  animation: slideUp 0.35s ease;
+}
+
+@keyframes slideUp {
+  0% { transform: translateY(40px); opacity: 0; }
+  100% { transform: translateY(6px); opacity: 1; }
+}
+
+/* CLOSE BUTTON — more minimal, Airbnb style */
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.07);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.modal-close:hover {
+  background: rgba(0,0,0,0.12);
+  transform: scale(1.07);
 }
 
-.success-box {
-  background: #fff;
-  padding: 40px 50px;
-  border-radius: 20px;
-  text-align: center;
-  animation: popIn 0.35s ease-out;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+/* ---------- FACILITY MODAL IMAGE -------- */
+.modal-img {
+  height: 260px; /* was 320px */
+  background-size: cover;
+  background-position: center;
 }
 
-@keyframes popIn {
-  0% { transform: scale(0.6); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+/* FACILITY MODAL BODY */
+.modal-body {
+  padding: 2rem 2.2rem;
 }
+
+.modal-title {
+  font-size: 1.85rem;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+/* AIRBNB-STYLE BADGE ABOVE DESCRIPTION */
+.modal-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: #fff0f4;
+  color: #ff385c;
+  border-radius: 40px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0.4rem 0 1rem;
+}
+
+
+.modal-meta {
+  color: #777;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+/* RATING + REVIEWS (Airbnb style) */
+.modal-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0.4rem 0 0.4rem;
+  font-size: 1.05rem;
+  color: #333;
+  font-weight: 500;
+}
+.modal-rating .star {
+  color: #ff385c;
+  font-size: 1.25rem;
+}
+.modal-reviews {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1.2rem;
+}
+
+
+.modal-price {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #ff7ea9;
+  margin: 1.2rem 0;
+}
+
+.modal-book {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.9rem 2.2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.28s ease;
+}
+.modal-book:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+}
+
+/* ---------- BOOKING MODAL ---------- */
+#booking-modal .modal-content {
+  max-width: 640px; /* narrower for tighter Airbnb feel */
+}
+
+#booking-modal .modal-body {
+  padding: 2rem 2.2rem;
+}
+
+#booking-modal input,
+#booking-modal textarea {
+  font-family: "Claviro", "Archivo", sans-serif !important;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  font-size: 1rem;
+}
+
+#booking-modal textarea {
+  resize: none;
+}
+
+#booking-modal button[type="submit"] {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.9rem 2.1rem;
+  border-radius: 50px;
+  border: none;
+  transition: all 0.25s ease;
+}
+#booking-modal button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+}
+
+#booking-modal .modal-close {
+  font-size: 1.2rem !important;
+}
+
+
 
 /* SVG CHECK ANIMATION */
 .checkmark {
@@ -417,6 +507,88 @@
 
 
 <body>
+
+  <!-- WELCOME MODAL – Small, Transparent Blur, Full Image (Shows on load) -->
+<div id="welcome-modal" class="modal active">
+  <div class="modal-content" style="max-width: 420px; border-radius: 32px; overflow: hidden; box-shadow: 0 25px 70px rgba(0,0,0,0.25);">
+
+    <!-- FULL IMAGE (your emoji – takes full width, no borders) -->
+    <div style="
+      height: 260px;
+      background: url('https://nujddmdrhlvaqzszjnkt.supabase.co/storage/v1/object/public/emojis/11b02ea8-8634-4a7f-b1d3-8b712cf30235.png') center/contain no-repeat;
+      background-color: #ffffff;
+      border-radius: 32px 32px 0 0;
+    "></div>
+
+    <!-- Content below image -->
+    <div style="padding: 2rem 1.8rem 2.4rem; text-align: center; background: white;">
+      <h2 style="font-size: 1.95rem; font-weight: 600; margin-bottom: 0.7rem; color: #1a1a1a;">
+        Accomodations
+      </h2>
+      <p style="font-size: 1.08rem; color: #666; line-height: 1.6; margin-bottom: 1.8rem;">
+        Relax in exclusive private stays.<br>
+        Your tropical escape awaits.
+      </p>
+
+      <!-- Continue Button -->
+      <button id="welcome-continue" style="
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 1rem 3rem;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        box-shadow: 0 10px 30px rgba(216,27,96,0.35);
+        transition: all 0.3s ease;
+      ">
+        Explore Now
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Close modal
+document.getElementById('welcome-continue').onclick = () => {
+  document.getElementById('welcome-modal').classList.remove('active');
+};
+document.getElementById('welcome-close').onclick = () => {
+  document.getElementById('welcome-modal').classList.remove('active');
+};
+document.getElementById('welcome-modal').onclick = (e) => {
+  if (e.target === document.getElementById('welcome-modal')) {
+    document.getElementById('welcome-modal').classList.remove('active');
+  }
+};
+</script>
+
+<style>
+/* Stronger transparent blur + darker overlay */
+#welcome-modal {
+  background: rgba(255, 255, 255, 0.137);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+/* Smooth pop-in animation */
+#welcome-modal .modal-content {
+  animation: popIn 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Button hover lift */
+#welcome-continue:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 38px rgba(255, 63, 133, 0.795);
+}
+</style>
 
 
   <div class="container">
@@ -476,17 +648,120 @@
       </div>
     </div>
   </div>
-  <!-- Success Animation Modal -->
-<div id="success-modal" class="modal">
-  <div class="success-box">
-    <svg class="checkmark" viewBox="0 0 52 52">
-      <circle class="checkmark-circle" cx="26" cy="26" r="25" />
-      <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16"/>
-    </svg>
-    <h3>Booking Successful!</h3>
-    <p>Your request has been submitted.</p>
+<!-- SUCCESS MODAL – Confetti + Permanent (No auto-close) -->
+<div id="success-modal" class="bella-success-modal">
+  <div class="bella-success-content">
+
+    <!-- Small X button (only way to close) -->
+    <button class="bella-close-x" aria-label="Close">×</button>
+
+    <!-- Confetti layer -->
+    <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+
+    <!-- Content – same luxurious style as welcome modal -->
+    <div style="padding:2.4rem 2rem 3rem;text-align:center;background:white;border-radius:32px;position:relative;z-index:2;">
+      <h2 style="font-size:2.15rem;font-weight:600;margin:0 0 0.8rem;color:#1a1a1a;">
+        Booking Confirmed!
+      </h2>
+      <p style="font-size:1.12rem;color:#555;line-height:1.6;max-width:330px;margin:0 auto 2.3rem;">
+        Your booking is confirmed! Track it anytime from your profile.
+      </p>
+
+      <div style="display:flex;flex-direction:column;gap:14px;max-width:300px;margin:0 auto;">
+        <a href="/profile" style="
+          background:var(--accent);
+          color:white;
+          padding:1rem 2rem;
+          border-radius:50px;
+          font-size:1.1rem;
+          font-weight:600;
+          text-decoration:none;
+          box-shadow:0 10px 30px rgba(255, 77, 142, 0.521);
+          transition:all .3s;
+        " onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 38px rgba(216,27,96,0.45)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 10px 30px rgba(216,27,96,0.35)'">
+          View Profile
+        </a>
+
+        <a href="/messages" style="
+          background:#fdf2f6;
+          color:#d81b60;
+          padding:1rem 2rem;
+          border-radius:50px;
+          font-size:1.05rem;
+          font-weight:600;
+          text-decoration:none;
+          border:1.5px solid #ffe0e9;
+          transition:all .3s;
+        " onmouseover="this.style.background='#ffe0e9'"
+           onmouseout="this.style.background='#fdf2f6'">
+          Message Us
+        </a>
+      </div>
+    </div>
   </div>
 </div>
+<!-- Confetti Library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<script>
+// Success modal with confetti – stays open until user closes it
+function showSuccessAnimation() {
+  const modal = document.getElementById('success-modal');
+  modal.classList.add('active');
+
+  // One-time confetti burst
+  confetti({
+    particleCount: 180,
+    spread: 85,
+    origin: { y: 0.58 },
+    colors: ['#d81b60', '#ff6b9d', '#ff8fb1', '#ff9a9e', '#fad0c4', '#43e97b']
+  });
+
+  // Only close when user clicks X or outside – NO auto-close
+  const close = () => modal.classList.remove('active');
+  modal.querySelector('.bella-close-x').onclick = close;
+  modal.onclick = e => { if (e.target === modal) close(); };
+}
+</script>
+
+<style>
+.bella-success-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.bella-success-modal.active{display:flex;}
+
+.bella-success-content{
+  max-width:420px;
+  width:90%;
+  border-radius:32px;
+  overflow:hidden;
+  box-shadow:0 25px 70px rgba(0,0,0,0.25);
+  animation:popIn .65s cubic-bezier(.16,1,.3,1);
+  position:relative;
+}
+.bella-close-x{
+  position:absolute;
+  top:12px;right:12px;
+  width:36px;height:36px;
+  background:rgba(0,0,0,0.08);
+  border:none;border-radius:50%;
+  font-size:1.4rem;color:#444;
+  cursor:pointer;z-index:10;
+  opacity:0.7;
+}
+.bella-close-x:hover{opacity:1;background:rgba(0,0,0,0.15);transform:scale(1.1);}
+.confetti-canvas{position:absolute;inset:0;pointer-events:none;border-radius:32px;}
+@keyframes popIn{0%{transform:scale(.85);opacity:0}100%{transform:scale(1);opacity:1}}
+</style>
 
 
   <!-- Booking Modal -->
@@ -496,7 +771,7 @@
       <div class="modal-body">
         <h3 class="modal-title" style="text-align:center;margin-bottom:1.5rem;">Complete Your Reservation</h3>
         <form id="booking-form" style="display:grid;gap:1.5rem;">
-          <input id="bf-name" type="text" readonly style="padding:1rem;border-radius:12px;background:#f8f8f8;border:1px solid #ddd;font-weight:500;">
+          <input id="bf-name" type="text" readonly style="padding:1rem;border-radius:12px;background:#f8f8f8;border:1px solid #ddd;font-weight:400;">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
             <input id="bf-in" type="date" required>
             <input id="bf-out" type="date" required>
@@ -507,10 +782,10 @@
           </div>
           <textarea id="bf-notes" rows="4" placeholder="Special requests (optional)..."></textarea>
           <div style="background:#f9f9f9;padding:1.5rem;border-radius:16px;text-align:center;">
-            <div style="font-size:1.8rem;font-weight:700;color:var(--accent);" id="bf-price">—</div>
+            <div style="font-size:1.8rem;font-weight:400;color:var(--accent);" id="bf-price">—</div>
             <div style="margin-top:1rem;display:flex;gap:1rem;justify-content:center;">
               <button type="button" class="modal-close" style="padding:0.9rem 2rem;border-radius:50px;background:#ddd;">Cancel</button>
-              <button type="submit" style="padding:0.9rem 2.5rem;border-radius:50px;background:var(--accent);color:white;font-weight:700;">Confirm Booking</button>
+              <button type="submit" style="padding:0.9rem 2.5rem;border-radius:50px;background:var(--accent);color:white;font-weight:400;">Confirm Booking</button>
             </div>
           </div>
         </form>
@@ -756,17 +1031,73 @@ function showSuccessAnimation() {
   const m = document.getElementById('success-modal');
   m.classList.add('active');
 
-  // Auto-close after animation
-  setTimeout(() => {
-    m.classList.remove('active');
-  }, 2200);
 }
 
 
 
 </script>
 
+<!-- Confetti Library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
+<script>
+// Success modal with confetti – stays open until user closes it
+function showSuccessAnimation() {
+  const modal = document.getElementById('success-modal');
+  modal.classList.add('active');
+
+  // One-time confetti burst
+  confetti({
+    particleCount: 180,
+    spread: 85,
+    origin: { y: 0.58 },
+    colors: ['#d81b60', '#ff6b9d', '#ff8fb1', '#ff9a9e', '#fad0c4', '#43e97b']
+  });
+
+  // Only close when user clicks X or outside – NO auto-close
+  const close = () => modal.classList.remove('active');
+  modal.querySelector('.bella-close-x').onclick = close;
+  modal.onclick = e => { if (e.target === modal) close(); };
+}
+</script>
+
+<style>
+.bella-success-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.bella-success-modal.active{display:flex;}
+
+.bella-success-content{
+  max-width:420px;
+  width:90%;
+  border-radius:32px;
+  overflow:hidden;
+  box-shadow:0 25px 70px rgba(0,0,0,0.25);
+  animation:popIn .65s cubic-bezier(.16,1,.3,1);
+  position:relative;
+}
+.bella-close-x{
+  position:absolute;
+  top:12px;right:12px;
+  width:36px;height:36px;
+  background:rgba(0,0,0,0.08);
+  border:none;border-radius:50%;
+  font-size:1.4rem;color:#444;
+  cursor:pointer;z-index:10;
+  opacity:0.7;
+}
+.bella-close-x:hover{opacity:1;background:rgba(0,0,0,0.15);transform:scale(1.1);}
+.confetti-canvas{position:absolute;inset:0;pointer-events:none;border-radius:32px;}
+@keyframes popIn{0%{transform:scale(.85);opacity:0}100%{transform:scale(1);opacity:1}}
+</style>
 </body>
 </html>
 {{>footer}}

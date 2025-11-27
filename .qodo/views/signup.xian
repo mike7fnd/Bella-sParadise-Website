@@ -1,0 +1,478 @@
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign Up — Bella's Paradise Resort</title>
+ <link
+  href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&display=swap"
+  rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+  /* Base font: Archivo only + solid system fallbacks */
+  --base-font: "Archivo", sans-serif;
+ /* Logo font: Playfair Display only */
+  --logo-font: "Playfair Display", serif;
+      --bg-dark: #181818;
+      --muted: #e4bdd1;
+      --accent: #e6a8ce;
+      --white: #ffffff;
+      --glass-bg: rgba(0, 0, 0, 0.35);
+      --dropdown-bg: rgba(255, 255, 255, 0.92);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg-dark);
+      color: var(--white);
+      font-family: var(--base-font);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+        background-image:
+        linear-gradient(180deg, rgba(21, 17, 14, 0.233), rgba(21, 17, 14, 0.247)),
+        url("https://images.pexels.com/photos/27429680/pexels-photo-27429680.jpeg");
+      background-size: cover;
+      background-position: center 18%;
+    }
+
+    .signup-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 50px;
+      padding: 40px 36px;
+      width: min(560px, 92vw);
+      border: 1px solid rgba(255, 255, 255, .12);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo {
+      font-family: var(--logo-font);
+      font-size: 2rem;
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: 20px;
+    }
+
+    .progress-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      gap: 12px;
+    }
+
+    .step {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, .15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      transition: all .3s;
+    }
+
+    .step.active {
+      background: var(--accent);
+      color: #111;
+      transform: scale(1.1);
+    }
+
+    .step.done {
+      background: var(--white);
+      color: #111;
+    }
+
+    .form-step {
+      display: none;
+      animation: fadeIn .5s ease;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: .86rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, .22);
+      background: rgba(255, 255, 255, .12);
+      color: white;
+      font-size: 1rem;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, .5);
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, .18);
+      box-shadow: 0 0 0 3px rgba(189, 165, 137, .25);
+    }
+
+    select {
+      background: var(--dropdown-bg);
+      color: #000;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 12px;
+      padding-right: 40px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media(max-width:640px) {
+      .row {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all .25s;
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: #111;
+    }
+
+    .btn-primary:hover {
+      background: #e03d8f;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .btn-back {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: .9rem;
+      style:none;
+    }
+
+    .login-link a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .back-home {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--accent);
+      font-size: .9rem;
+    }
+
+     /* Back to Home Link */
+    .back-to-home {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      color: var(--accent);
+      margin-top: -8px;
+      margin-bottom: 12px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .back-to-home:hover {
+      color: #d6c0a0;
+      transform: translateX(-2px);
+    }
+
+    .back-to-home svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="signup-card">
+    <div class="logo">Bella's Paradise</div>
+    <p class="subtitle">Create your account in a few simple steps</p>
+
+    <div class="progress-container">
+      <div class="step active">1</div>
+      <div class="step">2</div>
+      <div class="step">3</div>
+    </div>
+
+    <form id="multiStepForm" action="/signup" method="POST" novalidate>
+
+      <!-- Step 1: Personal Info -->
+      <div class="form-step active" id="step-1">
+        <h3 style="text-align:center;margin-bottom:20px;color:var(--accent);">Personal Information</h3>
+        <div class="row">
+          <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="Juan"
+              required></div>
+          <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Dela Cruz"
+              required></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" name="email"
+            placeholder="juan@example.com" required></div>
+        <button type="button" class="btn btn-primary" onclick="nextStep(1)">Next</button>
+      </div>
+
+      <!-- Step 2: Contact & Address -->
+      <div class="form-step" id="step-2">
+        <h3 style="text-align:center;margin-bottom:20px;color:var(--accent);">Contact & Address</h3>
+        <div class="form-group"><label>Mobile Number <small style="color:#ccc">(+63)</small></label>
+          <input type="tel" name="mobile" placeholder="9123456789" pattern="[0-9]{10}" maxlength="10" required>
+        </div>
+        <div class="form-group"><label>Province</label>
+          <select name="province" id="province" required>
+            <option value="" disabled selected>Select Province</option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="form-group"><label>City / Municipality</label>
+            <select name="city" id="city" required disabled>
+              <option value="" disabled selected>Select City</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Barangay</label>
+            <select name="barangay" id="barangay" required disabled>
+              <option value="" disabled selected>Select Barangay</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Street, Building, House No. (Optional)</label>
+          <input type="text" name="street" placeholder="123 Sampaguita St.">
+        </div>
+        <button type="button" class="btn btn-back" onclick="prevStep()">Back</button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next</button>
+      </div>
+
+      <!-- Step 3: Password + 2 Security Questions -->
+      <div class="form-step" id="step-3">
+        <h3 style="text-align:center;margin-bottom:20px;color:var(--accent);">Secure Your Account</h3>
+
+        <div class="form-group"><label>Password</label>
+          <input type="password" name="password" placeholder="Enter strong password" minlength="6" required>
+        </div>
+        <div class="form-group"><label>Confirm Password</label>
+          <input type="password" name="confirm_password" placeholder="Repeat password" required>
+        </div>
+
+        <div
+          style="margin:24px 0 16px; padding:16px; background:rgba(189,165,137,.15); border-radius:12px; font-size:.92rem;">
+          <strong>Forgot Password Recovery</strong><br>
+          <small>Choose 2 different questions and provide answers only you know.</small>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="form-group">
+          <label>Security Question 1</label>
+          <select name="sec_question_1" id="q1" required onchange="syncQuestions()">
+            <option value="" disabled selected>Choose a question...</option>
+          </select>
+          <input type="text" name="sec_answer_1" placeholder="Your answer" required style="margin-top:8px;">
+        </div>
+
+        <!-- Question 2 -->
+        <div class="form-group">
+          <label>Security Question 2</label>
+          <select name="sec_question_2" id="q2" required onchange="syncQuestions()">
+            <option value="" disabled selected>Choose a question...</option>
+          </select>
+          <input type="text" name="sec_answer_2" placeholder="Your answer" required style="margin-top:8px;">
+        </div>
+
+        <button type="button" class="btn btn-back" onclick="prevStep()">Back</button>
+        <button type="submit" class="btn btn-primary">Create Account</button>
+      </div>
+    </form>
+
+    <p class="login-link">Already have an account? <a href="/login">Sign In</a></p>
+    <div class="back-home"><a href="/">Back to Home</a></div>
+  </div>
+
+  <!-- Security Questions -->
+  <script>
+    const questions = [
+      "What was your childhood nickname?",
+      "In what city were you born?",
+      "What is the name of your favorite childhood friend?",
+      "What was the name of your first pet?",
+      "What is your mother's maiden name?",
+      "What was the make of your first car?",
+      "What high school did you attend?",
+      "What is your favorite movie?",
+      "What street did you grow up on?",
+      "Who was your favorite teacher?"
+    ];
+
+    const q1 = document.getElementById('q1');
+    const q2 = document.getElementById('q2');
+
+    questions.forEach(q => {
+      q1.add(new Option(q, q));
+      q2.add(new Option(q, q));
+    });
+
+    function syncQuestions() {
+      const v1 = q1.value;
+      const v2 = q2.value;
+
+      Array.from(q1.options).forEach(opt => opt.disabled = (opt.value === v2 && v2 !== ''));
+      Array.from(q2.options).forEach(opt => opt.disabled = (opt.value === v1 && v1 !== ''));
+    }
+  </script>
+
+  <!-- Philippine Address API (unchanged) -->
+  <script>
+    const API = 'https://psgc.gitlab.io/api';
+    const prov = document.getElementById('province');
+    const city = document.getElementById('city');
+    const brgy = document.getElementById('barangay');
+
+    async function loadProvinces() {
+      const r = await fetch(`${API}/provinces.json`);
+      const data = await r.json();
+      data.sort((a, b) => a.name.localeCompare(b.name))
+        .forEach(p => prov.add(new Option(p.name, p.code)));
+    }
+    prov.addEventListener('change', async () => {
+      const code = prov.value; city.disabled = true; brgy.disabled = true;
+      if (!code) return;
+      const r = await fetch(`${API}/provinces/${code}/municipalities.json`);
+      const data = await r.json();
+      city.innerHTML = '<option value="" disabled selected>Select City</option>';
+      data.forEach(m => city.add(new Option(m.name, m.code)));
+      city.disabled = false;
+    });
+    city.addEventListener('change', async () => {
+      const code = city.value; brgy.disabled = true;
+      if (!code) return;
+      const r = await fetch(`${API}/municipalities/${code}/barangays.json`);
+      const data = await r.json();
+      brgy.innerHTML = '<option value="" disabled selected>Select Barangay</option>';
+      data.forEach(b => brgy.add(new Option(b.name, b.name)));
+      brgy.disabled = false;
+    });
+    window.addEventListener('DOMContentLoaded', loadProvinces);
+  </script>
+
+  <!-- Multi-step + Validation -->
+  <script>
+    let currentStep = 1;
+    function updateProgress() {
+      document.querySelectorAll('.step').forEach((s, i) => {
+        s.classList.toggle('active', i + 1 === currentStep);
+        s.classList.toggle('done', i + 1 < currentStep);
+      });
+    }
+    function nextStep(from) {
+      if (from === 1 && (!document.querySelector('[name=first_name]').value.trim() || !document.querySelector('[name=email]').value.includes('@'))) {
+        alert('Please complete personal info'); return;
+      }
+      if (from === 2 && (!document.querySelector('[name=mobile]').checkValidity() || !prov.value || !city.value || !brgy.value)) {
+        alert('Please complete address'); return;
+      }
+      if (currentStep < 3) {
+        document.getElementById(`step-${currentStep}`).classList.remove('active');
+        currentStep++;
+        document.getElementById(`step-${currentStep}`).classList.add('active');
+        updateProgress(); window.scrollTo(0, 0);
+      }
+    }
+    function prevStep() {
+      if (currentStep > 1) {
+        document.getElementById(`step-${currentStep}`).classList.remove('active');
+        currentStep--;
+        document.getElementById(`step-${currentStep}`).classList.add('active');
+        updateProgress();
+      }
+    }
+
+    document.getElementById('multiStepForm').addEventListener('submit', e => {
+      const pw = document.querySelector('[name=password]').value;
+      const cpw = document.querySelector('[name=confirm_password]').value;
+      if (pw !== cpw) { e.preventDefault(); alert('Passwords do not match!'); }
+      else if (pw.length < 6) { e.preventDefault(); alert('Password too short'); }
+    });
+
+    gsap.from('.signup-card', { opacity: 0, y: 80, duration: 1, ease: 'power3.out' });
+    updateProgress();
+  </script>
+</body>
+
+</html>

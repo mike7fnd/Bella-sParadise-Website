@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bella’s Paradise – Guest Profile</title>
+
+  <!-- Airbnb Circular Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Circular+Std:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <style>
+    :root {
+      --red: #e03d8f;
+      --dark: #222222;
+      --gray: #484848;
+      --light: #767676;
+      --bg: #F7F7F7;
+      --white: #FFFFFF;
+      --border: #EBEBEB;
+      --shadow: 0 8px 30px rgba(0,0,0,0.09);
+      --radius: 20px;
+      --gap: 3rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Circular Std", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .site { display: flex; min-height: 100vh; }
+
+    .main {
+      flex: 1;
+      padding: 9rem 2rem 4rem 2rem !important;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--gray);
+      font-weight: 600;
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    .back-link:hover { color: var(--red); }
+    .back-link i { width: 20px; height: 20px; }
+
+    .page-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: var(--gap);
+    }
+
+    /* Profile Card – exact same style as other cards */
+    .profile-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 3rem;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .avatar {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+    }
+
+    .profile-main h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-email {
+      font-size: 1.2rem;
+      color: var(--light);
+      margin-bottom: 2rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .meta-item {
+      background: #FAFAFA;
+      padding: 1.5rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .meta-item strong {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 0.5rem;
+    }
+
+    .meta-value {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .qr {
+      background: white;
+      padding: 1rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      max-width: 180px;
+      align-self: start;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 868px) {
+      .profile-card { grid-template-columns: 1fr; }
+      .main { padding: 7rem 1rem 3rem 1rem !important; }
+      .page-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="site">
+    {{> admin-sidebar}}
+
+    <main class="main">
+
+      <a href="/admin-guests" class="back-link">
+        <i data-lucide="arrow-left"></i> Back to Guests
+      </a>
+
+      <h1 class="page-title">Guest Profile</h1>
+
+      <section class="profile-card">
+
+        <!-- Avatar + QR -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:2rem;">
+          <img
+            src="{{#if user.profile_picture}}{{user.profile_picture}}{{else}}https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80{{/if}}"
+            alt="{{user.first_name}} {{user.last_name}}"
+            class="avatar">
+
+          <div class="qr">
+            <img src="{{qrCode}}" alt="QR Code" style="width:100%;height:auto;">
+          </div>
+        </div>
+
+        <!-- Details -->
+        <div class="profile-main">
+          <h2>{{user.first_name}} {{user.last_name}}</h2>
+          <div class="profile-email">{{user.email}}</div>
+
+          <div class="meta-grid">
+            <div class="meta-item">
+              <strong>Mobile</strong>
+              <div class="meta-value">{{user.mobile}}</div>
+            </div>
+
+            <div class="meta-item">
+              <strong>Address</strong>
+              <div class="meta-value">
+                {{#if user.street}}{{user.street}},<br>{{/if}}
+                {{#if user.barangay}}{{user.barangay}}, {{/if}}{{#if user.city}}{{user.city}}, {{/if}}<br>
+                {{user.province}} Philippines
+              </div>
+            </div>
+
+            <div class="meta-item">
+              <strong>Member Since</strong>
+              <div class="meta-value">{{user.createdAt}}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

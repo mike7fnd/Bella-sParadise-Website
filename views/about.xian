@@ -59,7 +59,7 @@
       border-radius: 0 0 60px 60px;
       overflow: hidden;
       background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)),
-        url('https://images.pexels.com/photos/27429680/pexels-photo-27429680.jpeg');
+        url('https://scontent.fmnl13-3.fna.fbcdn.net/v/t39.30808-6/491998749_122174434196314282_8701410998447490278_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF79WRB2PoycUzkiHJWc2SQOvlpsVs8ZZU6-WmxWzxllU5OnL1UNvYBfrTxn2QbZwoAy2XLic9kbrN8UsqtoRNL&_nc_ohc=VcYTwLt4IQkQ7kNvwGMroWZ&_nc_oc=AdlRRDFqR_fVlgx0vIyIrc0JzDrEgz6rT-QB6OiJIN8GHGsVIJtmJ8gipDOrEyLsBoc&_nc_zt=23&_nc_ht=scontent.fmnl13-3.fna&_nc_gid=P5ZwTtpyLfoIAaarOVv-lg&oh=00_AfjH1kXQF_K7CEAefyb_9wdONlxMpC2W_g19zQnhn3Z7Gg&oe=6929FF5A');
       background-size: cover;
       background-position: center;
       display: flex;

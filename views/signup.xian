@@ -44,7 +44,7 @@
       justify-content: center;
         background-image:
         linear-gradient(180deg, rgba(21, 17, 14, 0.233), rgba(21, 17, 14, 0.247)),
-        url("https://images.pexels.com/photos/27429680/pexels-photo-27429680.jpeg");
+        url("https://scontent.fmnl3-4.fna.fbcdn.net/v/t39.30808-6/491998749_122174434196314282_8701410998447490278_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF79WRB2PoycUzkiHJWc2SQOvlpsVs8ZZU6-WmxWzxllU5OnL1UNvYBfrTxn2QbZwoAy2XLic9kbrN8UsqtoRNL&_nc_ohc=psxjALTVZRYQ7kNvwF0CyAS&_nc_oc=AdkDSieEDbLVUhq9fH3yscws_Ec5y0TuWduGxRzYDfJKamxgIPJqq5wwAJQuIGZN-fx0aOXa3rTX-ji57cZDAvz9&_nc_zt=23&_nc_ht=scontent.fmnl3-4.fna&_nc_gid=DBvDstwnyRAdqbqMouyUVw&oh=00_AfhinDbFFF7eDlNy8vOMBY-6C7OIP5li1cFeKQ66_qGCjA&oe=692D4B1A");
       background-size: cover;
       background-position: center 18%;
     }

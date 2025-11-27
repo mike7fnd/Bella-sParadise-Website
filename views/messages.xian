@@ -269,8 +269,130 @@
   </style>
 </head>
 <body>
+
+<!-- REUSABLE AUTO-SHOW WELCOME MODAL (Beautiful Bella’s Paradise) -->
+<div id="bella-welcome-modal" class="bella-modal">
+  <div class="bella-modal-content">
+    <button class="bella-close"></button>
+
+    <!-- Full Image -->
+    <div class="bella-image" style="
+      height: 260px;
+      background: url('https://nujddmdrhlvaqzszjnkt.supabase.co/storage/v1/object/public/emojis/e7fb8f9f-7a0d-44c5-a2bf-c5b880e0bfda.png') center/contain no-repeat #ffffff;
+    "></div>
+
+    <!-- Text Content -->
+    <div style="padding: 2rem 1.8rem 2.4rem; text-align: center; background: white;">
+      <h2 style="font-size: 1.95rem; font-weight: 600; margin-bottom: 0.7rem; color: #1a1a1a;">
+        Messages
+      </h2>
+      <p style="font-size: 1.08rem; color: #666; line-height: 1.6; margin-bottom: 1.8rem;">
+        Message us for your inquiries<br>
+        Always stay connected.
+      </p>
+      <button id="bella-explore-btn" style="
+        background: #d81b60;
+        color: white;
+        border: none;
+        padding: 1rem 3rem;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        box-shadow: 0 10px 30px rgba(216,27,96,0.35);
+        transition: all 0.3s ease;
+      ">Continue</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.bella-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fade 0.4s ease;
+}
+
+.bella-modal.active {
+  display: flex;
+}
+
+.bella-modal-content {
+  max-width: 420px;
+  width: 90%;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+  animation: pop 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bella-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  color: #333;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.7;
+}
+
+.bella-close:hover { opacity: 1; transform: scale(1.1); }
+
+#bella-explore-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 38px rgba(255, 63, 133, 0.795);
+}
+
+@keyframes pop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+</style>
+
+<script>
+// Auto-show the beautiful Bella’s Paradise modal when page loads
+window.addEventListener('load', () => {
+  const modal = document.getElementById('bella-welcome-modal');
+  modal.classList.add('active');
+
+  // Close handlers
+  document.querySelector('.bella-close').onclick = () => modal.classList.remove('active');
+  document.getElementById('bella-explore-btn').onclick = () => modal.classList.remove('active');
+  modal.onclick = (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+  };
+});
+</script>
+<script>
+// Paste this on any page → modal auto appears on load
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('bella-welcome-modal')?.classList.add('active');
+});
+</script>
+
   <div class="site">
     <main class="main">
+
+
 
       <aside class="conversations-panel">
         <div class="panel-header">

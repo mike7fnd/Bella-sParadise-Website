@@ -7,7 +7,8 @@
   <title>Bella’s Paradise – Bookings Management</title>
 
   <!-- Airbnb Circular Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Circular+Std:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Circular+Std:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet">
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -24,12 +25,16 @@
       --bg: #F7F7F7;
       --white: #FFFFFF;
       --border: #EBEBEB;
-      --shadow: 0 8px 30px rgba(0,0,0,0.09);
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.09);
       --radius: 20px;
       --gap: 3rem;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: "Circular Std", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -39,7 +44,10 @@
       min-height: 100vh;
     }
 
-    .site { display: flex; min-height: 100vh; }
+    .site {
+      display: flex;
+      min-height: 100vh;
+    }
 
     /* GENEROUS TOP SPACING – exactly like the base UI */
     .main {
@@ -64,6 +72,7 @@
       gap: 1.5rem;
       margin-bottom: var(--gap);
     }
+
     .stat-card {
       background: var(--white);
       border-radius: var(--radius);
@@ -71,8 +80,18 @@
       box-shadow: var(--shadow);
       text-align: center;
     }
-    .stat-value { font-size: 2.6rem; font-weight: 700; color: var(--red); }
-    .stat-label { font-size: 1rem; color: var(--light); margin-top: 0.5rem; }
+
+    .stat-value {
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--red);
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: var(--light);
+      margin-top: 0.5rem;
+    }
 
     /* Table */
     .table-container {
@@ -82,6 +101,7 @@
       box-shadow: var(--shadow);
       margin-bottom: var(--gap);
     }
+
     th {
       background: #FAFAFA;
       padding: 1.5rem;
@@ -92,13 +112,17 @@
       text-transform: uppercase;
       letter-spacing: 0.6px;
     }
+
     td {
       padding: 1.5rem;
       border-top: 1px solid var(--border);
       font-size: 1rem;
       vertical-align: middle;
     }
-    tr:hover td { background: #fff9f9; }
+
+    tr:hover td {
+      background: #fff9f9;
+    }
 
     .badge {
       padding: 0.45rem 1rem;
@@ -107,10 +131,26 @@
       font-weight: 700;
       text-transform: uppercase;
     }
-    .badge.confirmed   { background: #E3FCEF; color: #0D8B5F; }
-    .badge.pending     { background: #FFF4E5; color: #B25E02; }
-    .badge.completed   { background: #E8F5E9; color: #2E7D32; }
-    .badge.cancelled  { background: #FCE7E7; color: #C62828; }
+
+    .badge.confirmed {
+      background: #E3FCEF;
+      color: #0D8B5F;
+    }
+
+    .badge.pending {
+      background: #FFF4E5;
+      color: #B25E02;
+    }
+
+    .badge.completed {
+      background: #E8F5E9;
+      color: #2E7D32;
+    }
+
+    .badge.cancelled {
+      background: #FCE7E7;
+      color: #C62828;
+    }
 
     /* Action Buttons – exactly like the base UI */
     .action-buttons {
@@ -118,6 +158,7 @@
       gap: 0.75rem;
       align-items: center;
     }
+
     .action-btn {
       width: 44px;
       height: 44px;
@@ -131,12 +172,17 @@
       justify-content: center;
       transition: all 0.2s ease;
     }
+
     .action-btn:hover {
       background: var(--red);
       color: white;
       border-color: var(--red);
     }
-    .action-btn i { width: 20px; height: 20px; }
+
+    .action-btn i {
+      width: 20px;
+      height: 20px;
+    }
 
     /* Forms */
     .form-section {
@@ -145,24 +191,37 @@
       padding: 3rem;
       box-shadow: var(--shadow);
     }
-    .form-title { font-size: 1.8rem; margin-bottom: 2rem; font-weight: 700; }
+
+    .form-title {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+
     .form-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 2rem;
     }
-    input, select, textarea {
+
+    input,
+    select,
+    textarea {
       width: 100%;
       padding: 1rem;
       border: 1.5px solid var(--border);
       border-radius: 12px;
       font-size: 1rem;
     }
-    input:focus, select:focus, textarea:focus {
+
+    input:focus,
+    select:focus,
+    textarea:focus {
       outline: none;
       border-color: var(--red);
-      box-shadow: 0 0 0 4px rgba(255,90,95,0.15);
+      box-shadow: 0 0 0 4px rgba(255, 90, 95, 0.15);
     }
+
     .btn {
       background: var(--red);
       color: white;
@@ -174,10 +233,15 @@
       cursor: pointer;
       margin-top: 1rem;
     }
-    .btn:hover { background: #e04a4f; }
+
+    .btn:hover {
+      background: #e04a4f;
+    }
 
     @media (max-width: 768px) {
-      .main { padding: 7rem 1rem 3rem 1rem !important; }
+      .main {
+        padding: 7rem 1rem 3rem 1rem !important;
+      }
     }
   </style>
 </head>
@@ -234,6 +298,8 @@
 
       <hr class="section-divider">
 
+
+
       <!-- Create New Booking -->
       <section class="form-section">
         <h2 class="form-title">Create New Booking</h2>
@@ -270,8 +336,79 @@
     </main>
   </div>
 
+  <!-- View Booking Modal -->
+  <div id="view-modal" class="modal"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+    <div class="modal-content"
+      style="background: var(--white); border-radius: var(--radius); padding: 2rem; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: var(--shadow);">
+      <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem; font-weight: 700;">Booking Details</h3>
+      <div id="view-modal-content" style="line-height: 1.6;">
+        <!-- Booking details will be populated here -->
+      </div>
+      <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
+        <button id="view-close-btn" class="btn" style="background: var(--gray); color: white;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Status Modal -->
+  <div id="edit-modal" class="modal"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+    <div class="modal-content"
+      style="background: var(--white); border-radius: var(--radius); padding: 2rem; max-width: 400px; width: 90%; box-shadow: var(--shadow);">
+      <h3 style="margin-bottom: 1rem; font-size: 1.5rem; font-weight: 700;">Edit Booking Status</h3>
+      <div style="margin-bottom: 1.5rem;">
+        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">New Status</label>
+        <select id="edit-status-select"
+          style="width: 100%; padding: 1rem; border: 1.5px solid var(--border); border-radius: 12px; font-size: 1rem;">
+          <option value="pending">Pending</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+        <button id="edit-cancel-btn" class="btn" style="background: var(--gray); color: white;">Cancel</button>
+        <button id="edit-save-btn" class="btn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cancel Booking Modal -->
+  <div id="cancel-modal" class="modal"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+    <div class="modal-content"
+      style="background: var(--white); border-radius: var(--radius); padding: 2rem; max-width: 400px; width: 90%; box-shadow: var(--shadow);">
+      <h3 style="margin-bottom: 1rem; font-size: 1.5rem; font-weight: 700;">Cancel Booking</h3>
+      <p style="margin-bottom: 1.5rem; color: var(--gray);">Are you sure you want to cancel this booking? This action
+        cannot be undone.</p>
+      <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+        <button id="cancel-confirm-no" class="btn" style="background: var(--gray); color: white;">No, Keep
+          Booking</button>
+        <button id="cancel-confirm-yes" class="btn" style="background: #C62828;">Yes, Cancel Booking</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     lucide.createIcons();
+
+    // Load facilities for the select
+    async function loadFacilities() {
+      try {
+        const res = await fetch('/api/facilities');
+        if (!res.ok) throw new Error('Failed to load facilities');
+        const facilities = await res.json();
+        const select = document.querySelector('#create-booking-form select[name="facility_id"]');
+        select.innerHTML = '<option value="">Select facility</option>';
+        facilities.forEach(f => {
+          const option = document.createElement('option');
+          option.value = f.id;
+          option.textContent = f.name;
+          select.appendChild(option);
+        });
+      } catch (e) { console.error('Error loading facilities:', e); }
+    }
 
     // Same logic you had, just adapted to the new markup
     async function loadBookings() {
@@ -293,11 +430,11 @@
           tr.dataset.id = b.id;
 
           const badgeClass = b.status === 'confirmed' ? 'confirmed' :
-                            b.status === 'pending' ? 'pending' :
-                            b.status === 'completed' ? 'completed' : 'cancelled';
+            b.status === 'pending' ? 'pending' :
+              b.status === 'completed' ? 'completed' : 'cancelled';
 
           tr.innerHTML = `
-            <td><strong>#BK${String(b.id).padStart(3,'0')}</strong></td>
+            <td><strong>#BK${String(b.id).padStart(3, '0')}</strong></td>
             <td>${escape(b.guest_name || b.User?.first_name + ' ' + b.User?.last_name || 'Guest')}</td>
             <td>${escape(b.Facility?.name || '—')}</td>
             <td>${b.check_in?.split('T')[0] || ''}</td>
@@ -307,9 +444,9 @@
             <td><span class="badge ${badgeClass}">${b.status}</span></td>
             <td>
               <div class="action-buttons">
-                <button class="action-btn view-btn" title="View"><i data-lucide="eye"></i></button>
-                <button class="action-btn edit-btn" title="Edit"><i data-lucide="pencil"></i></button>
-                <button class="action-btn cancel-btn" title="Cancel"><i data-lucide="x"></i></button>
+                <button class="action-btn view-btn" title="View" data-id="${b.id}"><i data-lucide="eye"></i></button>
+                <button class="action-btn edit-btn" title="Edit" data-id="${b.id}"><i data-lucide="pencil"></i></button>
+                <button class="action-btn cancel-btn" title="Cancel" data-id="${b.id}"><i data-lucide="x"></i></button>
               </div>
             </td>
           `;
@@ -332,7 +469,193 @@
       return div.innerHTML;
     }
 
-    document.addEventListener('DOMContentLoaded', loadBookings);
+    document.addEventListener('DOMContentLoaded', () => {
+      loadFacilities();
+      loadBookings();
+    });
+
+    // Form submit handler
+    document.getElementById('create-booking-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+      try {
+        const res = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error(await res.text());
+        alert('Booking created successfully!');
+        e.target.reset();
+        loadBookings();
+      } catch (err) {
+        alert('Error creating booking: ' + err.message);
+      }
+    });
+
+    // Action buttons event delegation
+    document.getElementById('bookings-tbody').addEventListener('click', async (e) => {
+      const btn = e.target.closest('.action-btn');
+      if (!btn) return;
+      const bookingId = btn.dataset.id;
+      if (btn.classList.contains('view-btn')) {
+        // View: fetch and show details in modal
+        try {
+          const res = await fetch('/api/bookings');
+          const bookings = await res.json();
+          const booking = bookings.find(b => b.id == bookingId);
+          if (booking) {
+            const modal = document.getElementById('view-modal');
+            const content = document.getElementById('view-modal-content');
+            const closeBtn = document.getElementById('view-close-btn');
+
+            content.innerHTML = `
+              <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem; margin-bottom: 1rem;">
+                <strong>Booking ID:</strong>
+                <span>#BK${String(booking.id).padStart(3, '0')}</span>
+
+                <strong>Guest:</strong>
+                <span>${escape(booking.guest_name || booking.User?.first_name + ' ' + booking.User?.last_name || 'Guest')}</span>
+
+                <strong>Email:</strong>
+                <span>${escape(booking.User?.email || 'N/A')}</span>
+
+                <strong>Phone:</strong>
+                <span>${escape(booking.phone || 'N/A')}</span>
+
+                <strong>Facility:</strong>
+                <span>${escape(booking.Facility?.name || 'N/A')}</span>
+
+                <strong>Check-in:</strong>
+                <span>${booking.check_in?.split('T')[0] || 'N/A'}</span>
+
+                <strong>Check-out:</strong>
+                <span>${booking.check_out?.split('T')[0] || 'N/A'}</span>
+
+                <strong>Guests:</strong>
+                <span>${booking.guests || 'N/A'}</span>
+
+                <strong>Total:</strong>
+                <span>₱${Number(booking.total || 0).toLocaleString()}</span>
+
+                <strong>Status:</strong>
+                <span class="badge ${booking.status}">${booking.status}</span>
+
+                <strong>Notes:</strong>
+                <span>${escape(booking.notes || 'N/A')}</span>
+              </div>
+            `;
+
+            modal.style.display = 'flex';
+
+            const handleClose = () => {
+              modal.style.display = 'none';
+            };
+
+            closeBtn.onclick = handleClose;
+            modal.onclick = (e) => {
+              if (e.target === modal) {
+                modal.style.display = 'none';
+              }
+            };
+          }
+        } catch (err) {
+          alert('Error loading booking details');
+        }
+      } else if (btn.classList.contains('edit-btn')) {
+        // Edit: show modal for status selection
+        const modal = document.getElementById('edit-modal');
+        const select = document.getElementById('edit-status-select');
+        const saveBtn = document.getElementById('edit-save-btn');
+        const cancelBtn = document.getElementById('edit-cancel-btn');
+
+        // Set current booking ID for save handler
+        modal.dataset.bookingId = bookingId;
+
+        // Show modal
+        modal.style.display = 'flex';
+
+        // Handle save
+        const handleSave = async () => {
+          const newStatus = select.value;
+          try {
+            const res = await fetch(`/api/bookings/${bookingId}/status`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ status: newStatus })
+            });
+            if (!res.ok) throw new Error(await res.text());
+            alert('Booking status updated');
+            loadBookings();
+            modal.style.display = 'none';
+          } catch (err) {
+            alert('Error updating booking status: ' + err.message);
+          }
+        };
+
+        // Handle cancel
+        const handleCancel = () => {
+          modal.style.display = 'none';
+        };
+
+        // Attach event listeners
+        saveBtn.onclick = handleSave;
+        cancelBtn.onclick = handleCancel;
+
+        // Close modal on outside click
+        modal.onclick = (e) => {
+          if (e.target === modal) {
+            modal.style.display = 'none';
+          }
+        };
+      } else if (btn.classList.contains('cancel-btn')) {
+        // Cancel: show confirmation modal
+        const modal = document.getElementById('cancel-modal');
+        const noBtn = document.getElementById('cancel-confirm-no');
+        const yesBtn = document.getElementById('cancel-confirm-yes');
+
+        // Set current booking ID for confirmation handler
+        modal.dataset.bookingId = bookingId;
+
+        // Show modal
+        modal.style.display = 'flex';
+
+        // Handle no (keep booking)
+        const handleNo = () => {
+          modal.style.display = 'none';
+        };
+
+        // Handle yes (cancel booking)
+        const handleYes = async () => {
+          try {
+            const res = await fetch(`/api/bookings/${bookingId}/status`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ status: 'cancelled' })
+            });
+            if (!res.ok) throw new Error(await res.text());
+            alert('Booking cancelled');
+            loadBookings();
+            modal.style.display = 'none';
+          } catch (err) {
+            alert('Error cancelling booking: ' + err.message);
+          }
+        };
+
+        // Attach event listeners
+        noBtn.onclick = handleNo;
+        yesBtn.onclick = handleYes;
+
+        // Close modal on outside click
+        modal.onclick = (e) => {
+          if (e.target === modal) {
+            modal.style.display = 'none';
+          }
+        };
+      }
+    });
   </script>
 </body>
+
 </html>
