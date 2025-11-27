@@ -4,8 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "xian-start": "node index.js",
-    "xian": "nodemon index.js",
+    "xian": "node index.js",
+    "dev": "nodemon index.js",
     "migrate": "node migrate.js",
     "create:model": "node create.js model",
     "create:controller": "node create.js controller"

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bella’s Paradise – Book Your Experience</title>
+  <title>Bella's Paradise – Book Your Experience</title>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;200;300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 {{>head}}
   <style>
@@ -23,6 +23,7 @@
       color: var(--text);
       line-height: 1.5;
       min-height: 100vh;
+      font-size: 14px; /* Smaller base font */
     }
 
     .container {
@@ -32,607 +33,596 @@
     }
 
    .page-title {
-  font-size: 2.3rem;
-  text-align: center;
-  margin: 8rem 0 1rem; /* increased top margin from 4rem to 6rem */
-  font-weight: 350;
-  /* Alternatively, you can use pading-top instead of increasing margin */
-  /* padding-top: 2rem; */
-}
+      font-size: 1.9rem; /* Reduced from 2.3rem */
+      text-align: center;
+      margin: 8rem 0 1rem;
+      font-weight: 350;
+      line-height: 1.2;
+    }
 
-.page-subtitle {
-  text-align: center;
-  color: var(--muted);
-  font-size: 1.1rem;
-  max-width: 720px;
-  margin: 0 auto 5rem;
-}
+    .page-subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem; /* Reduced from 1.1rem */
+      max-width: 720px;
+      margin: 0 auto 5rem;
+      line-height: 1.4;
+    }
 
+    /* ============================
+       SEARCH SECTION (Airbnb-style)
+    ============================== */
+    .search-section {
+      margin-bottom: 3rem;
+    }
 
-/* ============================
-   SEARCH SECTION (Airbnb-style)
-=============================== */
+    .search-bar {
+      background: white;
+      border-radius: 50px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+      padding: 12px 20px; /* Slightly reduced */
+      display: flex;
+      align-items: center;
+      gap: 16px;
 
-.search-section {
-  margin-bottom: 3rem;
-}
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
 
-.search-bar {
-  background: white;
-  border-radius: 50px;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
-  padding: 14px 22px;
-  display: flex;
-  align-items: center;
-  gap: 18px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+    .search-icon svg {
+      width: 24px; /* Slightly reduced */
+      height: 24px;
+      stroke: var(--text);
+      fill: none;
+      stroke-width: 2;
+      opacity: 0.7;
+    }
 
-  max-width: 900px;
-  margin: 0 auto;
-}
+    #search-input {
+      flex: 1;
+      border: none;
+      font-size: 1rem; /* Reduced from 1.1rem */
+      background: transparent;
+      outline: none;
+    }
 
-.search-icon svg {
-  width: 26px;
-  height: 26px;
-  stroke: var(--text);
-  fill: none;
-  stroke-width: 2;
-  opacity: 0.7;
-}
+    .filters {
+      display: flex;
+      gap: 12px;
+    }
 
-#search-input {
-  flex: 1;
-  border: none;
-  font-size: 1.1rem;
-  background: transparent;
-  outline: none;
-}
+    .filters select {
+      padding: 9px 15px; /* Slightly reduced */
+      border-radius: 40px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+      font-size: 0.9rem; /* Reduced */
+      cursor: pointer;
+    }
 
-.filters {
-  display: flex;
-  gap: 12px;
-}
+    /* Mobile search adjustments */
+    @media (max-width: 700px) {
+      .search-bar {
+        flex-direction: column;
+        gap: 14px;
+        padding: 16px 20px;
+        border-radius: 28px;
+      }
+      .filters {
+        width: 100%;
+      }
+      .filters select {
+        flex: 1;
+      }
+      #search-input {
+        width: 100%;
+      }
+    }
 
-.filters select {
-  padding: 10px 16px;
-  border-radius: 40px;
-  border: 1px solid #ddd;
-  background: #fafafa;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
+    /* ============================
+       GRID: 3-COLUMN DESKTOP → 2-COLUMN MOBILE
+    ============================== */
+    .facilities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* YOUR ORIGINAL 3-COLUMN DESKTOP */
+      gap: 20px;
+      margin-bottom: 6rem;
+    }
 
-/* Mobile adjustments */
-@media (max-width: 700px) {
-  .search-bar {
-    flex-direction: column;
-    gap: 14px;
-    padding: 18px 22px;
-    border-radius: 28px;
-  }
-  .filters {
-    width: 100%;
-  }
-  .filters select {
-    flex: 1;
-  }
-  #search-input {
-    width: 100%;
-  }
-}
+    @media (max-width: 1100px) {
+      .facilities-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+      }
+    }
 
+    /* MOBILE: 2-COLUMN GRID AS REQUESTED */
+    @media (max-width: 768px) {
+      .facilities-grid {
+        grid-template-columns: repeat(2, 1fr); /* ✅ 2-COLUMN MOBILE */
+        gap: 16px;
+      }
+      .container {
+        padding: 0 16px;
+      }
+      .page-title {
+        font-size: 1.6rem;
+        margin-top: 4rem;
+      }
+      .page-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 3.5rem;
+      }
+    }
 
-
-    /* 4 → 2 → 1 GRID */
-   .facilities-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* CHANGED from 4 → 3 */
-  gap: 20px;
-  margin-bottom: 6rem;
-}
-
-@media (max-width: 1100px) {
-  .facilities-grid {
-    grid-template-columns: repeat(2, 1fr); /* stays 2-column on tablets */
-  }
-}
-
-@media (max-width: 640px) {
-  .facilities-grid {
-    grid-template-columns: 1fr;  /* full width on mobile */
-    gap: 10px;
-  }
-  .container {
-    padding: 0 16px;
-  }
-}
-
+    @media (max-width: 480px) {
+      .facilities-grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+        gap: 14px;
+      }
+    }
 
     /* CARD */
-.card {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  background: var(--img) center/cover no-repeat;
-  border-radius: 32px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  display: flex;
-  align-items: flex-end;
-}
+    .card {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background: var(--img) center/cover no-repeat;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: flex-end;
+    }
 
-/* Bottom-to-top fade like second UI */
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.72) 0%,
-    rgba(0, 0, 0, 0.38) 25%,
-    rgba(0, 0, 0, 0.12) 55%,
-    transparent 100%
-  );
-  z-index: 1;
-}
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.72) 0%,
+        rgba(0, 0, 0, 0.38) 25%,
+        rgba(0, 0, 0, 0.12) 55%,
+        transparent 100%
+      );
+      z-index: 1;
+    }
 
-.card > * {
-  position: relative;
-  z-index: 2;
-}
+    .card > * {
+      position: relative;
+      z-index: 2;
+    }
 
-/* TITLE (updated visually like second UI) */
-.card-title {
-  position: absolute;
-  bottom: 62px;
-  left: 20px;
-  font-size: 1.65rem;
-  font-weight: 300;
-  color: white;
-  margin: 0;
-  line-height: 1;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-  transition: bottom 0.35s ease;
-  pointer-events: none;
-}
+    /* SMALLER CARD TEXT */
+    .card-title {
+      position: absolute;
+      bottom: 62px;
+      left: 20px;
+      font-size: 1.4rem; /* Reduced from 1.65rem */
+      font-weight: 300;
+      color: white;
+      margin: 0;
+      line-height: 1;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      transition: bottom 0.35s ease;
+      pointer-events: none;
+    }
 
-/* BLURRED TAG — updated to match second UI */
-.info-tag {
-  position: absolute;
-  bottom: 18px;
-  left: 18px;
+    .info-tag {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 50px;
+      padding: 8px 15px; /* Slightly reduced */
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem; /* Reduced from 0.9rem */
+      font-weight: 200;
+      color: white;
+      transition: all 0.3s ease;
+    }
 
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+    .price {
+      font-weight: 500;
+      color: #cf7e99;
+    }
 
-  border-radius: 50px;
-  padding: 9px 17px;
+    .heart {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 52px; /* Slightly reduced */
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
 
-  display: flex;
-  align-items: center;
-  gap: 14px;
+    .heart:hover {
+      transform: scale(1.12);
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
 
-  font-size: 0.9rem;
-  font-weight: 200;
-  color: white;
+    .heart svg {
+      width: 28px; /* Reduced from 32px */
+      height: 28px;
+      fill: none;
+      stroke: white;
+      stroke-width: 2.3;
+      transition: all 0.3s ease;
+    }
 
-  transition: all 0.3s ease;
-}
+    .heart.liked svg {
+      fill: white;
+      stroke: white;
+      animation: bounce 0.6s ease;
+    }
 
-.price {
-  font-weight: 500;
-  color: #cf7e99;
-}
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.5); }
+    }
 
-/* HEART — styled to match second UI’s proportion + behavior */
-.heart {
-  position: absolute;
-  top: 18px;
-  right: 18px;
+    /* MODALS - SMALLER TEXT */
+    .modal, .modal * {
+      font-family: "Archivo", sans-serif !important;
+    }
 
-  width: 56px;
-  height: 56px;
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+      animation: fadeIn 0.25s ease-out;
+    }
+    .modal.active { display: flex; }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
 
-  cursor: pointer;
-  border-radius: 50%;
+    .modal-content {
+      background: #ffffff;
+      border-radius: 28px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 88vh;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.16);
+      position: relative;
+      transform: translateY(6px);
+      animation: slideUp 0.35s ease;
+    }
 
-  z-index: 10;
-  transition: all 0.3s ease;
-}
+    @keyframes slideUp {
+      0% { transform: translateY(40px); opacity: 0; }
+      100% { transform: translateY(6px); opacity: 1; }
+    }
 
-.heart:hover {
-  transform: scale(1.12);
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.07);
+      border: none;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .modal-close:hover {
+      background: rgba(0,0,0,0.12);
+      transform: scale(1.07);
+    }
 
-.heart svg {
-  width: 32px;
-  height: 32px;
-  fill: none;
-  stroke: white;
-  stroke-width: 2.3;
-  transition: all 0.3s ease;
-}
+    .modal-img {
+      height: 260px;
+    }
 
-.heart.liked svg {
-  fill: white;
-  stroke: white;
-  animation: bounce 0.6s ease;
-}
+    .modal-body {
+      padding: 1.8rem 2rem;
+    }
 
-@keyframes bounce {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.5); }
-}
+    .modal-title {
+      font-size: 1.65rem; /* Reduced from 1.85rem */
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
 
+    .modal-meta {
+      color: #777;
+      font-size: 0.95rem; /* Reduced */
+      margin-bottom: 0.4rem;
+    }
 
-   /* Updated modal CSS for facility-modal and booking-modal */
+    .modal-rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0.4rem 0 0.4rem;
+      font-size: 1rem;
+      color: #333;
+      font-weight: 500;
+    }
+    .modal-rating .star {
+      color: #ff385c;
+      font-size: 1.2rem;
+    }
 
+    .modal-reviews {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1.2rem;
+    }
 
-/* GLOBAL FONT OVERRIDE FOR MODALS (Claviro-like Airbnb aesthetic) */
-.modal, .modal * {
-  font-family: "Claviro", "Archivo", sans-serif !important;
-}
+    .modal-price {
+      font-size: 1.65rem; /* Reduced from 1.8rem */
+      font-weight: 500;
+      color: #ff7ea9;
+      margin: 1.2rem 0;
+    }
 
-/* BASE MODAL LAYOUT — slightly smaller, centered, Airbnb spacing */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(18px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 1rem;
-  animation: fadeIn 0.25s ease-out;
-}
-.modal.active { display: flex; }
+    .modal-book {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-size: 0.95rem; /* Reduced */
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.28s ease;
+      width: 100%;
+    }
+    .modal-book:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+    }
 
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
+    #booking-modal .modal-content {
+      max-width: 640px;
+    }
 
-/* MODAL CONTENT — decreased size by ~10% ("1× smaller") */
-.modal-content {
-  background: #ffffff;
-  border-radius: 28px;
-  max-width: 700px; /* was 820px */
-  width: 100%;
-  max-height: 88vh;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.16);
-  position: relative;
-  transform: translateY(6px);
-  animation: slideUp 0.35s ease;
-}
+    #booking-modal .modal-body {
+      padding: 2rem 2.2rem;
+    }
 
-@keyframes slideUp {
-  0% { transform: translateY(40px); opacity: 0; }
-  100% { transform: translateY(6px); opacity: 1; }
-}
+    #booking-modal input,
+    #booking-modal textarea {
+      font-family: "Archivo", sans-serif !important;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+      font-size: 0.95rem; /* Reduced */
+    }
 
-/* CLOSE BUTTON — more minimal, Airbnb style */
-.modal-close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.07);
-  border: none;
-  border-radius: 50%;
-  font-size: 1.4rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.modal-close:hover {
-  background: rgba(0,0,0,0.12);
-  transform: scale(1.07);
-}
+    #booking-modal textarea {
+      resize: none;
+    }
 
-/* ---------- FACILITY MODAL IMAGE -------- */
-.modal-img {
-  height: 260px; /* was 320px */
-  background-size: cover;
-  background-position: center;
-}
+    #booking-modal button[type="submit"] {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      border: none;
+      transition: all 0.25s ease;
+      font-size: 0.95rem;
+    }
+    #booking-modal button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+    }
 
-/* FACILITY MODAL BODY */
-.modal-body {
-  padding: 2rem 2.2rem;
-}
+    #booking-modal .modal-close {
+      font-size: 1.2rem !important;
+    }
 
-.modal-title {
-  font-size: 1.85rem;
-  margin-bottom: 0.4rem;
-  font-weight: 500;
-}
+    /* Mobile modal adjustments */
+    @media (max-width: 768px) {
+      .modal-content {
+        width: 95%;
+        margin: 1rem;
+      }
 
-/* AIRBNB-STYLE BADGE ABOVE DESCRIPTION */
-.modal-badge {
-  display: inline-block;
-  padding: 6px 14px;
-  background: #fff0f4;
-  color: #ff385c;
-  border-radius: 40px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin: 0.4rem 0 1rem;
-}
+      .modal-body {
+        padding: 1.5rem 1.75rem;
+      }
 
+      .modal-title {
+        font-size: 1.45rem;
+      }
 
-.modal-meta {
-  color: #777;
-  font-size: 1rem;
-  margin-bottom: 0.4rem;
-}
+      .modal-price {
+        font-size: 1.45rem;
+      }
+    }
 
-/* RATING + REVIEWS (Airbnb style) */
-.modal-rating {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0.4rem 0 0.4rem;
-  font-size: 1.05rem;
-  color: #333;
-  font-weight: 500;
-}
-.modal-rating .star {
-  color: #ff385c;
-  font-size: 1.25rem;
-}
-.modal-reviews {
-  font-size: 0.95rem;
-  color: #666;
-  margin-bottom: 1.2rem;
-}
+    /* SUCCESS MODAL */
+    .bella-success-modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(255, 255, 255, 0.15);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+    }
+    .bella-success-modal.active{display:flex;}
 
+    .bella-success-content{
+      max-width:420px;
+      width:90%;
+      border-radius:32px;
+      overflow:hidden;
+      box-shadow:0 25px 70px rgba(0,0,0,0.25);
+      animation:popIn .65s cubic-bezier(.16,1,.3,1);
+      position:relative;
+    }
+    .bella-close-x{
+      position:absolute;
+      top:12px;right:12px;
+      width:36px;height:36px;
+      background:rgba(0,0,0,0.08);
+      border:none;border-radius:50%;
+      font-size:1.4rem;color:#444;
+      cursor:pointer;z-index:10;
+      opacity:0.7;
+    }
+    .bella-close-x:hover{opacity:1;background:rgba(0,0,0,0.15);transform:scale(1.1);}
+    .confetti-canvas{position:absolute;inset:0;pointer-events:none;border-radius:32px;}
+    @keyframes popIn{0%{transform:scale(.85);opacity:0}100%{transform:scale(1);opacity:1}}
 
-.modal-price {
-  font-size: 1.8rem;
-  font-weight: 500;
-  color: #ff7ea9;
-  margin: 1.2rem 0;
-}
+    /* WELCOME MODAL */
+    #welcome-modal {
+      background: rgba(255, 255, 255, 0.137);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
 
-.modal-book {
-  background: var(--accent);
-  color: white;
-  border: none;
-  padding: 0.9rem 2.2rem;
-  border-radius: 50px;
-  font-size: 1rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.28s ease;
-}
-.modal-book:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.15);
-}
+    #welcome-modal .modal-content {
+      animation: popIn 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-/* ---------- BOOKING MODAL ---------- */
-#booking-modal .modal-content {
-  max-width: 640px; /* narrower for tighter Airbnb feel */
-}
+    #welcome-continue:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 38px rgba(255, 63, 133, 0.795);
+    }
 
-#booking-modal .modal-body {
-  padding: 2rem 2.2rem;
-}
+    /* SVG CHECK ANIMATION */
+    .checkmark {
+      width: 80px;
+      height: 80px;
+      stroke-width: 4;
+      stroke: #4caf50;
+      fill: none;
+      stroke-linecap: round;
+      margin-bottom: 15px;
+    }
 
-#booking-modal input,
-#booking-modal textarea {
-  font-family: "Claviro", "Archivo", sans-serif !important;
-  padding: 0.9rem 1rem;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-  background: #fafafa;
-  font-size: 1rem;
-}
+    .checkmark-circle {
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      animation: circle 0.6s ease-out forwards;
+    }
 
-#booking-modal textarea {
-  resize: none;
-}
+    .checkmark-check {
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: check 0.35s 0.6s ease forwards;
+    }
 
-#booking-modal button[type="submit"] {
-  background: var(--accent);
-  color: #fff;
-  font-weight: 600;
-  padding: 0.9rem 2.1rem;
-  border-radius: 50px;
-  border: none;
-  transition: all 0.25s ease;
-}
-#booking-modal button[type="submit"]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.18);
-}
+    @keyframes circle {
+      to { stroke-dashoffset: 0; }
+    }
 
-#booking-modal .modal-close {
-  font-size: 1.2rem !important;
-}
-
-
-
-/* SVG CHECK ANIMATION */
-.checkmark {
-  width: 80px;
-  height: 80px;
-  stroke-width: 4;
-  stroke: #4caf50;
-  fill: none;
-  stroke-linecap: round;
-  margin-bottom: 15px;
-}
-
-.checkmark-circle {
-  stroke-dasharray: 166;
-  stroke-dashoffset: 166;
-  animation: circle 0.6s ease-out forwards;
-}
-
-.checkmark-check {
-  stroke-dasharray: 48;
-  stroke-dashoffset: 48;
-  animation: check 0.35s 0.6s ease forwards;
-}
-
-@keyframes circle {
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes check {
-  to { stroke-dashoffset: 0; }
-}
-
-
+    @keyframes check {
+      to { stroke-dashoffset: 0; }
+    }
   </style>
-
 </head>
 
-
 <body>
-
-  <!-- WELCOME MODAL – Small, Transparent Blur, Full Image (Shows on load) -->
-<div id="welcome-modal" class="modal active">
-  <div class="modal-content" style="max-width: 420px; border-radius: 32px; overflow: hidden; box-shadow: 0 25px 70px rgba(0,0,0,0.25);">
-
-    <!-- FULL IMAGE (your emoji – takes full width, no borders) -->
-    <div style="
-      height: 260px;
-      background: url('https://nujddmdrhlvaqzszjnkt.supabase.co/storage/v1/object/public/emojis/11b02ea8-8634-4a7f-b1d3-8b712cf30235.png') center/contain no-repeat;
-      background-color: #ffffff;
-      border-radius: 32px 32px 0 0;
-    "></div>
-
-    <!-- Content below image -->
-    <div style="padding: 2rem 1.8rem 2.4rem; text-align: center; background: white;">
-      <h2 style="font-size: 1.95rem; font-weight: 600; margin-bottom: 0.7rem; color: #1a1a1a;">
-        Accomodations
-      </h2>
-      <p style="font-size: 1.08rem; color: #666; line-height: 1.6; margin-bottom: 1.8rem;">
-        Relax in exclusive private stays.<br>
-        Your tropical escape awaits.
-      </p>
-
-      <!-- Continue Button -->
-      <button id="welcome-continue" style="
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 1rem 3rem;
-        border-radius: 50px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        width: 100%;
-        box-shadow: 0 10px 30px rgba(216,27,96,0.35);
-        transition: all 0.3s ease;
-      ">
-        Explore Now
-      </button>
+  <!-- WELCOME MODAL -->
+  <div id="welcome-modal" class="modal active">
+    <div class="modal-content" style="max-width: 420px; border-radius: 32px; overflow: hidden; box-shadow: 0 25px 70px rgba(0,0,0,0.25);">
+      <div style="
+        height: 260px;
+        background: url('https://nujddmdrhlvaqzszjnkt.supabase.co/storage/v1/object/public/emojis/11b02ea8-8634-4a7f-b1d3-8b712cf30235.png') center/contain no-repeat;
+        background-color: #ffffff;
+        border-radius: 32px 32px 0 0;
+      "></div>
+      <div style="padding: 2rem 1.8rem 2.4rem; text-align: center; background: white;">
+        <h2 style="font-size: 1.75rem; font-weight: 600; margin-bottom: 0.7rem; color: #1a1a1a;">
+          Accommodations
+        </h2>
+        <p style="font-size: 1rem; color: #666; line-height: 1.6; margin-bottom: 1.8rem;">
+          Relax in exclusive private stays.<br>
+          Your tropical escape awaits.
+        </p>
+        <button id="welcome-continue" style="
+          background: var(--accent);
+          color: white;
+          border: none;
+          padding: 0.9rem 2.5rem;
+          border-radius: 50px;
+          font-size: 1rem;
+          font-weight: 600;
+          cursor: pointer;
+          width: 100%;
+          box-shadow: 0 10px 30px rgba(216,27,96,0.35);
+          transition: all 0.3s ease;
+        ">
+          Explore Now
+        </button>
+      </div>
     </div>
   </div>
-</div>
-
-<script>
-// Close modal
-document.getElementById('welcome-continue').onclick = () => {
-  document.getElementById('welcome-modal').classList.remove('active');
-};
-document.getElementById('welcome-close').onclick = () => {
-  document.getElementById('welcome-modal').classList.remove('active');
-};
-document.getElementById('welcome-modal').onclick = (e) => {
-  if (e.target === document.getElementById('welcome-modal')) {
-    document.getElementById('welcome-modal').classList.remove('active');
-  }
-};
-</script>
-
-<style>
-/* Stronger transparent blur + darker overlay */
-#welcome-modal {
-  background: rgba(255, 255, 255, 0.137);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-}
-
-/* Smooth pop-in animation */
-#welcome-modal .modal-content {
-  animation: popIn 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes popIn {
-  0% { transform: scale(0.85); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* Button hover lift */
-#welcome-continue:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 38px rgba(255, 63, 133, 0.795);
-}
-</style>
-
 
   <div class="container">
     <h1 class="page-title">Book Your Experience</h1>
     <p class="page-subtitle">Explore our resort offerings, pool, kubos, cabanas, house, and more for your perfect day or overnight stay.</p>
 
-    <!-- SEARCH + FILTER BAR (Airbnb-style) -->
-<section class="search-section">
-  <div class="search-bar">
-    <div class="search-icon">
-      <svg viewBox="0 0 24 24">
-        <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12A6 6 0 0110 4z"/>
-      </svg>
-    </div>
-
-    <input id="search-input" type="text" placeholder="Search facilities...">
-
-    <div class="filters">
-      <select id="filter-type">
-        <option value="">All Types</option>
-        <option value="Kubo">Kubo</option>
-        <option value="Cabana">Cabana</option>
-        <option value="Room">Room</option>
-        <option value="Hall">Function Hall</option>
-        <option value="House">House</option>
-      </select>
-
-      <select id="filter-capacity">
-        <option value="">Capacity</option>
-        <option value="10">Up to 10 pax</option>
-        <option value="20">Up to 20 pax</option>
-        <option value="50">Up to 50 pax</option>
-        <option value="100">Up to 100 pax</option>
-      </select>
-    </div>
-  </div>
-</section>
-
+    <!-- SEARCH + FILTER BAR -->
+    <section class="search-section">
+      <div class="search-bar">
+        <div class="search-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm0 2a6 6 0 110 12A6 6 0 0110 4z"/>
+          </svg>
+        </div>
+        <input id="search-input" type="text" placeholder="Search facilities...">
+        <div class="filters">
+          <select id="filter-type">
+            <option value="">All Types</option>
+            <option value="Kubo">Kubo</option>
+            <option value="Cabana">Cabana</option>
+            <option value="Room">Room</option>
+            <option value="Hall">Function Hall</option>
+            <option value="House">House</option>
+          </select>
+          <select id="filter-capacity">
+            <option value="">Capacity</option>
+            <option value="10">Up to 10 pax</option>
+            <option value="20">Up to 20 pax</option>
+            <option value="50">Up to 50 pax</option>
+            <option value="100">Up to 100 pax</option>
+          </select>
+        </div>
+      </div>
+    </section>
 
     <div class="facilities-grid" id="grid"></div>
   </div>
-
-  <!-- SEARCH + FILTER SECTION -->
-
 
   <!-- Facility Modal -->
   <div id="facility-modal" class="modal">
@@ -648,121 +638,52 @@ document.getElementById('welcome-modal').onclick = (e) => {
       </div>
     </div>
   </div>
-<!-- SUCCESS MODAL – Confetti + Permanent (No auto-close) -->
-<div id="success-modal" class="bella-success-modal">
-  <div class="bella-success-content">
 
-    <!-- Small X button (only way to close) -->
-    <button class="bella-close-x" aria-label="Close">×</button>
-
-    <!-- Confetti layer -->
-    <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
-
-    <!-- Content – same luxurious style as welcome modal -->
-    <div style="padding:2.4rem 2rem 3rem;text-align:center;background:white;border-radius:32px;position:relative;z-index:2;">
-      <h2 style="font-size:2.15rem;font-weight:600;margin:0 0 0.8rem;color:#1a1a1a;">
-        Booking Confirmed!
-      </h2>
-      <p style="font-size:1.12rem;color:#555;line-height:1.6;max-width:330px;margin:0 auto 2.3rem;">
-        Your booking is confirmed! Track it anytime from your profile.
-      </p>
-
-      <div style="display:flex;flex-direction:column;gap:14px;max-width:300px;margin:0 auto;">
-        <a href="/profile" style="
-          background:var(--accent);
-          color:white;
-          padding:1rem 2rem;
-          border-radius:50px;
-          font-size:1.1rem;
-          font-weight:600;
-          text-decoration:none;
-          box-shadow:0 10px 30px rgba(255, 77, 142, 0.521);
-          transition:all .3s;
-        " onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 38px rgba(216,27,96,0.45)'"
-           onmouseout="this.style.transform='';this.style.boxShadow='0 10px 30px rgba(216,27,96,0.35)'">
-          View Profile
-        </a>
-
-        <a href="/messages" style="
-          background:#fdf2f6;
-          color:#d81b60;
-          padding:1rem 2rem;
-          border-radius:50px;
-          font-size:1.05rem;
-          font-weight:600;
-          text-decoration:none;
-          border:1.5px solid #ffe0e9;
-          transition:all .3s;
-        " onmouseover="this.style.background='#ffe0e9'"
-           onmouseout="this.style.background='#fdf2f6'">
-          Message Us
-        </a>
+  <!-- SUCCESS MODAL -->
+  <div id="success-modal" class="bella-success-modal">
+    <div class="bella-success-content">
+      <button class="bella-close-x" aria-label="Close">×</button>
+      <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+      <div style="padding:2.4rem 2rem 3rem;text-align:center;background:white;border-radius:32px;position:relative;z-index:2;">
+        <h2 style="font-size:1.75rem;font-weight:600;margin:0 0 0.8rem;color:#1a1a1a;">
+          Booking Confirmed!
+        </h2>
+        <p style="font-size:1rem;color:#555;line-height:1.6;max-width:330px;margin:0 auto 2.3rem;">
+          Your booking is confirmed! Track it anytime from your profile.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:14px;max-width:300px;margin:0 auto;">
+          <a href="/profile" style="
+            background:var(--accent);
+            color:white;
+            padding:0.9rem 2rem;
+            border-radius:50px;
+            font-size:1rem;
+            font-weight:600;
+            text-decoration:none;
+            box-shadow:0 10px 30px rgba(255, 77, 142, 0.521);
+            transition:all .3s;
+          " onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 38px rgba(216,27,96,0.45)'"
+             onmouseout="this.style.transform='';this.style.boxShadow='0 10px 30px rgba(216,27,96,0.35)'">
+            View Profile
+          </a>
+          <a href="/messages" style="
+            background:#fdf2f6;
+            color:#d81b60;
+            padding:0.9rem 2rem;
+            border-radius:50px;
+            font-size:0.95rem;
+            font-weight:600;
+            text-decoration:none;
+            border:1.5px solid #ffe0e9;
+            transition:all .3s;
+          " onmouseover="this.style.background='#ffe0e9'"
+             onmouseout="this.style.background='#fdf2f6'">
+            Message Us
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- Confetti Library -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-
-<script>
-// Success modal with confetti – stays open until user closes it
-function showSuccessAnimation() {
-  const modal = document.getElementById('success-modal');
-  modal.classList.add('active');
-
-  // One-time confetti burst
-  confetti({
-    particleCount: 180,
-    spread: 85,
-    origin: { y: 0.58 },
-    colors: ['#d81b60', '#ff6b9d', '#ff8fb1', '#ff9a9e', '#fad0c4', '#43e97b']
-  });
-
-  // Only close when user clicks X or outside – NO auto-close
-  const close = () => modal.classList.remove('active');
-  modal.querySelector('.bella-close-x').onclick = close;
-  modal.onclick = e => { if (e.target === modal) close(); };
-}
-</script>
-
-<style>
-.bella-success-modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
-.bella-success-modal.active{display:flex;}
-
-.bella-success-content{
-  max-width:420px;
-  width:90%;
-  border-radius:32px;
-  overflow:hidden;
-  box-shadow:0 25px 70px rgba(0,0,0,0.25);
-  animation:popIn .65s cubic-bezier(.16,1,.3,1);
-  position:relative;
-}
-.bella-close-x{
-  position:absolute;
-  top:12px;right:12px;
-  width:36px;height:36px;
-  background:rgba(0,0,0,0.08);
-  border:none;border-radius:50%;
-  font-size:1.4rem;color:#444;
-  cursor:pointer;z-index:10;
-  opacity:0.7;
-}
-.bella-close-x:hover{opacity:1;background:rgba(0,0,0,0.15);transform:scale(1.1);}
-.confetti-canvas{position:absolute;inset:0;pointer-events:none;border-radius:32px;}
-@keyframes popIn{0%{transform:scale(.85);opacity:0}100%{transform:scale(1);opacity:1}}
-</style>
-
 
   <!-- Booking Modal -->
   <div id="booking-modal" class="modal">
@@ -771,7 +692,7 @@ function showSuccessAnimation() {
       <div class="modal-body">
         <h3 class="modal-title" style="text-align:center;margin-bottom:1.5rem;">Complete Your Reservation</h3>
         <form id="booking-form" style="display:grid;gap:1.5rem;">
-          <input id="bf-name" type="text" readonly style="padding:1rem;border-radius:12px;background:#f8f8f8;border:1px solid #ddd;font-weight:400;">
+          <input id="bf-name" type="text" readonly style="padding:0.85rem;border-radius:12px;background:#f8f8f8;border:1px solid #ddd;font-weight:400;">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
             <input id="bf-in" type="date" required>
             <input id="bf-out" type="date" required>
@@ -782,10 +703,10 @@ function showSuccessAnimation() {
           </div>
           <textarea id="bf-notes" rows="4" placeholder="Special requests (optional)..."></textarea>
           <div style="background:#f9f9f9;padding:1.5rem;border-radius:16px;text-align:center;">
-            <div style="font-size:1.8rem;font-weight:400;color:var(--accent);" id="bf-price">—</div>
+            <div style="font-size:1.65rem;font-weight:400;color:var(--accent);" id="bf-price">—</div>
             <div style="margin-top:1rem;display:flex;gap:1rem;justify-content:center;">
-              <button type="button" class="modal-close" style="padding:0.9rem 2rem;border-radius:50px;background:#ddd;">Cancel</button>
-              <button type="submit" style="padding:0.9rem 2.5rem;border-radius:50px;background:var(--accent);color:white;font-weight:400;">Confirm Booking</button>
+              <button type="button" class="modal-close" style="padding:0.85rem 2rem;border-radius:50px;background:#ddd;">Cancel</button>
+              <button type="submit" style="padding:0.85rem 2.5rem;border-radius:50px;background:var(--accent);color:white;font-weight:600;">Confirm Booking</button>
             </div>
           </div>
         </form>
@@ -793,311 +714,256 @@ function showSuccessAnimation() {
     </div>
   </div>
 
- <script>
-/* -------------------------------------------------------------
-   FACILITIES (dynamic load, polling, caching)
-------------------------------------------------------------- */
-/* SEARCH + FILTER HANDLING */
-const searchInput = document.getElementById('search-input');
-const filterType = document.getElementById('filter-type');
-const filterCapacity = document.getElementById('filter-capacity');
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-function applyFilters() {
-  const text = searchInput.value.toLowerCase();
-  const type = filterType.value;
-  const cap = filterCapacity.value;
+  <script>
+    // Welcome modal close
+    document.getElementById('welcome-continue').onclick = () => {
+      document.getElementById('welcome-modal').classList.remove('active');
+    };
 
-  const filtered = facilities.filter(f => {
-    const matchesText =
-      f.name.toLowerCase().includes(text) ||
-      (f.type && f.type.toLowerCase().includes(text));
+    // Success modal with confetti
+    function showSuccessAnimation() {
+      const modal = document.getElementById('success-modal');
+      modal.classList.add('active');
 
-    const matchesType = type ? f.type === type : true;
-    const matchesCap = cap ? f.capacity <= Number(cap) : true;
+      confetti({
+        particleCount: 180,
+        spread: 85,
+        origin: { y: 0.58 },
+        colors: ['#d81b60', '#ff6b9d', '#ff8fb1', '#ff9a9e', '#fad0c4', '#43e97b']
+      });
 
-    return matchesText && matchesType && matchesCap;
-  });
-
-  grid.innerHTML = "";
-  filtered.forEach(renderCard);
-}
-
-searchInput.addEventListener('input', applyFilters);
-filterType.addEventListener('change', applyFilters);
-filterCapacity.addEventListener('change', applyFilters);
-
-
-let facilities = [];
-const grid = document.getElementById('grid');
-
-// Placeholder images by type
-function getPlaceholder(type) {
-  const map = {
-    Kubo: 'https://via.placeholder.com/800x450?text=Kubo',
-    Cabana: 'https://via.placeholder.com/800x450?text=Cabana',
-    Room: 'https://via.placeholder.com/800x450?text=Room',
-    Hall: 'https://via.placeholder.com/800x450?text=Function+Hall',
-    House: 'https://via.placeholder.com/800x450?text=House'
-  };
-  return map[type] || 'https://via.placeholder.com/800x450?text=Facility';
-}
-
-function renderFacilities() {
-  grid.innerHTML = '';
-
-  facilities.forEach(f => {
-    const price = f.price == 0 ? 'FREE' : `₱${Number(f.price).toLocaleString()}`;
-    const img = f.imageUrl || getPlaceholder(f.type);
-
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.style.setProperty('--img', `url(${img})`);
-
-    card.innerHTML = `
-      <div class="heart">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
-          2 5.42 4.42 3 7.5 3c1.74 0 3.41.81
-          4.5 2.09C13.09 3.81 14.76 3
-          16.5 3 19.58 3 22 5.42 22
-          8.5c0 3.78-3.4 6.86-8.55
-          11.54L12 21.35z"/>
-        </svg>
-      </div>
-      <h2 class="card-title">${f.name}</h2>
-      <div class="info-tag">
-        <span>${f.capacity} pax</span>
-        <span class="price">${price}</span>
-      </div>
-    `;
-
-    // Like toggle
-    card.querySelector('.heart').addEventListener('click', e => {
-      e.stopPropagation();
-      e.currentTarget.classList.toggle('liked');
-    });
-
-    card.addEventListener('click', () => openFacilityModal(f));
-    grid.appendChild(card);
-  });
-}
-
-async function loadFacilities() {
-  try {
-    const res = await fetch('/api/facilities');
-    facilities = await res.json();
-    renderFacilities();
-  } catch (err) {
-    grid.innerHTML =
-      '<p style="grid-column:1/-1;text-align:center;padding:80px;color:#888;">Unable to load facilities.</p>';
-  }
-}
-
-// initial load
-loadFacilities();
-
-// poll every 15 seconds (from your first file)
-setInterval(loadFacilities, 15000);
-
-
-/* -------------------------------------------------------------
-   FACILITY MODAL
-------------------------------------------------------------- */
-
-function openFacilityModal(f) {
-  const img = document.getElementById('f-img');
-  const title = document.getElementById('f-title');
-  const meta = document.getElementById('f-meta');
-  const desc = document.getElementById('f-desc');
-  const price = document.getElementById('f-price');
-
-  img.style.backgroundImage = `url(${f.imageUrl || getPlaceholder(f.type)})`;
-  title.textContent = f.name;
-  meta.textContent = `${f.type} • ${f.capacity} pax`;
-  desc.textContent = f.description || 'No description available.';
-  price.textContent = f.price == 0 ? 'FREE' : `₱${Number(f.price).toLocaleString()}`;
-
-  document.getElementById('f-book').onclick = () => openBookingModal(f);
-
-  document.getElementById('facility-modal').classList.add('active');
-}
-
-
-/* -------------------------------------------------------------
-   BOOKING MODAL + FORM HANDLING (full DB logic)
-------------------------------------------------------------- */
-
-function openBookingModal(facility) {
-  document.getElementById('booking-modal').classList.add('active');
-  document.getElementById('bf-name').value = facility.name;
-
-  // Price preview
-  document.getElementById('bf-price').textContent =
-    facility.price == 0 ? 'FREE' : `₱${Number(facility.price).toLocaleString()}`;
-
-  // Save facility ID to form
-  const form = document.getElementById('booking-form');
-  form.dataset.facilityId = facility.id;
-
-  // Prefill phone from profile (from your first file)
-  fetch('/api/profile')
-    .then(r => r.json())
-    .then(p => {
-      if (p && p.mobile) document.getElementById('bf-phone').value = p.mobile;
-    })
-    .catch(() => {});
-}
-
-// Validation (same logic as first file)
-function validateBooking() {
-  const checkIn = document.getElementById('bf-in').value;
-  const checkOut = document.getElementById('bf-out').value;
-  const guests = parseInt(document.getElementById('bf-guests').value || 0);
-
-  if (!checkIn || !checkOut) return false;
-
-  const d1 = new Date(checkIn);
-  const d2 = new Date(checkOut);
-  if (isNaN(d1) || isNaN(d2) || d2 <= d1) return false;
-
-  if (guests < 1) return false;
-
-  return true;
-}
-
-['bf-in', 'bf-out', 'bf-guests'].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) el.addEventListener('input', validateBooking);
-});
-
-// Submit booking (full DB POST from first file)
-document.getElementById('booking-form').addEventListener('submit', async e => {
-  e.preventDefault();
-
-  if (!validateBooking()) {
-    alert('Please provide valid dates and guest count.');
-    return;
-  }
-
-  const form = e.target;
-  const facilityId = Number(form.dataset.facilityId);
-
-  const payload = {
-    facilityId,
-    check_in: document.getElementById('bf-in').value,
-    check_out: document.getElementById('bf-out').value,
-    guests: Number(document.getElementById('bf-guests').value),
-    contact_phone: document.getElementById('bf-phone').value,
-    notes: document.getElementById('bf-notes').value
-  };
-
-  try {
-    const res = await fetch('/api/bookings', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-  if (res.status === 201) {
-    closeAllModals();
-    showSuccessAnimation();  // <-- NEW ANIMATED FEEDBACK
-}
- else if (res.status === 401) {
-      window.location = '/login';
-    } else {
-      const data = await res.json().catch(() => ({}));
-      alert('Booking error: ' + (data.error || data.message || res.status));
+      const close = () => modal.classList.remove('active');
+      modal.querySelector('.bella-close-x').onclick = close;
+      modal.onclick = e => { if (e.target === modal) close(); };
     }
-  } catch (err) {
-    alert('Network error while submitting booking.');
-  }
-});
 
+    /* -------------------------------------------------------------
+       FACILITIES (dynamic load, polling, caching)
+    ------------------------------------------------------------- */
+    const searchInput = document.getElementById('search-input');
+    const filterType = document.getElementById('filter-type');
+    const filterCapacity = document.getElementById('filter-capacity');
 
-/* -------------------------------------------------------------
-   CLOSE MODALS
-------------------------------------------------------------- */
+    function applyFilters() {
+      const text = searchInput.value.toLowerCase();
+      const type = filterType.value;
+      const cap = filterCapacity.value;
 
-function closeAllModals() {
-  document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
-}
+      const filtered = facilities.filter(f => {
+        const matchesText =
+          f.name.toLowerCase().includes(text) ||
+          (f.type && f.type.toLowerCase().includes(text));
 
-document.addEventListener('click', e => {
-  if (e.target.classList.contains('modal') || e.target.classList.contains('modal-close')) {
-    closeAllModals();
-  }
-});
-function showSuccessAnimation() {
-  const m = document.getElementById('success-modal');
-  m.classList.add('active');
+        const matchesType = type ? f.type === type : true;
+        const matchesCap = cap ? f.capacity <= Number(cap) : true;
 
-}
+        return matchesText && matchesType && matchesCap;
+      });
 
+      const grid = document.getElementById('grid');
+      grid.innerHTML = "";
+      filtered.forEach(renderCard);
+    }
 
+    searchInput.addEventListener('input', applyFilters);
+    filterType.addEventListener('change', applyFilters);
+    filterCapacity.addEventListener('change', applyFilters);
 
-</script>
+    let facilities = [];
+    const grid = document.getElementById('grid');
 
-<!-- Confetti Library -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    // Placeholder images by type
+    function getPlaceholder(type) {
+      const map = {
+        Kubo: 'https://via.placeholder.com/800x450?text=Kubo',
+        Cabana: 'https://via.placeholder.com/800x450?text=Cabana',
+        Room: 'https://via.placeholder.com/800x450?text=Room',
+        Hall: 'https://via.placeholder.com/800x450?text=Function+Hall',
+        House: 'https://via.placeholder.com/800x450?text=House'
+      };
+      return map[type] || 'https://via.placeholder.com/800x450?text=Facility';
+    }
 
-<script>
-// Success modal with confetti – stays open until user closes it
-function showSuccessAnimation() {
-  const modal = document.getElementById('success-modal');
-  modal.classList.add('active');
+    function renderCard(f) {
+      const price = f.price == 0 ? 'FREE' : `₱${Number(f.price).toLocaleString()}`;
+      const img = f.imageUrl || getPlaceholder(f.type);
 
-  // One-time confetti burst
-  confetti({
-    particleCount: 180,
-    spread: 85,
-    origin: { y: 0.58 },
-    colors: ['#d81b60', '#ff6b9d', '#ff8fb1', '#ff9a9e', '#fad0c4', '#43e97b']
-  });
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.style.setProperty('--img', `url(${img})`);
 
-  // Only close when user clicks X or outside – NO auto-close
-  const close = () => modal.classList.remove('active');
-  modal.querySelector('.bella-close-x').onclick = close;
-  modal.onclick = e => { if (e.target === modal) close(); };
-}
-</script>
+      card.innerHTML = `
+        <div class="heart">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+            2 5.42 4.42 3 7.5 3c1.74 0 3.41.81
+            4.5 2.09C13.09 3.81 14.76 3
+            16.5 3 19.58 3 22 5.42 22
+            8.5c0 3.78-3.4 6.86-8.55
+            11.54L12 21.35z"/>
+          </svg>
+        </div>
+        <h2 class="card-title">${f.name}</h2>
+        <div class="info-tag">
+          <span>${f.capacity} pax</span>
+          <span class="price">${price}</span>
+        </div>
+      `;
 
-<style>
-.bella-success-modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
-.bella-success-modal.active{display:flex;}
+      // Like toggle
+      card.querySelector('.heart').addEventListener('click', e => {
+        e.stopPropagation();
+        e.currentTarget.classList.toggle('liked');
+      });
 
-.bella-success-content{
-  max-width:420px;
-  width:90%;
-  border-radius:32px;
-  overflow:hidden;
-  box-shadow:0 25px 70px rgba(0,0,0,0.25);
-  animation:popIn .65s cubic-bezier(.16,1,.3,1);
-  position:relative;
-}
-.bella-close-x{
-  position:absolute;
-  top:12px;right:12px;
-  width:36px;height:36px;
-  background:rgba(0,0,0,0.08);
-  border:none;border-radius:50%;
-  font-size:1.4rem;color:#444;
-  cursor:pointer;z-index:10;
-  opacity:0.7;
-}
-.bella-close-x:hover{opacity:1;background:rgba(0,0,0,0.15);transform:scale(1.1);}
-.confetti-canvas{position:absolute;inset:0;pointer-events:none;border-radius:32px;}
-@keyframes popIn{0%{transform:scale(.85);opacity:0}100%{transform:scale(1);opacity:1}}
-</style>
+      card.addEventListener('click', () => openFacilityModal(f));
+      grid.appendChild(card);
+    }
+
+    function renderFacilities() {
+      grid.innerHTML = '';
+      facilities.forEach(renderCard);
+    }
+
+    async function loadFacilities() {
+      try {
+        const res = await fetch('/api/facilities');
+        facilities = await res.json();
+        renderFacilities();
+      } catch (err) {
+        grid.innerHTML =
+          '<p style="grid-column:1/-1;text-align:center;padding:80px;color:#888;">Unable to load facilities.</p>';
+      }
+    }
+
+    // Initial load
+    loadFacilities();
+    setInterval(loadFacilities, 15000);
+
+    /* -------------------------------------------------------------
+       FACILITY MODAL
+    ------------------------------------------------------------- */
+    function openFacilityModal(f) {
+      const img = document.getElementById('f-img');
+      const title = document.getElementById('f-title');
+      const meta = document.getElementById('f-meta');
+      const desc = document.getElementById('f-desc');
+      const price = document.getElementById('f-price');
+
+      img.style.backgroundImage = `url(${f.imageUrl || getPlaceholder(f.type)})`;
+      title.textContent = f.name;
+      meta.textContent = `${f.type} • ${f.capacity} pax`;
+      desc.textContent = f.description || 'No description available.';
+      price.textContent = f.price == 0 ? 'FREE' : `₱${Number(f.price).toLocaleString()}`;
+
+      document.getElementById('f-book').onclick = () => openBookingModal(f);
+      document.getElementById('facility-modal').classList.add('active');
+    }
+
+    /* -------------------------------------------------------------
+       BOOKING MODAL + FORM HANDLING
+    ------------------------------------------------------------- */
+    function openBookingModal(facility) {
+      document.getElementById('booking-modal').classList.add('active');
+      document.getElementById('bf-name').value = facility.name;
+      document.getElementById('bf-price').textContent =
+        facility.price == 0 ? 'FREE' : `₱${Number(facility.price).toLocaleString()}`;
+
+      const form = document.getElementById('booking-form');
+      form.dataset.facilityId = facility.id;
+
+      fetch('/api/profile')
+        .then(r => r.json())
+        .then(p => {
+          if (p && p.mobile) document.getElementById('bf-phone').value = p.mobile;
+        })
+        .catch(() => {});
+    }
+
+    function validateBooking() {
+      const checkIn = document.getElementById('bf-in').value;
+      const checkOut = document.getElementById('bf-out').value;
+      const guests = parseInt(document.getElementById('bf-guests').value || 0);
+
+      if (!checkIn || !checkOut) return false;
+
+      const d1 = new Date(checkIn);
+      const d2 = new Date(checkOut);
+      if (isNaN(d1) || isNaN(d2) || d2 <= d1) return false;
+
+      if (guests < 1) return false;
+
+      return true;
+    }
+
+    ['bf-in', 'bf-out', 'bf-guests'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', validateBooking);
+    });
+
+    document.getElementById('booking-form').addEventListener('submit', async e => {
+      e.preventDefault();
+
+      if (!validateBooking()) {
+        alert('Please provide valid dates and guest count.');
+        return;
+      }
+
+      const form = e.target;
+      const facilityId = Number(form.dataset.facilityId);
+
+      const payload = {
+        facilityId,
+        check_in: document.getElementById('bf-in').value,
+        check_out: document.getElementById('bf-out').value,
+        guests: Number(document.getElementById('bf-guests').value),
+        contact_phone: document.getElementById('bf-phone').value,
+        notes: document.getElementById('bf-notes').value
+      };
+
+      try {
+        const res = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.status === 201) {
+          closeAllModals();
+          showSuccessAnimation();
+        } else if (res.status === 401) {
+          window.location = '/login';
+        } else {
+          const data = await res.json().catch(() => ({}));
+          alert('Booking error: ' + (data.error || data.message || res.status));
+        }
+      } catch (err) {
+        alert('Network error while submitting booking.');
+      }
+    });
+
+    /* -------------------------------------------------------------
+       CLOSE MODALS
+    ------------------------------------------------------------- */
+    function closeAllModals() {
+      document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+    }
+
+    document.addEventListener('click', e => {
+      if (e.target.classList.contains('modal') || e.target.classList.contains('modal-close')) {
+        closeAllModals();
+      }
+    });
+
+    document.getElementById('welcome-modal').onclick = (e) => {
+      if (e.target === document.getElementById('welcome-modal')) {
+        document.getElementById('welcome-modal').classList.remove('active');
+      }
+    };
+  </script>
 </body>
 </html>
 {{>footer}}

@@ -59,7 +59,7 @@
       border-radius: 0 0 60px 60px;
       overflow: hidden;
       background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)),
-        url('https://scontent.fmnl13-3.fna.fbcdn.net/v/t39.30808-6/491998749_122174434196314282_8701410998447490278_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF79WRB2PoycUzkiHJWc2SQOvlpsVs8ZZU6-WmxWzxllU5OnL1UNvYBfrTxn2QbZwoAy2XLic9kbrN8UsqtoRNL&_nc_ohc=VcYTwLt4IQkQ7kNvwGMroWZ&_nc_oc=AdlRRDFqR_fVlgx0vIyIrc0JzDrEgz6rT-QB6OiJIN8GHGsVIJtmJ8gipDOrEyLsBoc&_nc_zt=23&_nc_ht=scontent.fmnl13-3.fna&_nc_gid=P5ZwTtpyLfoIAaarOVv-lg&oh=00_AfjH1kXQF_K7CEAefyb_9wdONlxMpC2W_g19zQnhn3Z7Gg&oe=6929FF5A');
+        url('https://scontent.fmnl37-1.fna.fbcdn.net/v/t39.30808-6/470194130_122153667986314282_4039062478804330655_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFlkwb--ddQw8z_y0IFKt9S4TQ5DYiGeb_hNDkNiIZ5v-SPfDia7rM7EKqh1ehVkBpPnNDU2bHrCkXmBfut8k9R&_nc_ohc=CskEU8-du5sQ7kNvwGTy4x5&_nc_oc=AdlNJSO__Zsl9rKipYqTKB86U_z87SNoAD4157vGzyr-BK_D0tMXPQWOfpaXB4bfyWhMNIkSCo0e2DflnNI-mNJa&_nc_zt=23&_nc_ht=scontent.fmnl37-1.fna&_nc_gid=Pd-jwUGzdsIA06HduZMNcA&oh=00_Afi667sTXAT6W-St8bI8NgPmZQWWfPHQa-yoga8HdFBqDQ&oe=692DAAFF');
       background-size: cover;
       background-position: center;
       display: flex;
@@ -247,7 +247,7 @@
       </div>
       <div class="story-image">
         <!-- Nature/Resort vibe placeholder -->
-        <img src="https://images.pexels.com/photos/16436952/pexels-photo-16436952.jpeg" alt="Relaxing at Bela's Paradise">
+        <img src="https://scontent.fmnl3-2.fna.fbcdn.net/v/t39.30808-6/586901199_122213938784358347_3651113017931463506_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeG_MQe3fR2WAsVOm__zv82-dxddmXorpzB3F12ZeiunMMks5PD8wQQxrcLHe5qW5Pa5BRvJPkYZOTDMvoqLvMxq&_nc_ohc=gLccqU68Bj8Q7kNvwFfQZh7&_nc_oc=AdmD7C7wzwNl3AnzFPtLEdTwuFyJjY_Z3R1FG4jIbjfWPGDbFjeeTvEMCXPvOlRHxZGMLIh2vzng-4RE0cPVM5W0&_nc_zt=23&_nc_ht=scontent.fmnl3-2.fna&_nc_gid=LzLjKObgKBJcpv2xFdcEyw&oh=00_Afjq_qwJBLL6v0y6znOA1TloWrIcjVQKZt07Qw7tvoj0Kw&oe=692D6325" alt="Relaxing at Bela's Paradise">
       </div>
     </section>
 

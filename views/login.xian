@@ -20,8 +20,8 @@
  /* Logo font: Playfair Display only */
   --logo-font: "Playfair Display", serif;
       --bg-dark: #181818;
-      --muted: #e4bdd1;
-      --accent: #e6a8ce;
+      --muted: #dfdfdf;
+      --accent: #e7e7e7;
       --white: #ffffff;
       --glass-bg: rgba(0, 0, 0, 0.35);
       --radius: 16px;

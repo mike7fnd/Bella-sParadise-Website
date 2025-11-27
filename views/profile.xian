@@ -1,13 +1,10 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>My Profile – Bella’s Paradise</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #f7f7f7;
@@ -17,17 +14,12 @@
       --accent: #e6a8ce;
       --white: #ffffff;
       --radius: 12px;
-      --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --shadow: 0 1px 3px rgba(0,0,0,0.1);
       --max-width: 1100px;
       --border: #e8e8e8;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: "Archivo", sans-serif;
       background: var(--bg);
@@ -35,358 +27,83 @@
       line-height: 1.5;
       padding-bottom: 80px;
     }
+    a { text-decoration: none; color: inherit; }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
 
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    .header { padding: 32px 0 16px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--text-light); font-size: 14px; font-weight: 500; margin-bottom: 16px; }
+    .back-link svg { width: 16px; height: 16px; }
+    .page-title { font-size: 40px; font-weight: 500; margin-bottom: 8px; }
+    .page-subtitle { color: var(--text-light); font-size: 16px; }
 
-    .header {
-      padding: 32px 0 16px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 40px;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text-light);
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 16px;
-    }
-
-    .back-link svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .page-title {
-      font-size: 40px;
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-
-    .page-subtitle {
-      color: var(--text-light);
-      font-size: 16px;
-    }
-
-    .main-grid {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 48px;
-      margin-bottom: 64px;
-    }
-
-    .profile-section {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 40px;
-      box-shadow: var(--shadow);
-    }
-
-    .profile-header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-
+    .main-grid { display: grid; grid-template-columns: 1fr 300px; gap: 48px; margin-bottom: 64px; }
+    .profile-section { background: var(--white); border: 1px solid var(--border); border-radius: 30px; padding: 40px; box-shadow: var(--shadow); }
+    .profile-header { text-align: center; margin-bottom: 32px; }
     .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--white);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      transition: all 0.2s;
+      width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+      border: 4px solid var(--white); box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer; transition: all 0.2s;
     }
+    .avatar:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .name { font-size: 28px; font-weight: 600; margin: 20px 0 8px; }
+    .role { color: var(--accent); font-weight: 600; font-size: 16px; }
 
-    .avatar:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
+    .details-grid { display: grid; grid-template-columns: max-content 1fr; gap: 16px 24px; font-size: 16px; margin: 32px 0; }
+    .label { color: var(--text-light); font-weight: 500; }
+    .value { font-weight: 500; }
 
-    .name {
-      font-size: 28px;
-      font-weight: 600;
-      margin: 20px 0 8px;
-    }
+    .actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+    .btn { padding: 12px 24px; border-radius: 30px; font-weight: 500; font-size: 15px; cursor: pointer; transition: all 0.2s; border: none; }
+    .btn-primary { background: var(--text); color: white; }
+    .btn-primary:hover { background: #e03d8f; }
+    .btn-outline { border: 1.5px solid var(--text); background: transparent; color: var(--text); }
+    .btn-outline:hover { background: var(--text); color: white; }
 
-    .role {
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 16px;
-    }
+    .qr-sidebar { background: var(--white); border: 1px solid var(--border); border-radius: 30px; padding: 32px; text-align: center; height: fit-content; box-shadow: var(--shadow); }
+    .qr-sidebar h3 { font-size: 18px; font-weight: 600; margin-bottom: 20px; }
+    .qr-sidebar img { width: 180px; height: 180px; border-radius: 12px; border: 1px solid var(--border); margin: 0 auto 16px; }
+    .qr-sidebar p { color: var(--text-light); font-size: 14px; }
 
-    .details-grid {
-      display: grid;
-      grid-template-columns: max-content 1fr;
-      gap: 16px 24px;
-      font-size: 16px;
-      margin: 32px 0;
-    }
+    .section { margin-bottom: 64px; }
+    .section-title { font-size: 22px; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: 30px; padding: 24px; transition: all 0.2s; }
+    .card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .card-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .card-subtitle { color: var(--text-light); font-size: 15px; line-height: 1.5; }
+    .progress-bar { margin: 16px 0 12px; height: 8px; background: #f0f0f0; border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.6s ease; }
 
-    .label {
-      color: var(--text-light);
-      font-weight: 500;
-    }
+    footer { text-align: center; padding: 40px 0; color: var(--text-light); font-size: 14px; border-top: 1px solid var(--border); }
 
-    .value {
-      font-weight: 500;
-    }
-
-    .actions {
-      display: flex;
-      gap: 12px;
-      margin-top: 32px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-weight: 500;
-      font-size: 15px;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--text);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #e03d8f;
-    }
-
-    .btn-outline {
-      border: 1.5px solid var(--text);
-      background: transparent;
-      color: var(--text);
-    }
-
-    .btn-outline:hover {
-      background: var(--text);
-      color: white;
-    }
-
-    .qr-sidebar {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 32px;
-      text-align: center;
-      height: fit-content;
-      box-shadow: var(--shadow);
-    }
-
-    .qr-sidebar h3 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    .qr-sidebar img {
-      width: 180px;
-      height: 180px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      margin: 0 auto 16px;
-    }
-
-    .qr-sidebar p {
-      color: var(--text-light);
-      font-size: 14px;
-    }
-
-    .section {
-      margin-bottom: 64px;
-    }
-
-    .section-title {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 24px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 24px;
-      transition: all 0.2s;
-    }
-
-    .card:hover {
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .card-subtitle {
-      color: var(--text-light);
-      font-size: 15px;
-      line-height: 1.5;
-    }
-
-    .progress-bar {
-      margin: 16px 0 12px;
-      height: 8px;
-      background: #f0f0f0;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: var(--accent);
-      border-radius: 4px;
-      transition: width 0.6s ease;
-    }
-
-    /* Booking Status Grid - Airbnb Inspired */
-    .status-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-top: 24px;
-    }
-
-    .status-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
-      transition: all 0.2s ease;
-      box-shadow: var(--shadow);
-    }
-
-    .status-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    }
-
-    .status-icon {
-      font-size: 32px;
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .status-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .status-number {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1;
-    }
-
-    .status-label {
-      font-size: 14px;
-      color: var(--text-light);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* Status-specific colors */
-    .status-card.confirmed .status-icon { color: #10B981; }
-    .status-card.pending .status-icon { color: #F59E0B; }
-    .status-card.completed .status-icon { color: #3B82F6; }
-    .status-card.cancelled .status-icon { color: #EF4444; }
-
-    footer {
-      text-align: center;
-      padding: 40px 0;
-      color: var(--text-light);
-      font-size: 14px;
-      border-top: 1px solid var(--border);
-    }
-
-    @media (max-width: 968px) {
-      .main-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
-      .qr-sidebar {
-        order: -1;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .container {
-        padding: 0 16px;
-      }
-
-      .profile-section {
-        padding: 24px;
-      }
-
-      .actions {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-      }
-    }
+    @media (max-width: 968px) { .main-grid { grid-template-columns: 1fr; gap: 32px; } .qr-sidebar { order: -1; } }
+    @media (max-width: 640px) { .container { padding: 0 16px; } .profile-section { padding: 24px; } .actions { flex-direction: column; } .btn { width: 100%; } }
   </style>
 </head>
-
 <body>
 
   <!-- REUSABLE AUTO-SHOW WELCOME MODAL (Beautiful Bella’s Paradise) -->
-  <div id="bella-welcome-modal" class="bella-modal">
-    <div class="bella-modal-content">
-      <button class="bella-close"></button>
+<div id="bella-welcome-modal" class="bella-modal">
+  <div class="bella-modal-content">
+    <button class="bella-close"></button>
 
-      <!-- Full Image -->
-      <div class="bella-image" style="
+    <!-- Full Image -->
+    <div class="bella-image" style="
       height: 260px;
       background: url('https://nujddmdrhlvaqzszjnkt.supabase.co/storage/v1/object/public/emojis/1c34c2df-6222-4f08-8ddd-40ebe4438b17.png') center/contain no-repeat #ffffff;
     "></div>
 
-      <!-- Text Content -->
-      <div style="padding: 2rem 1.8rem 2.4rem; text-align: center; background: white;">
-        <h2 style="font-size: 1.95rem; font-weight: 600; margin-bottom: 0.7rem; color: #1a1a1a;">
-          Profile
-        </h2>
-        <p style="font-size: 1.08rem; color: #666; line-height: 1.6; margin-bottom: 1.8rem;">
-          Manage your profile and<br>
-          track your bookings progress.
-        </p>
-        <button id="bella-explore-btn" style="
+    <!-- Text Content -->
+    <div style="padding: 2rem 1.8rem 2.4rem; text-align: center; background: white;">
+      <h2 style="font-size: 1.95rem; font-weight: 600; margin-bottom: 0.7rem; color: #1a1a1a;">
+        Profile
+      </h2>
+      <p style="font-size: 1.08rem; color: #666; line-height: 1.6; margin-bottom: 1.8rem;">
+        Manage your profile and<br>
+        track your bookings progress.
+      </p>
+      <button id="bella-explore-btn" style="
         background: #d81b60;
         color: white;
         border: none;
@@ -399,115 +116,98 @@
         box-shadow: 0 10px 30px rgba(216,27,96,0.35);
         transition: all 0.3s ease;
       ">Continue</button>
-      </div>
     </div>
   </div>
+</div>
 
-  <style>
-    .bella-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      animation: fade 0.4s ease;
-    }
+<style>
+.bella-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fade 0.4s ease;
+}
 
-    .bella-modal.active {
-      display: flex;
-    }
+.bella-modal.active {
+  display: flex;
+}
 
-    .bella-modal-content {
-      max-width: 420px;
-      width: 90%;
-      border-radius: 32px;
-      overflow: hidden;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
-      animation: pop 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+.bella-modal-content {
+  max-width: 420px;
+  width: 90%;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+  animation: pop 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-    .bella-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 36px;
-      height: 36px;
-      background: rgba(0, 0, 0, 0);
-      border: none;
-      border-radius: 50%;
-      font-size: 1.4rem;
-      color: #333;
-      cursor: pointer;
-      z-index: 10;
-      opacity: 0.7;
-    }
+.bella-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  color: #333;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.7;
+}
 
-    .bella-close:hover {
-      opacity: 1;
-      transform: scale(1.1);
-    }
+.bella-close:hover { opacity: 1; transform: scale(1.1); }
 
-    #bella-explore-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 38px rgba(255, 63, 133, 0.795);
-    }
+#bella-explore-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 38px rgba(255, 63, 133, 0.795);
+}
 
-    @keyframes pop {
-      0% {
-        transform: scale(0.85);
-        opacity: 0;
-      }
+@keyframes pop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
 
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+</style>
 
-    @keyframes fade {
-      from {
-        opacity: 0;
-      }
+<script>
+// Auto-show the beautiful Bella’s Paradise modal when page loads
+window.addEventListener('load', () => {
+  const modal = document.getElementById('bella-welcome-modal');
+  modal.classList.add('active');
 
-      to {
-        opacity: 1;
-      }
-    }
-  </style>
-
-  <script>
-    // Auto-show the beautiful Bella’s Paradise modal when page loads
-    window.addEventListener('load', () => {
-      const modal = document.getElementById('bella-welcome-modal');
-      modal.classList.add('active');
-
-      // Close handlers
-      document.querySelector('.bella-close').onclick = () => modal.classList.remove('active');
-      document.getElementById('bella-explore-btn').onclick = () => modal.classList.remove('active');
-      modal.onclick = (e) => {
-        if (e.target === modal) modal.classList.remove('active');
-      };
-    });
-  </script>
-  <script>
-    // Paste this on any page → modal auto appears on load
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('bella-welcome-modal')?.classList.add('active');
-    });
-  </script>
+  // Close handlers
+  document.querySelector('.bella-close').onclick = () => modal.classList.remove('active');
+  document.getElementById('bella-explore-btn').onclick = () => modal.classList.remove('active');
+  modal.onclick = (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+  };
+});
+</script>
+<script>
+// Paste this on any page → modal auto appears on load
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('bella-welcome-modal')?.classList.add('active');
+});
+</script>
 
   <div class="container">
 
     <!-- Header -->
     <div class="header">
       <a href="/home" class="back-link">
-        <svg viewBox="0 0 24 24">
-          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-        </svg>
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
         Back to Home
       </a>
       <h1 class="page-title">My Profile</h1>
@@ -520,9 +220,8 @@
       <!-- Profile Card -->
       <div class="profile-section">
         <div class="profile-header">
-          <img
-            src="{{#if user.profile_picture}}{{user.profile_picture}}{{else}}https://i.pinimg.com/736x/d2/98/4e/d2984ec4b65a8568eab3dc2b640fc58e.jpg{{/if}}"
-            alt="{{user.first_name}} {{user.last_name}}" class="avatar" id="profileAvatar">
+          <img src="{{#if user.profile_picture}}{{user.profile_picture}}{{else}}https://i.pinimg.com/736x/d2/98/4e/d2984ec4b65a8568eab3dc2b640fc58e.jpg{{/if}}"
+               alt="{{user.first_name}} {{user.last_name}}" class="avatar" id="profileAvatar">
           <h2 class="name">{{user.first_name}} {{user.last_name}}</h2>
         </div>
 
@@ -553,79 +252,41 @@
       </div>
     </div>
 
-    <!-- Booking Status Overview -->
-    <div class="section">
-      <h2 class="section-title">Booking Overview</h2>
-      <div class="status-grid">
-        <div class="status-card confirmed">
-          <div class="status-icon">✓</div>
-          <div class="status-content">
-            <div class="status-number">{{bookingStats.confirmed}}</div>
-            <div class="status-label">Confirmed</div>
-          </div>
-        </div>
-        <div class="status-card pending">
-          <div class="status-icon">⏳</div>
-          <div class="status-content">
-            <div class="status-number">{{bookingStats.pending}}</div>
-            <div class="status-label">Pending</div>
-          </div>
-        </div>
-        <div class="status-card completed">
-          <div class="status-icon">🏠</div>
-          <div class="status-content">
-            <div class="status-number">{{bookingStats.completed}}</div>
-            <div class="status-label">Completed</div>
-          </div>
-        </div>
-        <div class="status-card cancelled">
-          <div class="status-icon">✕</div>
-          <div class="status-content">
-            <div class="status-number">{{bookingStats.cancelled}}</div>
-            <div class="status-label">Cancelled</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Upcoming Stays -->
     <div class="section">
       <h2 class="section-title">Upcoming Stays</h2>
       {{#if bookings}}
-      <div class="cards-grid">
-        {{#each bookings}}
-        <div class="card">
-          <div class="card-title">{{this.facilityName}}</div>
-          <div class="card-subtitle">
-            Check-in: {{this.check_in}}<br>
-            Check-out: {{this.check_out}} • {{this.amount}}
+        <div class="cards-grid">
+          {{#each bookings}}
+          <div class="card">
+            <div class="card-title">{{this.facilityName}}</div>
+            <div class="card-subtitle">
+              Check-in: {{this.check_in}}<br>
+              Check-out: {{this.check_out}} • {{this.amount}}
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: {{this.progress}}%"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+              <small style="color:var(--text-light);">{{this.statusLabel}}</small>
+              <small style="font-weight:600; color:var(--text-light);">BKP{{this.id}}</small>
+            </div>
           </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: {{this.progress}}%"></div>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-            <small style="color:var(--text-light);">{{this.statusLabel}}</small>
-            <small style="font-weight:600; color:var(--text-light);">BKP{{this.id}}</small>
-          </div>
+          {{/each}}
         </div>
-        {{/each}}
-      </div>
       {{else}}
-      <div class="card">
-        <div class="card-title">No upcoming bookings</div>
-        <div class="card-subtitle">You currently have no bookings. Book a stay to see your booking progress here.</div>
-      </div>
+        <div class="card">
+          <div class="card-title">No upcoming bookings</div>
+          <div class="card-subtitle">You currently have no bookings. Book a stay to see your booking progress here.</div>
+        </div>
       {{/if}}
     </div>
 
     <!-- PROFILE PICTURE MODAL (FIXED & WORKING) -->
-    <div class="profile-modal" id="profileModal"
-      style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(12px); place-items:center; z-index:1000; padding:20px;">
-      <div class="modal-content"
-        style="background:white; border-radius:24px; max-width:500px; width:100%; padding:40px 32px; box-shadow:0 30px 70px rgba(0,0,0,0.2); position:relative; text-align:center;">
+    <div class="profile-modal" id="profileModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(12px); place-items:center; z-index:1000; padding:20px;">
+      <div class="modal-content" style="background:white; border-radius:24px; max-width:500px; width:100%; padding:40px 32px; box-shadow:0 30px 70px rgba(0,0,0,0.2); position:relative; text-align:center;">
 
-        <button id="closeModal"
-          style="position:absolute; top:16px; right:16px; width:48px; height:48px; background:rgba(255,255,255,0.95); border:none; border-radius:50%; font-size:28px; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.15);">
+        <button id="closeModal" style="position:absolute; top:16px; right:16px; width:48px; height:48px; background:rgba(255,255,255,0.95); border:none; border-radius:50%; font-size:28px; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.15);">
           ×
         </button>
 
@@ -637,8 +298,7 @@
 
           <!-- GALLERY - NOW WORKS -->
           <div id="choosePhoto" style="cursor:pointer; border-radius:18px; overflow:hidden;">
-            <img src="/gallery.JPG" alt="Choose from Gallery"
-              style="width:100%; height:180px; object-fit:cover; display:block;">
+            <img src="/gallery.JPG" alt="Choose from Gallery" style="width:100%; height:180px; object-fit:cover; display:block;">
             <div style="padding:16px 12px; background:white;">
               <div style="font-weight:700; font-size:18px; color:#222;">Choose Photo</div>
               <div style="font-size:14px; color:#717171; margin-top:4px;">Select from gallery</div>
@@ -660,42 +320,39 @@
       </div>
     </div>
 
-    <!-- COMPACT WHITE CAMERA MODAL -->
-    <div id="cameraModal"
-      style="display:none; position:fixed; inset:0; background:rgba(255,255,255,0.95); backdrop-filter:blur(12px); z-index:1001; place-items:center; padding:16px;">
-      <div
-        style="width:100%; max-width:420px; background:#fff; border-radius:28px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.18); position:relative;">
+<!-- COMPACT WHITE CAMERA MODAL -->
+<div id="cameraModal" style="display:none; position:fixed; inset:0; background:rgba(255,255,255,0.95); backdrop-filter:blur(12px); z-index:1001; place-items:center; padding:16px;">
+  <div style="width:100%; max-width:420px; background:#fff; border-radius:28px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.18); position:relative;">
 
-        <!-- Close button -->
-        <button id="closeCameraModal"
-          style="position:absolute; top:12px; right:12px; z-index:10; width:44px; height:44px; background:#fff; color:#333; border:none; border-radius:50%; font-size:28px; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.15);">
-          ×
-        </button>
+    <!-- Close button -->
+    <button id="closeCameraModal" style="position:absolute; top:12px; right:12px; z-index:10; width:44px; height:44px; background:#fff; color:#333; border:none; border-radius:50%; font-size:28px; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+      ×
+    </button>
 
-        <!-- Title -->
-        <div style="padding:24px 24px 16px; text-align:center;">
-          <h2 style="color:#1a1a1a; font-size:24px; font-weight:700; margin:0;">Take a Photo</h2>
-        </div>
-
-        <!-- Camera preview -->
-        <div style="position:relative; background:#000;">
-          <video id="cameraPreviewFull" autoplay playsinline
-            style="width:100%; height:440px; object-fit:cover; display:block;"></video>
-        </div>
-
-        <!-- Buttons -->
-        <div style="display:flex; gap:16px; padding:24px; justify-content:center; background:#fff;">
-          <button id="cancelCameraFull"
-            style="flex:1; padding:16px; border-radius:50px; background:transparent; color:#666; border:2px solid #ddd; font-weight:600; font-size:16px; cursor:pointer;">
-            Cancel
-          </button>
-          <button id="capturePhotoFull"
-            style="flex:1; padding:16px; border-radius:50px; background:#000; color:#fff; font-weight:700; font-size:16px; cursor:pointer;">
-            Capture
-          </button>
-        </div>
-      </div>
+    <!-- Title -->
+    <div style="padding:24px 24px 16px; text-align:center;">
+      <h2 style="color:#1a1a1a; font-size:24px; font-weight:700; margin:0;">Take a Photo</h2>
     </div>
+
+    <!-- Camera preview -->
+    <div style="position:relative; background:#000;">
+      <video id="cameraPreviewFull" autoplay playsinline
+             style="width:100%; height:440px; object-fit:cover; display:block;"></video>
+    </div>
+
+    <!-- Buttons -->
+    <div style="display:flex; gap:16px; padding:24px; justify-content:center; background:#fff;">
+      <button id="cancelCameraFull"
+              style="flex:1; padding:16px; border-radius:50px; background:transparent; color:#666; border:2px solid #ddd; font-weight:600; font-size:16px; cursor:pointer;">
+        Cancel
+      </button>
+      <button id="capturePhotoFull"
+              style="flex:1; padding:16px; border-radius:50px; background:#000; color:#fff; font-weight:700; font-size:16px; cursor:pointer;">
+        Capture
+      </button>
+    </div>
+  </div>
+</div>
 
   </div> <!-- end .container -->
 
@@ -790,5 +447,4 @@
     });
   </script>
 </body>
-
 </html>
